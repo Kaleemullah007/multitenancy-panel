@@ -1,0 +1,96 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\TenantRequest;
+use App\Models\Tenant;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+
+class TenantController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $tenants = Tenant::with('domains')->get();
+        return view('tenant.index', compact('tenants'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('tenant.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(TenantRequest $request)
+    {
+        $data = $request->validated();
+
+        // $filename = $request->photo->getClientOriginalName();
+        // $request->photo->storeAs('photos', $filename);
+        // $file = request()->file('photos');
+        // $path = $request->photo->storeAs('avatars');
+
+        $path = Storage::disk('public')->putFile('photos', $request->file('photo'));
+        // dd($path);
+        $tenant = Tenant::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => $data['password'],
+            'status' => true,
+            'file' => $path
+        ]);
+
+        $tenant->domains()->create([
+            'domain' => $data['domain_name'] . '.' . config('app.domain')
+        ]);
+        User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'status' => true
+        ]);
+        return to_route('tenants.index');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        return view('tenant.show');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        return view('tenant.edit');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+}
