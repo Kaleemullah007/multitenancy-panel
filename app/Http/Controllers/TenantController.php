@@ -16,7 +16,7 @@ class TenantController extends Controller
      */
     public function index()
     {
-        $tenants = Tenant::with('domains')->get();
+        $tenants = Tenant::withTrashed()->with('domains')->get();
         return view('tenant.index', compact('tenants'));
     }
 
@@ -89,8 +89,41 @@ class TenantController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Tenant $tenant)
     {
-        //
+
+        // if ($user->hasRole('Admin')) {
+
+        //     session()->flash('message', 'You can not delete admin.');
+        //     session()->flash('error', 'danger');
+
+        //     // $user->save();
+
+        // } else {
+        // dd($tenant);
+        $tenant->destroy($tenant->id);
+        // }
+        return to_route('tenants.index');
+    }
+
+    public function restoreUser($id)
+    {
+
+        dd($id);
+        $record = Tenant::withTrashed()->find($id);
+        $record->restore(); // This restores the soft-deleted post
+
+        return to_route('tenants.index');
+        // Additional logic...
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function deletePermanently($id)
+    {
+        $record = Tenant::withTrashed()->find($id);
+        $record->forceDelete();
+        return to_route('tenants.index');
     }
 }

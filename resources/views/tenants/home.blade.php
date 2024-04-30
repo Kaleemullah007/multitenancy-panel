@@ -16,6 +16,7 @@
 
                         {{ __('You are logged in!') }}
                         <a href="{{ route('users.create') }}" class="btn btn-lg bg-primary">Create Users</a>
+                        <a href="{{ route('users.index') }}" class="btn btn-lg bg-primary">Tenants</a>
                     </div>
                 </div>
             </div>
