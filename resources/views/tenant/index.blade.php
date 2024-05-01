@@ -16,6 +16,7 @@
         <tbody>
 
             @foreach ($tenants as $key => $tenant)
+                {{-- @dd($tenant) --}}
                 <tr>
                     <th scope="row">{{ $key + 1 }}</th>
                     <td>{{ $tenant->name }}</td>

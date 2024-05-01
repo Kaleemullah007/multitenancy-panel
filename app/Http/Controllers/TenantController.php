@@ -6,8 +6,10 @@ use App\Http\Requests\TenantRequest;
 use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Stancl\Tenancy\Database\Models\Domain;
 
 class TenantController extends Controller
 {
@@ -89,7 +91,7 @@ class TenantController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tenant $tenant)
+    public function destroy($tenant)
     {
 
         // if ($user->hasRole('Admin')) {
@@ -100,16 +102,20 @@ class TenantController extends Controller
         //     // $user->save();
 
         // } else {
-        // dd($tenant);
-        $tenant->destroy($tenant->id);
+
+        $tenant = Tenant::withTrashed()->find($tenant);
+
+        // $tenant->destroy($tenant->id);
+        $tenant->deleted_at  = now();
+        $tenant->save();
         // }
         return to_route('tenants.index');
     }
 
-    public function restoreUser($id)
+    public function restore($id)
     {
 
-        dd($id);
+
         $record = Tenant::withTrashed()->find($id);
         $record->restore(); // This restores the soft-deleted post
 
@@ -122,8 +128,16 @@ class TenantController extends Controller
      */
     public function deletePermanently($id)
     {
+
         $record = Tenant::withTrashed()->find($id);
+
+        // Domain::where('tenant_id', $record->id)->delete();
+        $record->domains()->delete();
+
+        User::whereEmail($record->email)->forceDelete();
+
         $record->forceDelete();
+
         return to_route('tenants.index');
     }
 }
