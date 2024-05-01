@@ -53,7 +53,8 @@
                                         class="form-control @error('roles') is-invalid @enderror" name="roles[]" multiple
                                         required autocomplete="roles" autofocus>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->name }}">
+                                            <option value="{{ $role->name }}"
+                                                {{ (is_array(old('roles')) and in_array($role->name, old('roles'))) ? ' selected' : '' }}>
                                                 {{ $role->name }}</option>
                                         @endforeach
 

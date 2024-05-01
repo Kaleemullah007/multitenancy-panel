@@ -49,7 +49,7 @@ class TenantUserController extends Controller
     public function index()
     {
 
-        $users = User::with('roles')->withTrashed()->get();
+        $users = User::with('roles')->withTrashed()->superAdmin()->get();
         return view('tenants.users.index', compact('users'));
     }
 
@@ -69,6 +69,7 @@ class TenantUserController extends Controller
      */
     public function store(TenantUserRequest $request)
     {
+
 
         $roles = $request->roles;
         $data = $request->validated();
@@ -103,22 +104,20 @@ class TenantUserController extends Controller
     public function update(UpdateTenantUserRequest $request, User $user)
     {
         $data = $request->validated();
-        $check = true;
         if (is_null($request->password)) {
             unset($data['password']);
-            $check = false;
         }
 
         $roles = $request->roles;
         unset($data['roles']);
         $user->update($data);
         $user->assignRole($roles);
-        if ($check) {
-            Auth::logout();
-            // $request->session()->invalidate();
-            // $request->session()->regenerateToken();
-            return to_route('login');
-        }
+        // if ($check) {
+        //     Auth::logout();
+        //     // $request->session()->invalidate();
+        //     // $request->session()->regenerateToken();
+        //     return to_route('login');
+        // }
         return view('tenants.users.edit', compact('user'));
     }
 
@@ -128,13 +127,11 @@ class TenantUserController extends Controller
     public function destroy(User $user)
     {
 
-        if ($user->hasRole('Admin')) {
 
-            session()->flash('message', 'You can not delete admin.');
+        if ($user->hasRole('SuperAdmin')) {
+
+            session()->flash('message', 'You can not delete super admin.');
             session()->flash('error', 'danger');
-
-            // $user->save();
-
         } else {
             $user->destroy($user->id);
         }
@@ -143,6 +140,7 @@ class TenantUserController extends Controller
 
     public function restoreUser($id)
     {
+
 
         $record = User::withTrashed()->find($id);
         $record->restore(); // This restores the soft-deleted post

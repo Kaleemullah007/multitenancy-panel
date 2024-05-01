@@ -50,11 +50,8 @@ class User extends Authenticatable
         ];
     }
 
-    // protected function password(): Attribute
-    // {
-    //     // return Attribute::make(
-    //     //     get: null,
-    //     //     set: fn (string $value) => Hash::make($value),
-    //     // );
-    // }
+    protected function ScopeSuperAdmin()
+    {
+        return $this->where('email', '!=', 'kadinumber804imrankhan@gmail.com');
+    }
 }

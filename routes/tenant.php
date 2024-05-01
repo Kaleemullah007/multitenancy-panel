@@ -41,7 +41,8 @@ Route::middleware([
         return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
     });
 
-    Route::resource('tenants', TenantController::class)->middleware('auth');
+
+    // Route::resource('tenants', TenantUserController::class)->middleware('auth');
     Route::delete('user-permanently-deleted/{id}', [TenantUserController::class, 'deletePermanently'])->name('users.user-deleted');
     Route::delete('user-restore/{id}', [TenantUserController::class, 'restoreUser'])->name('users.user-restored');
     Route::get('user-manage-permission/{user}', [TenantUserController::class, 'mangePermissions'])->name('users.manage-permissions');
@@ -59,4 +60,4 @@ Route::middleware([
 
 
     Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
-});
+})->middleware('auth');

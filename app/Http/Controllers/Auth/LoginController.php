@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AuthRequest;
+use App\Models\User;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -26,6 +31,7 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    protected $tries = 3;
 
     /**
      * Create a new controller instance.
@@ -35,5 +41,30 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+    public function login(AuthRequest $request)
+    {
+
+
+        $user = User::whereEmail($request->email)->first();
+        if ($user == null) {
+            session()->flash('message', 'No account exist in the system.');
+            return to_route('login');
+        }
+        if ($user->status == 0) {
+            session()->flash('message', 'Your account is inactive');
+            return to_route('login');
+        } else if ($user->status == 2) {
+            session()->flash('message', 'Your account is suspended');
+            return to_route('login');
+        }
+
+
+
+
+        if (Auth::attempt($request->validated())) {
+            return redirect('/home')->with('success', 'Login berhasil');
+        }
+        return back()->with('error', 'Email or Password salah');
     }
 }

@@ -6,8 +6,10 @@ use App\Http\Requests\TenantRequest;
 use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Stancl\Tenancy\Database\Models\Domain;
 
 class TenantController extends Controller
 {
@@ -16,7 +18,7 @@ class TenantController extends Controller
      */
     public function index()
     {
-        $tenants = Tenant::with('domains')->get();
+        $tenants = Tenant::withTrashed()->with('domains')->get();
         return view('tenant.index', compact('tenants'));
     }
 
@@ -89,8 +91,53 @@ class TenantController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($tenant)
     {
-        //
+
+        // if ($user->hasRole('Admin')) {
+
+        //     session()->flash('message', 'You can not delete admin.');
+        //     session()->flash('error', 'danger');
+
+        //     // $user->save();
+
+        // } else {
+
+        $tenant = Tenant::withTrashed()->find($tenant);
+
+        // $tenant->destroy($tenant->id);
+        $tenant->deleted_at  = now();
+        $tenant->save();
+        // }
+        return to_route('tenants.index');
+    }
+
+    public function restore($id)
+    {
+
+
+        $record = Tenant::withTrashed()->find($id);
+        $record->restore(); // This restores the soft-deleted post
+
+        return to_route('tenants.index');
+        // Additional logic...
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function deletePermanently($id)
+    {
+
+        $record = Tenant::withTrashed()->find($id);
+
+        // Domain::where('tenant_id', $record->id)->delete();
+        $record->domains()->delete();
+
+        User::whereEmail($record->email)->forceDelete();
+
+        $record->forceDelete();
+
+        return to_route('tenants.index');
     }
 }

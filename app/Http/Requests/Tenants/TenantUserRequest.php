@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Tenants;
 
+use App\Rules\Tenants\CheckSuperAdmin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
@@ -27,7 +28,7 @@ class TenantUserRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed', Password::defaults()],
             'status' => ['required', 'boolean'],
-            'roles' => ['array', 'required', 'min:1'],
+            'roles' => ['array', 'required', 'min:1', new CheckSuperAdmin],
         ];
     }
 

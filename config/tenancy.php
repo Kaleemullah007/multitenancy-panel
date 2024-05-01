@@ -197,4 +197,17 @@ return [
         '--class' => 'PermissionSeeder', // root seeder class
         // '--force' => true,
     ],
+
+    /**
+     * Should tenant databases be deleted asynchronously in a queued job.
+     */
+    'queue_database_deletion' => false,
+
+    /**
+     * Automatically delete the tenant's database after the tenant is deleted.
+     *
+     * This will save space but permanently delete data which you might want to keep.
+     */
+    'delete_database_after_tenant_deletion' => true,
+
 ];

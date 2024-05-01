@@ -65,7 +65,8 @@ class PermissionController extends Controller
 
         $users = User::whereHas("roles", function ($q) {
             $q->Where(function ($query) {
-                $query->where("name", "Admin");
+                // "Admin",
+                $query->whereIn("name", ['SuperAdmin']);
             });
         })->get();
 
