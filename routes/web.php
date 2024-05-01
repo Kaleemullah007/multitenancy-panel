@@ -1,13 +1,21 @@
 <?php
 
+use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\TenantController;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use App\Http\Middleware\Localization;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return redirect()->to(app()->getLocale());
 });
 
+Route::get('localization/{locale}', [LocalizationController::class, 'index'])->name('localization');
+
+
+Route::get('/', function () {
+    return view('home');
+});
 Auth::routes();
 
 Route::middleware('auth')->group(function () {

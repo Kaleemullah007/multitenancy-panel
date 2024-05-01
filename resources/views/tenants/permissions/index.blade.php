@@ -1,14 +1,14 @@
 @extends('layouts.app')
 @section('content')
     @haspermission('permissions_create')
-        <a class="btn btn-lg bg-primary" href="{{ route('permissions.create') }}">Create</a>
+        <a class="btn btn-lg bg-primary" href="{{ route('permissions.create') }}">{{ __('permission.create') }}</a>
     @endhaspermission
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">action</th>
+                <th scope="col">{{ __('permission.permission.table.name') }}</th>
+                <th scope="col">{{ __('permission.permission.table.action') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -20,7 +20,7 @@
 
                     <td>
                         @haspermission('permissions_edit')
-                            <a href="{{ route('permissions.edit', $permission->id) }}">Edit</a>
+                            <a href="{{ route('permissions.edit', $permission->id) }}">{{ __('permission.edit') }}</a>
                         @endhaspermission
                         @include('tenants.permissions.delete')
 

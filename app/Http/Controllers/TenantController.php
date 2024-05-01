@@ -91,7 +91,7 @@ class TenantController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($tenant)
+    public function destroy($locale, $tenant)
     {
 
         // if ($user->hasRole('Admin')) {
@@ -104,7 +104,7 @@ class TenantController extends Controller
         // } else {
 
         $tenant = Tenant::withTrashed()->find($tenant);
-
+        // dd($tenant);
         // $tenant->destroy($tenant->id);
         $tenant->deleted_at  = now();
         $tenant->save();
