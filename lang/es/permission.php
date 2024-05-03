@@ -16,19 +16,19 @@ return [
     'permissions' => 'Permisos',
     'users' => 'Usuarias',
     'roles' => 'Roles',
-    'permission' => [
-        'table' => [
-            '#' => 'No Señor',
-            'name' => 'Nombre',
-            'action' => 'Acción'
-        ],
-        'form' => [
-            'name' => 'Nombre',
-        ],
-        'message' => [
-            'save-message' => 'Permiso creado exitosamente',
-            'update-message' => 'Permiso actualizado exitosamente',
-            'delete-message' => 'Permiso eliminado exitosamente',
-        ]
+    'table' => [
+        '#' => 'No Señor',
+        'name' => 'Nombre',
+        'action' => 'Acción'
+    ],
+    'form' => [
+        'name' => 'Nombre',
+    ],
+    'message' => [
+        'save-message' => 'Permiso creado exitosamente',
+        'update-message' => 'Permiso actualizado exitosamente',
+        'delete-message' => 'Permiso eliminado exitosamente',
+        'error_name' => 'El campo Nombre es obligatorio',
+
     ]
 ];

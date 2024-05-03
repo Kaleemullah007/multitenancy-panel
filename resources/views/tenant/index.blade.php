@@ -1,16 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="{{ route('tenants.create') }}">create Tenants</a>
-    <a href="{{ route('tenants.index') }}" class="btn btn-lg bg-primary">Tenants</a>
+    @haspermission('tenant_create')
+        <a href="{{ route('tenants.create') }}">{{ __('tenant.create_user') }}</a>
+    @endhaspermission
+    @haspermission('tenant_view')
+        <a href="{{ route('tenants.index') }}" class="btn btn-lg bg-primary">{{ __('tenant.users') }}</a>
+    @endhaspermission
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Domains</th>
-                <th scope="col">Action</th>
+                <th scope="col">{{ __('tenant.table.#') }}</th>
+                <th scope="col">{{ __('tenant.table.name') }}</th>
+                <th scope="col">{{ __('tenant.table.email') }}</th>
+                <th scope="col">{{ __('tenant.table.domains') }}</th>
+                <th scope="col">{{ __('tenant.table.action') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -29,9 +33,14 @@
                         @endforeach
 
                     </td>
-                    <td> @include('tenant.delete')</td>
+                    <td> <a href="{{ route('tenants.edit', $tenant->id) }}">{{ __('tenant.edit') }}</a>
+                        @include('tenant.delete')</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
+    <div class="container">
+        {{ $tenants->onEachSide(5)->links() }}
+    </div>
 @endsection

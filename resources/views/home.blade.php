@@ -6,6 +6,9 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Dashboard') }}</div>
+                    @haspermission('tenant_view')
+                        <a href="{{ route('tenants.index') }}" class="btn btn-lg bg-primary">Tenants</a>
+                    @endhaspermission
 
                     <div class="card-body">
                         @if (session('status'))
@@ -15,7 +18,7 @@
                         @endif
 
                         {{ __('You are logged in!') }}
-                        <a href="{{ route('tenants.create') }}" class="btn btn-lg bg-primary">Create Tenant</a>
+
                     </div>
                 </div>
             </div>

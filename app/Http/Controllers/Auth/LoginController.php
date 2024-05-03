@@ -48,23 +48,23 @@ class LoginController extends Controller
 
         $user = User::whereEmail($request->email)->first();
         if ($user == null) {
-            session()->flash('message', 'No account exist in the system.');
+            session()->flash('message', __('auth.no_email'));
             return to_route('login');
         }
         if ($user->status == 0) {
-            session()->flash('message', 'Your account is inactive');
+            session()->flash('message', __('auth.in_active_user'));
             return to_route('login');
         } else if ($user->status == 2) {
-            session()->flash('message', 'Your account is suspended');
+            session()->flash('message', __('auth.suspend_user'));
             return to_route('login');
         }
-
-
 
 
         if (Auth::attempt($request->validated())) {
-            return redirect('/home')->with('success', 'Login berhasil');
+            return redirect('/home')->with('message', __('auth.sucess'));
         }
-        return back()->with('error', 'Email or Password salah');
+
+
+        return back()->with('message', __('auth.failed'));
     }
 }

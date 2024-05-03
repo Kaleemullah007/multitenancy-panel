@@ -31,4 +31,13 @@ class UpdateTenantUserRequest extends FormRequest
             'roles' => ['array', 'required', 'min:1', new CheckSuperAdmin],
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'name' => __('tenant.message.error_name'),
+            'email' => __('tenant.message.error_email'),
+            'password' => __('tenant.message.error_password'),
+
+        ];
+    }
 }

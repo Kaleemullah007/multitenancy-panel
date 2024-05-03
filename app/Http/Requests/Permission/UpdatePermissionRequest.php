@@ -25,4 +25,16 @@ class UpdatePermissionRequest extends FormRequest
             'name' => 'required|max:255|unique:permissions,name,' . $this->permission->id
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'name' => __('permission.message.error_name'),
+        ];
+    }
+    public function attributes(): array
+    {
+        return [
+            'name' => __('permission.form.name'),
+        ];
+    }
 }

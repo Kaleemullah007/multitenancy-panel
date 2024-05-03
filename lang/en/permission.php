@@ -17,21 +17,21 @@ return [
     'permissions' => 'Permissions',
     'users' => 'Users',
     'roles' => 'Roles',
-
-    'permission' => [
-        'table' => [
-            '#' => 'Sr. No',
-            'name' => 'Name',
-            'action' => 'Action'
-        ],
-        'form' => [
-            '#' => 'Sr. No',
-            'name' => 'Name',
-            'btn' => 'Action',
-            'save-message' => 'Permission created successfully',
-            'update-message' => 'Permission updated successfully',
-            'delete-message' => 'Permission deleted successfully',
-        ]
+    'table' => [
+        '#' => 'Sr. No',
+        'name' => 'Name',
+        'action' => 'Action'
+    ],
+    'form' => [
+        '#' => 'Sr. No',
+        'name' => 'Name',
+        'btn' => 'Action',
+    ],
+    'message' => [
+        'save-message' => 'Permission created successfully',
+        'update-message' => 'Permission updated successfully',
+        'delete-message' => 'Permission deleted successfully',
+        'error_name' => 'The Name field is required'
     ]
 
 ];

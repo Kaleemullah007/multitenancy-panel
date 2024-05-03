@@ -43,7 +43,7 @@ class PermissionController extends Controller
 
     public function index()
     {
-        $permissions = Permission::withTrashed()->get();
+        $permissions = Permission::withTrashed()->paginate($this->per_page);
         return view('tenants.permissions.index', compact('permissions'));
     }
 

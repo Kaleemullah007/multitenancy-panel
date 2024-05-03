@@ -21,6 +21,8 @@ class CreateTenantsTable extends Migration
             $table->string('email');
             $table->string('password');
             $table->boolean('status')->default(true);
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
             $table->softDeletes();
             $table->json('data')->nullable();

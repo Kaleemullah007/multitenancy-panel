@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Jobs\seedTenantJob;
+use App\Jobs\UpdateTenantJob;
+use App\Jobs\UpdateTenantStatus;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -39,8 +41,24 @@ class TenancyServiceProvider extends ServiceProvider
                 })->shouldBeQueued(false), // `false` by default, but you probably want to make this `true` for production.
             ],
             Events\SavingTenant::class => [],
-            Events\TenantSaved::class => [],
-            Events\UpdatingTenant::class => [],
+            Events\TenantSaved::class => [
+                // JobPipeline::make([
+                //     UpdateTenantStatus::class,
+                // ])->send(function (Events\TenantSaved $event) {
+                //     return $event->tenant;
+                // })->shouldBeQueued(false)
+
+
+            ],
+            Events\UpdatingTenant::class => [
+                JobPipeline::make([
+                    UpdateTenantJob::class,
+                ])->send(function (Events\UpdatingTenant $event) {
+                    return $event->tenant;
+                })->shouldBeQueued(false)
+
+
+            ],
             Events\TenantUpdated::class => [],
             Events\DeletingTenant::class => [],
             Events\TenantDeleted::class => [

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Hash;
 use Stancl\Tenancy\Database\Models\Tenant as BaseTenant;
@@ -23,7 +25,8 @@ class Tenant extends BaseTenant implements TenantWithDatabase
             'name',
             'email',
             'password',
-            'status'
+            'status',
+            'user_id'
 
         ];
     }
@@ -34,5 +37,10 @@ class Tenant extends BaseTenant implements TenantWithDatabase
             get: null,
             set: fn (string $value) => Hash::make($value),
         );
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -14,7 +14,19 @@ return [
     */
 
     'failed' => 'These credentials do not match our records.',
+    'sucess' => 'Logged in successfully',
     'password' => 'The provided password is incorrect.',
+    'invalid_password' => 'Minimum password length is 8',
+    'invalid_email' => 'Enter correct email',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'no_email' => 'No email exist in the system',
+    'suspend_user' => 'Your account is suspended',
+    'in_active_user' => 'Your account is inactive, Contact to administrator',
+    'title_email' => 'Email',
+    'title_password' => 'Password',
+    'remember_me' => 'Remember Me',
+    'forgot_password' => 'Forgot Your Password'
+
+
 
 ];

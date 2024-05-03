@@ -38,7 +38,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::withTrashed()->get();
+        $roles = Role::withTrashed()->paginate($this->per_page);
         return view('tenants.roles.index', compact('roles'));
     }
 

@@ -5,14 +5,16 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Manage ' . $user->name . ' Permissions') }}</div>
+                    <div class="card-header"> {{ __('tenantuser.user_title', ['user' => ucfirst($user->name)]) }}
+                    </div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('users.save-permissions', encrypt($user->id)) }}">
                             @csrf
 
                             <div class="row mb-3">
-                                <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
+                                <label for="name"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('tenantuser.form.roles') }}</label>
 
                                 @php
                                     $user_roles = $user->roles->pluck('name')->toArray();
@@ -70,7 +72,7 @@
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Update Permissions and Role') }}
+                                        {{ __('tenantuser.btn_role_permission') }}
                                     </button>
                                 </div>
                             </div>

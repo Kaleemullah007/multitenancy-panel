@@ -28,8 +28,18 @@ class TenantRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed', Password::defaults()],
-            'domain_name' => ['required', 'string'],
+            'domain_name' => ['required', 'string', 'unique:domains,domain'],
             'photo' => 'required|file|image|mimes:jpeg,jpg,png|max:2048',
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            'name' => __('tenant.message.error_name'),
+            'email' => __('tenant.message.error_email'),
+            'password' => __('tenant.message.error_password'),
+            'domain_name' => __('tenant.message.error_domain_name'),
+            'photo' => __('tenant.message.error_profile_photo'),
         ];
     }
 }

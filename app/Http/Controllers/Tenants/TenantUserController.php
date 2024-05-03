@@ -49,7 +49,7 @@ class TenantUserController extends Controller
     public function index()
     {
 
-        $users = User::with('roles')->withTrashed()->superAdmin()->get();
+        $users = User::with('roles')->withTrashed()->superAdmin()->paginate($this->per_page);
         return view('tenants.users.index', compact('users'));
     }
 

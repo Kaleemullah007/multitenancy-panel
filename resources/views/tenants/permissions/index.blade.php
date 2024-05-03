@@ -7,8 +7,8 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">{{ __('permission.permission.table.name') }}</th>
-                <th scope="col">{{ __('permission.permission.table.action') }}</th>
+                <th scope="col">{{ __('permission.table.name') }}</th>
+                <th scope="col">{{ __('permission.table.action') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -29,4 +29,7 @@
             @endforeach
         </tbody>
     </table>
+    <div class="container">
+        {{ $permissions->onEachSide(5)->links() }}
+    </div>
 @endsection
