@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -25,6 +26,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'status',
     ];
 
     /**
@@ -53,5 +55,14 @@ class User extends Authenticatable
     protected function ScopeSuperAdmin()
     {
         return $this->where('email', '!=', 'kadinumber804imrankhan@gmail.com');
+    }
+
+    protected function ScopeExpiredUsers()
+    {
+        return $this->whereDate('end_date', '<=', now()->format('Y-m-d'))->whereNotNull('end_date')->where('actioned', 0);
+    }
+    public function tenant(): HasOne
+    {
+        return $this->hasOne(Tenant::class, 'user_id', 'id');
     }
 }

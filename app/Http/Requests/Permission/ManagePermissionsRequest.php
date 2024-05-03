@@ -26,4 +26,19 @@ class ManagePermissionsRequest extends FormRequest
             'permissions' => ['array', 'required', 'min:1']
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'roles' => __('tenantuser.message.error_roles'),
+            'permissions' => __('tenantuser.message.error_permissions'),
+        ];
+    }
+    public function attributes(): array
+    {
+        return [
+            'roles' => __('tenantuser.form.roles'),
+            'permissions' => __('tenantuser.form.permissions'),
+        ];
+    }
 }

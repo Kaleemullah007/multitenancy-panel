@@ -40,4 +40,11 @@ class TenantUserRequest extends FormRequest
             ]);
         }
     }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => __('permission.form.name'),
+        ];
+    }
 }

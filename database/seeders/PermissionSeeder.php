@@ -45,9 +45,7 @@ class PermissionSeeder extends Seeder
             ['name' => 'permissions_restore', 'guard_name' => 'web'],
             ['name' => 'permissions_export:csv', 'guard_name' => 'web'],
             ['name' => 'permissions_export:pdf', 'guard_name' => 'web'],
-            ['name' => 'permissions_export:excel', 'guard_name' => 'web']
-
-
+            ['name' => 'permissions_export:excel', 'guard_name' => 'web'],
 
         ]);
         Role::insert([

@@ -49,7 +49,7 @@ class TenantUserController extends Controller
     public function index()
     {
 
-        $users = User::with('roles')->withTrashed()->superAdmin()->get();
+        $users = User::with('roles')->withTrashed()->superAdmin()->paginate($this->per_page);
         return view('tenants.users.index', compact('users'));
     }
 
@@ -60,7 +60,7 @@ class TenantUserController extends Controller
     {
         // app('auth')->user()->can('permissions.user_create');
 
-        $roles = Role::get();
+        $roles = Role::where('name', '!=', 'SuperAdmin')->get();
         return view('tenants.users.create', compact('roles'));
     }
 
@@ -94,7 +94,7 @@ class TenantUserController extends Controller
     {
         //$user = User::with(['roles', 'permissions'])->find(decrypt($id));
         $user->load('roles');
-        $roles = Role::get();
+        $roles = Role::where('name', '!=', 'SuperAdmin')->get();
         return view('tenants.users.edit', compact('user', 'roles'));
     }
 

@@ -27,4 +27,18 @@ class AuthRequest extends FormRequest
             'remember' => 'nullable'
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'email' => __('auth.invalid_email'),
+            'password' => __('auth.invalid_password'),
+        ];
+    }
+    public function attributes(): array
+    {
+        return [
+            'email' => __('auth.title_email'),
+            'password' => __('auth.title_password'),
+        ];
+    }
 }

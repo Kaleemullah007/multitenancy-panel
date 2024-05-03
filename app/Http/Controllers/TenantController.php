@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TenantRequest;
+use App\Http\Requests\UpdateTenantRequest;
 use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,7 +19,9 @@ class TenantController extends Controller
      */
     public function index()
     {
-        $tenants = Tenant::withTrashed()->with('domains')->get();
+        // $users = User::with(['tena'])->ExpiredUsers()->get();
+
+        $tenants = Tenant::withTrashed()->with('domains')->paginate($this->per_page);
         return view('tenant.index', compact('tenants'));
     }
 
@@ -43,24 +46,27 @@ class TenantController extends Controller
         // $path = $request->photo->storeAs('avatars');
 
         $path = Storage::disk('public')->putFile('photos', $request->file('photo'));
-        // dd($path);
-        $tenant = Tenant::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => $data['password'],
-            'status' => true,
-            'file' => $path
-        ]);
 
-        $tenant->domains()->create([
-            'domain' => $data['domain_name'] . '.' . config('app.domain')
-        ]);
-        User::create([
+        $user  = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'status' => true
         ]);
+        // dd($user_id);
+        $tenant = Tenant::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => $data['password'],
+            'status' => true,
+            'file' => $path,
+            'user_id' => $user->id
+        ]);
+        // dd($path);
+        $tenant->domains()->create([
+            'domain' => $data['domain_name'] . '.' . config('app.domain')
+        ]);
+
         return to_route('tenants.index');
     }
 
@@ -75,23 +81,36 @@ class TenantController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Tenant $tenant)
     {
-        return view('tenant.edit');
+        $tenant->load('domains');
+        return view('tenant.edit', compact('tenant'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateTenantRequest $request, Tenant $tenant)
     {
-        //
+
+        $data = $request->validated();
+        if (is_null($request->password)) {
+            unset($data['password']);
+        }
+
+        if ($request->has('photo')) {
+            $path = Storage::disk('public')->putFile('photos', $request->file('photo'));
+            $data['file'] = $path;
+        }
+        $tenant->update($data);
+        $tenant->user()->update(['name' => $data['name'], 'email' => $data['email'], 'status' => $data['status']]);
+        return to_route('tenants.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($tenant)
+    public function destroy($locale, $tenant)
     {
 
         // if ($user->hasRole('Admin')) {
@@ -104,7 +123,7 @@ class TenantController extends Controller
         // } else {
 
         $tenant = Tenant::withTrashed()->find($tenant);
-
+        // dd($tenant);
         // $tenant->destroy($tenant->id);
         $tenant->deleted_at  = now();
         $tenant->save();

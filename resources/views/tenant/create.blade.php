@@ -6,17 +6,17 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Create Tenant') }}</div>
-                    {{-- <img src="/photos/male1085277708526.png" />
-                    <img src="{{ asset('storage/app/photos/cover.jpg') }}" />
-                    <img src="<?php echo asset('/storage/app/public/photos/yqIUFOVXNJdfMeYowOOrH1i8E7FMjtxx4oGROIea.jpg'); ?>" /> --}}
+                    <div class="card-header">{{ __('tenant.create_user') }}</div>
+                    <img src="/photos/0Tujd6yAwXy6qQoH5LcylSs0EnS9vsT9TvPQBUtI.png" />
+                    <img src="{{ asset('storage/app/photos/0Tujd6yAwXy6qQoH5LcylSs0EnS9vsT9TvPQBUtI.jpg') }}" />
+                    <img src="<?php echo asset('/storage/app/public/photos/0Tujd6yAwXy6qQoH5LcylSs0EnS9vsT9TvPQBUtI.jpg'); ?>" />
                     <div class="card-body">
                         <form method="POST" action="{{ route('tenants.store') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="row mb-3">
                                 <label for="name"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('tenant.form.name') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
@@ -33,7 +33,7 @@
 
                             <div class="row mb-3">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('tenant.form.email') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -51,7 +51,7 @@
 
                             <div class="row mb-3">
                                 <label for="domain_name"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Domain Name') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('tenant.form.domain') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
@@ -68,7 +68,7 @@
 
                             <div class="row mb-3">
                                 <label for="password"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('tenant.form.password') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
@@ -85,7 +85,7 @@
 
                             <div class="row mb-3">
                                 <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('tenant.form.password_confirm') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
@@ -94,12 +94,13 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Profile') }}</label>
+                                <label for="file"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('tenant.form.profile_photo') }}</label>
 
 
                                 <div class="col-md-6">
-                                    <input id="file" type="file" class="form-control" name="photo">
+                                    <input id="file" type="file"
+                                        class="form-control @error('photo') is-invalid @enderror" name="photo">
 
                                 </div>
                                 @error('photo')
@@ -113,7 +114,7 @@
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Register') }}
+                                        {{ __('tenant.btn-save') }}
                                     </button>
                                 </div>
                             </div>

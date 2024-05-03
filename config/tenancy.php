@@ -194,7 +194,7 @@ return [
      */
     'seeder_parameters' => [
         // '--class' => 'DatabaseSeeder', // root seeder class
-        '--class' => 'PermissionSeeder', // root seeder class
+        '--class' => 'Database\\Seeders\\Tenant\\PermissionSeeder', // root seeder class
         // '--force' => true,
     ],
 

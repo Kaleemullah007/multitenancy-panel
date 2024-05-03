@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\Tenants\HomeController;
 use App\Http\Controllers\Tenants\Permission\PermissionController;
@@ -32,6 +33,8 @@ Route::middleware([
     PreventAccessFromCentralDomains::class,
     RevalidateBackHistory::class,
 ])->group(function () {
+    Route::get('localization/{locale}', [LocalizationController::class, 'index'])->name('localization');
+
 
     Auth::routes(['register' => false]);
 

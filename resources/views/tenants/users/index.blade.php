@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     @haspermission('user_create')
-        <a class="btn btn-lg bg-primary" href="{{ route('users.create') }}">Create</a>
+        <a class="btn btn-lg bg-primary" href="{{ route('users.create') }}">{{ __('tenantuser.create') }}</a>
     @endhaspermission
     <div>
         @if (session()->has('message'))
@@ -14,11 +14,11 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Role</th>
-                <th scope="col">action</th>
+                <th scope="col">{{ __('tenantuser.table.#') }}</th>
+                <th scope="col">{{ __('tenantuser.table.name') }}</th>
+                <th scope="col">{{ __('tenantuser.table.email') }}</th>
+                <th scope="col">{{ __('tenantuser.table.role') }}</th>
+                <th scope="col">{{ __('tenantuser.table.action') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -35,12 +35,13 @@
                     </td>
                     <td>
                         @haspermission('manage_permissions')
-                            <a href="{{ route('users.manage-permissions', encrypt($user->id)) }}">Manage permission</a>
+                            <a
+                                href="{{ route('users.manage-permissions', encrypt($user->id)) }}">{{ __('tenantuser.btn-manage-permission') }}</a>
                         @endhaspermission
 
                         @haspermission('user_edit')
                             <br>
-                            <a href="{{ route('users.edit', $user->id) }}">Edit</a>
+                            <a href="{{ route('users.edit', $user->id) }}">{{ __('tenantuser.edit') }}</a>
                         @endhaspermission
 
                         @include('tenants.users.delete')
@@ -50,4 +51,9 @@
             @endforeach
         </tbody>
     </table>
+    @if ($users->count() > 0)
+        <div class="container">
+            {{ $users->onEachSide(5)->links() }}
+        </div>
+    @endif
 @endsection

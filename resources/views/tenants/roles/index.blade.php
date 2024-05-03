@@ -6,9 +6,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">action</th>
+                <th scope="col">{{ __('role.table.#') }}</th>
+                <th scope="col">{{ __('role.table.name') }}</th>
+                <th scope="col">{{ __('role.table.action') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -20,7 +20,7 @@
 
                         <td>
                             @haspermission('roles_edit')
-                                <a href="{{ route('roles.edit', $role->id) }}">Edit</a>
+                                <a href="{{ route('roles.edit', $role->id) }}">{{ __('role.edit') }}</a>
                             @endhaspermission
                             @include('tenants.roles.delete', ['record' => $role])
 
@@ -30,4 +30,7 @@
             @endhaspermission
         </tbody>
     </table>
+    <div class="container">
+        {{ $roles->onEachSide(5)->links() }}
+    </div>
 @endsection

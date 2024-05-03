@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\Localization;
 use App\Http\Middleware\RevalidateBackHistory;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -25,10 +26,12 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->append([
             RevalidateBackHistory::class
         ]);
+        $middleware->web(append: [Localization::class]);
         $middleware->alias([
             'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

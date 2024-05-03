@@ -20,10 +20,13 @@
 
 <body>
     <div id="app">
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
+
+
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -58,8 +61,19 @@
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
+                                <ul class="list-group list-group-horizontal">
+                                    @foreach (config('localizations.locales') as $locale)
+                                        <li
+                                            class="list-group-item list-group-item list-group-item-action {{ session('localization') == $locale ? 'active text-white' : '' }}">
+                                            <a href="{{ route('localization', $locale) }}"
+                                                class="list-unstyled text-decoration-none text-info ">{{ strtoupper($locale) }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu
+                                                dropdown-menu-end"
+                                    aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -83,15 +97,16 @@
         app('auth')->user()->can('permissions.read'), app('auth')->user()->hasPermissionTo('permissions.read')); --}}
             @haspermission('user_view')
                 <li class="nav-item list-unstyled"><a href="{{ route('users.index') }}" class="btn btn-lg bg-primary">
-                        Users</a></li>
+                        {{ __('permission.users') }}</a></li>
             @endhaspermission
             @haspermission('permissions_view')
                 <li class="nav-item list-unstyled"><a href="{{ route('permissions.index') }}"
-                        class="btn btn-lg bg-primary">Permissions</a></li>
+                        class="btn btn-lg bg-primary">{{ __('permission.permissions') }}</a></li>
             @endhaspermission
             @haspermission('roles_view')
                 <li class="nav-item list-unstyled"><a href="{{ route('roles.index') }}"
-                        class="btn btn-lg bg-primary">Roles</a></li>
+                        class="btn btn-lg bg-primary">{{ __('permission.roles') }}</a>
+                </li>
             @endhaspermission
         </ul>
         <main class="py-4">

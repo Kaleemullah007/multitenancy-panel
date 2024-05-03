@@ -25,4 +25,16 @@ class StorePermissionRequest extends FormRequest
             'name' => 'required|max:255'
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'name' => __('permission.message.error_name'),
+        ];
+    }
+    public function attributes(): array
+    {
+        return [
+            'name' => __('permission.form.name'),
+        ];
+    }
 }

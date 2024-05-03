@@ -17,10 +17,15 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->unsignedBigInteger('plan_id')->nullable();
+            $table->date('start_date');
+            $table->date('end_date');
             $table->boolean('status')->default(true);
+            $table->boolean('actioned')->default(true);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('plan_id')->references('id')->on('plans');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
