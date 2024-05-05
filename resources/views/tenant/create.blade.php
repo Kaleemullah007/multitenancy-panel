@@ -2,15 +2,13 @@
 
 @section('content')
     <div class="container">
-        <a href="{{ route('tenants.index') }}" class="btn btn-lg bg-primary">Tenants</a>
+        <a href="{{ route('tenants.index') }}" class="btn btn-lg bg-primary">{{ __('tenant.tenants') }}</a>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('tenant.create_user') }}</div>
-                    <img src="/photos/0Tujd6yAwXy6qQoH5LcylSs0EnS9vsT9TvPQBUtI.png" />
-                    <img src="{{ asset('storage/app/photos/0Tujd6yAwXy6qQoH5LcylSs0EnS9vsT9TvPQBUtI.jpg') }}" />
-                    <img src="<?php echo asset('/storage/app/public/photos/0Tujd6yAwXy6qQoH5LcylSs0EnS9vsT9TvPQBUtI.jpg'); ?>" />
                     <div class="card-body">
+                        <?php print_r($errors->all()); ?>
                         <form method="POST" action="{{ route('tenants.store') }}" enctype="multipart/form-data">
                             @csrf
 
@@ -39,6 +37,30 @@
                                     <input id="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
                                         value="{{ old('email') }}" required autocomplete="email">
+
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{--  Plans --}}
+
+                            <div class="row mb-3">
+                                <label for="email"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('tenant.form.plan') }}</label>
+
+                                <div class="col-md-6">
+                                    <select id="plan_id" class="form-control @error('plan_id') is-invalid @enderror"
+                                        name="plan_id" required>
+                                        @foreach ($plans as $plan)
+                                            <option value=" {{ $plan->id }}" @selected(old('plan_id') == $plan->id)>
+                                                {{ $plan->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
 
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">

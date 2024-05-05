@@ -2,13 +2,25 @@
 
 @section('content')
     <div class="container">
+        <ul class="list-group list-group-horizontal flex justify-content-center">
+            @haspermission('tenant_view')
+                <li class="list-group-item text-decoration-none">
+                    <a href="{{ route('tenants.index') }}" class="btn btn-lg bg-primary">{{ __('tenant.tenants') }}</a>
+                </li>
+            @endhaspermission
+
+            @haspermission('plan_view')
+                <li class="list-group-item text-decoration-none">
+                    <a href="{{ route('plans.index') }}" class="btn btn-lg bg-primary">{{ __('plan.plans') }}</a>
+                </li>
+            @endhaspermission
+
+        </ul>
         <div class="row justify-content-center">
+
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Dashboard') }}</div>
-                    @haspermission('tenant_view')
-                        <a href="{{ route('tenants.index') }}" class="btn btn-lg bg-primary">Tenants</a>
-                    @endhaspermission
 
                     <div class="card-body">
                         @if (session('status'))

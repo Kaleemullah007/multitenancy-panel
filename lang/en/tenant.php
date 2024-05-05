@@ -16,6 +16,8 @@ return [
     'create_user' => 'Create User',
     'edit_user' => 'Edit User',
     'users' => 'Users',
+    'tenants' => 'Tenants',
+
     'user_title' => 'Manage :user permissions',
     'table' => [
         '#' => 'Sr. No',
@@ -24,6 +26,7 @@ return [
         'role' => 'Role',
         'action' => 'Action',
         'domains' => 'domains',
+        'plan' => 'Plan',
     ],
     'form' => [
         '#' => 'Sr. No',
@@ -35,7 +38,8 @@ return [
         'permissions' => 'permissions',
         'domain' => 'Domain',
         'profile_photo' => 'Profile Photo',
-        'status' => 'Status'
+        'status' => 'Status',
+        'plan' => 'Plan',
     ],
     'message' => [
         'save-message' => 'User created successfully',

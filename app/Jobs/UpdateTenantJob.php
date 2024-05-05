@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Stancl\Tenancy\Exceptions\TenantDatabaseDoesNotExistException;
 
 class UpdateTenantJob implements ShouldQueue
 {
@@ -28,16 +29,22 @@ class UpdateTenantJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $this->tenant->run(function () {
-            $user = User::where('email', $this->tenant->email)->first();
-            if (!is_null($user)) {
+        $database = $this->tenant->database()->getName();
+        if (!$this->tenant->database()->manager()->databaseExists($this->tenant->tenancy_db_name)) {
 
-                $user->update([
-                    'password' => $this->tenant->password,
-                    'status' => $this->tenant->status,
-                    'name' => $this->tenant->name,
-                ]);
-            }
-        });
+            info('No database created Yet' .  $database);
+        } else {
+            $this->tenant->run(function () {
+                $user = User::where('email', $this->tenant->email)->first();
+                if (!is_null($user)) {
+
+                    $user->update([
+                        'password' => $this->tenant->password,
+                        'status' => $this->tenant->status,
+                        'name' => $this->tenant->name,
+                    ]);
+                }
+            });
+        }
     }
 }

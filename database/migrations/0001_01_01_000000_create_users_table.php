@@ -18,10 +18,16 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->unsignedBigInteger('plan_id')->nullable();
-            $table->date('start_date');
-            $table->date('end_date');
+
+            $table->string('plan_name')->nullable();
+            $table->integer('validity')->default(12);
+            $table->integer('plan_price')->default(0);
+
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->boolean('status')->default(true);
             $table->boolean('actioned')->default(true);
+
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

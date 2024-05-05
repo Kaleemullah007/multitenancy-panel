@@ -66,6 +66,31 @@
                                 </div>
                             </div>
 
+                            {{--  Plans --}}
+
+                            <div class="row mb-3">
+                                <label for="email"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('tenant.form.plan') }}</label>
+
+                                <div class="col-md-6">
+                                    <select id="plan_id" class="form-control @error('plan_id') is-invalid @enderror"
+                                        name="plan_id" required>
+                                        @foreach ($plans as $plan)
+                                            <option value=" {{ $plan->id }}" @selected($tenant->plan?->id == $plan->id)
+                                                @selected(old('plan_id') == $plan->id)>
+                                                {{ $plan->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="row mb-3">
                                 <label for="password"
                                     class="col-md-4 col-form-label text-md-end">{{ __('tenant.form.password') }}</label>

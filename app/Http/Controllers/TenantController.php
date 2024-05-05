@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TenantRequest;
 use App\Http\Requests\UpdateTenantRequest;
+use App\Models\Plan;
 use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,9 +20,8 @@ class TenantController extends Controller
      */
     public function index()
     {
-        // $users = User::with(['tena'])->ExpiredUsers()->get();
 
-        $tenants = Tenant::withTrashed()->with('domains')->paginate($this->per_page);
+        $tenants = Tenant::withTrashed()->with(['domains'])->paginate($this->per_page);
         return view('tenant.index', compact('tenants'));
     }
 
@@ -30,7 +30,9 @@ class TenantController extends Controller
      */
     public function create()
     {
-        return view('tenant.create');
+        $plans = Plan::ActivePlans()->get();
+
+        return view('tenant.create', compact('plans'));
     }
 
     /**
@@ -39,6 +41,7 @@ class TenantController extends Controller
     public function store(TenantRequest $request)
     {
         $data = $request->validated();
+        // dd($data);
 
         // $filename = $request->photo->getClientOriginalName();
         // $request->photo->storeAs('photos', $filename);
@@ -51,7 +54,14 @@ class TenantController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'status' => true
+            'status' => $data['status'],
+            'start_date' => $data['start_date'],
+            'end_date' => $data['end_date'],
+            'validaty' => $data['validaty'],
+            'plan_name' => $data['plan_name'],
+            'plan_price' => $data['plan_price'],
+
+
         ]);
         // dd($user_id);
         $tenant = Tenant::create([
@@ -84,7 +94,8 @@ class TenantController extends Controller
     public function edit(Tenant $tenant)
     {
         $tenant->load('domains');
-        return view('tenant.edit', compact('tenant'));
+        $plans = Plan::ActivePlans()->get();
+        return view('tenant.edit', compact('tenant', 'plans'));
     }
 
     /**
