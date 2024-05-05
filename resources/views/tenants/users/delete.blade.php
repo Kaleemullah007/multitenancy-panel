@@ -3,6 +3,7 @@
         <form action="{{ route('users.destroy', $user->id) }}" method="post">
             @csrf
             @method('DELETE')
+            <input type="hidden" name="page" id="page" value="{{ request('page') }}">
             <button> {{ __('tenantuser.btn-deleted') }}</button>
         </form>
     @endhaspermission
@@ -11,6 +12,7 @@
         <form action="{{ route('users.user-deleted', $user->id) }}" method="post">
             @csrf
             @method('DELETE')
+            <input type="hidden" name="page" id="page" value="{{ request('page') }}">
             <button class="btn btn-lg btn-danger">{{ __('tenantuser.btn_permanently_deleted') }}</button>
         </form>
     @endhaspermission
@@ -18,6 +20,7 @@
         <form action="{{ route('users.user-restored', $user->id) }}" method="post">
             @csrf
             @method('DELETE')
+            <input type="hidden" name="page" id="page" value="{{ request('page') }}">
             <button class="btn btn-lg btn-info"> {{ __('tenantuser.btn_restored') }}</button>
         </form>
     @endhaspermission

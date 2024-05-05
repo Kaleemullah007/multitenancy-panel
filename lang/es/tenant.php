@@ -17,6 +17,8 @@ return [
     'edit_user' => 'editar usuario',
     'users' => 'Usuarias',
     'tenants' => 'Inquilinas',
+    'renew' => 'Renovar',
+
     'table' => [
         '#' => 'No Señor',
         'name' => 'Nombre',
@@ -25,6 +27,7 @@ return [
         'domains' => 'dominios',
         'action' => 'Acción',
         'plan' => 'Plan',
+        'date' => 'fechas',
     ],
     'form' => [
         'name' => 'Nombre',
@@ -42,6 +45,9 @@ return [
         'save-message' => 'Usuario creada con éxito',
         'update-message' => 'Usuario actualizada con éxito',
         'delete-message' => 'Usuario eliminada exitosamente',
+        'restore-message' => 'Usuario restaurada con éxito',
+        'permanently-delete-message' => 'Eliminación de usuario permanentemente exitosa',
+        'renew-message' => 'El usuario ha renovado con éxito',
 
         'error_name' => 'El nombre es campo obligatorio',
         'error_roles' => 'El rol es un campo obligatorio',
@@ -49,7 +55,7 @@ return [
         'error_domain' => 'El dominio es un campo obligatorio',
         'error_password' => 'La contraseña es un campo obligatorio',
         'error_profile_photo' => 'La foto de perfil es un campo obligatorio; el tipo de archivo es jpeg,jpg,png',
-
+        'error_domain_already' => 'El subdominio ya existe',
 
 
 

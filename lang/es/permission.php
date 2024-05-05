@@ -28,6 +28,8 @@ return [
         'save-message' => 'Permiso creado exitosamente',
         'update-message' => 'Permiso actualizado exitosamente',
         'delete-message' => 'Permiso eliminado exitosamente',
+        'restore-message' => 'Permiso restaurado exitosamente',
+        'permanently-delete-message' => 'Eliminación de permisos permanentemente con éxito',
         'error_name' => 'El campo Nombre es obligatorio',
 
     ]

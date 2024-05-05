@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Hash;
@@ -43,5 +44,10 @@ class Tenant extends BaseTenant implements TenantWithDatabase
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function planHistory(): HasMany
+    {
+        return $this->hasMany(PlanHistory::class, 'user_id', 'user_id');
     }
 }

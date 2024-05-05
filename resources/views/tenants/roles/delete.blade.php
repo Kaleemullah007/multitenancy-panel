@@ -3,6 +3,7 @@
         <form action="{{ route('roles.destroy', $role->id) }}" method="post">
             @csrf
             @method('DELETE')
+            <input type="hidden" name="page" id="page" value="{{ request('page') }}">
             <button> {{ __('role.btn-deleted') }}</button>
         </form>
     @endhaspermission
@@ -11,6 +12,7 @@
         <form action="{{ route('roles.user-deleted', $role->id) }}" method="post">
             @csrf
             @method('DELETE')
+            <input type="hidden" name="page" id="page" value="{{ request('page') }}">
             <button class="btn btn-lg btn-danger"> {{ __('role.btn_permanently_deleted') }}</button>
         </form>
     @endhaspermission
@@ -18,6 +20,7 @@
         <form action="{{ route('roles.user-restored', $role->id) }}" method="post">
             @csrf
             @method('DELETE')
+            <input type="hidden" name="page" id="page" value="{{ request('page') }}">
             <button class="btn btn-lg btn-info"> {{ __('role.btn_restored') }}</button>
         </form>
     @endhaspermission

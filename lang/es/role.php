@@ -25,6 +25,11 @@ return [
         'save-message' => 'Rol creado exitosamente',
         'update-message' => 'Rol actualizado exitosamente',
         'delete-message' => 'Rol eliminado exitosamente',
+        'restore-message' => 'Rol restaurado exitosamente',
+        'permanently-delete-message' => 'Eliminación de roles permanentemente exitosa',
+
+        'error_name_unique' => 'El nombre del rol debe ser único',
+        'error_name' => 'El nombre del rol es obligatorio',
     ]
 
 ];

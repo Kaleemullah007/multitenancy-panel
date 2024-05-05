@@ -9,6 +9,11 @@
                     </div>
 
                     <div class="card-body">
+                        @if (session()->has('message'))
+                            <div class="alert text-center alert-{{ session('error') }}">
+                                {{ session('message') }}
+                            </div>
+                        @endif
                         <form method="POST" action="{{ route('users.save-permissions', encrypt($user->id)) }}">
                             @csrf
 

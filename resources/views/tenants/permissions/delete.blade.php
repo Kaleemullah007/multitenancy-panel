@@ -3,6 +3,7 @@
         <form action="{{ route('permissions.destroy', $permission->id) }}" method="post">
             @csrf
             @method('DELETE')
+            <input type="hidden" name="page" id="page" value="{{ request('page') }}">
             <button> {{ __('permission.btn-deleted') }}</button>
         </form>
     @endhaspermission
@@ -11,6 +12,7 @@
         <form action="{{ route('permissions.user-deleted', $permission->id) }}" method="post">
             @csrf
             @method('DELETE')
+            <input type="hidden" name="page" id="page" value="{{ request('page') }}">
             <button class="btn btn-lg btn-danger"> {{ __('permission.btn_permanently_deleted') }}</button>
         </form>
     @endhaspermission
@@ -18,6 +20,7 @@
         <form action="{{ route('permissions.user-restored', $permission->id) }}" method="post">
             @csrf
             @method('DELETE')
+            <input type="hidden" name="page" id="page" value="{{ request('page') }}">
             <button class="btn btn-lg btn-info"> {{ __('permission.btn_restored') }}</button>
         </form>
     @endhaspermission

@@ -38,6 +38,9 @@ return [
         'save-message' => 'Plan created successfully',
         'update-message' => 'Plan updated successfully',
         'delete-message' => 'Plan deleted successfully',
+        'restore-message' => 'Plan restored successfully',
+        'permanently-delete-message' => 'Plan delete permanently successfully',
+
         'error_name' => 'The name field is required',
         'error_description' => 'The description field is required',
         'error_validity_month' => 'The validity month field is required',

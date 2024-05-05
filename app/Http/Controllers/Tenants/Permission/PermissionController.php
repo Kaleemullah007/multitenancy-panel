@@ -43,8 +43,11 @@ class PermissionController extends Controller
 
     public function index()
     {
-        $permissions = Permission::withTrashed()->paginate($this->per_page);
-        return view('tenants.permissions.index', compact('permissions'));
+        $permissions = Permission::withTrashed()->paginate(config('app.per_page'));
+        if ($permissions->lastPage() >= request('page')) {
+            return view('tenants.permissions.index', compact('permissions'));
+        }
+        return to_route('permissions.index', ['page' => request('page')]);
     }
 
     /**
@@ -74,7 +77,8 @@ class PermissionController extends Controller
             $user->givePermissionTo([$request->name]);
         }
 
-
+        session()->flash('message', __('permission.message.save-message'));
+        session()->flash('error', 'success');
 
         return to_route('permissions.index');
     }
@@ -102,6 +106,9 @@ class PermissionController extends Controller
     {
         $data = $request->validated();
         $permission->update($data);
+
+        session()->flash('message', __('permission.message.update-message'));
+        session()->flash('error', 'success');
         return view('tenants.permissions.edit', compact('permission'));
     }
 
@@ -111,16 +118,19 @@ class PermissionController extends Controller
     public function destroy(Permission $permission)
     {
         $permission->destroy($permission->id);
-        // $user->save();
-        return to_route('permissions.index');
+        session()->flash('message', __('permission.message.delete-message'));
+        session()->flash('error', 'danger');
+        return to_route('permissions.index', ['page' => request('page')]);
     }
     public function restoreUser($id)
     {
 
         $record = Permission::withTrashed()->find($id);
         $record->restore(); // This restores the soft-deleted post
+        session()->flash('message', __('permission.message.restore-message'));
+        session()->flash('error', 'success');
 
-        return to_route('permissions.index');
+        return to_route('permissions.index', ['page' => request('page')]);
         // Additional logic...
     }
 
@@ -131,6 +141,8 @@ class PermissionController extends Controller
     {
         $record = Permission::withTrashed()->find($id);
         $record->forceDelete();
-        return to_route('permissions.index');
+        session()->flash('message', __('permission.message.permanently-delete-message'));
+        session()->flash('error', 'danger');
+        return to_route('permissions.index', ['page' => request('page')]);
     }
 }

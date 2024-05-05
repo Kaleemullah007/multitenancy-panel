@@ -49,8 +49,19 @@ class TenantUserController extends Controller
     public function index()
     {
 
-        $users = User::with('roles')->withTrashed()->superAdmin()->paginate($this->per_page);
-        return view('tenants.users.index', compact('users'));
+
+
+
+        $users = User::with('roles')
+            ->superAdmin()
+            ->withTrashed()
+            ->paginate(config('app.per_page'));
+
+        // dd($users);
+        if ($users->lastPage() >= request('page')) {
+            return view('tenants.users.index', compact('users'));
+        }
+        return to_route('tenants.index', ['page' => request('page')]);
     }
 
     /**
@@ -76,6 +87,11 @@ class TenantUserController extends Controller
         unset($data['roles']);
         $user = User::create($data);
         $user->assignRole($roles);
+
+
+        session()->flash('message', __('tenantuser.message.save-message'));
+        session()->flash('error', 'success');
+
         return to_route('users.index');
     }
 
@@ -112,12 +128,10 @@ class TenantUserController extends Controller
         unset($data['roles']);
         $user->update($data);
         $user->assignRole($roles);
-        // if ($check) {
-        //     Auth::logout();
-        //     // $request->session()->invalidate();
-        //     // $request->session()->regenerateToken();
-        //     return to_route('login');
-        // }
+
+        session()->flash('message', __('tenantuser.message.update-message'));
+        session()->flash('error', 'success');
+
         return view('tenants.users.edit', compact('user'));
     }
 
@@ -130,12 +144,12 @@ class TenantUserController extends Controller
 
         if ($user->hasRole('SuperAdmin')) {
 
-            session()->flash('message', 'You can not delete super admin.');
+            session()->flash('message', __('tenantuser.message.delete-message'));
             session()->flash('error', 'danger');
         } else {
             $user->destroy($user->id);
         }
-        return to_route('users.index');
+        return to_route('users.index', ['page' => request('page')]);
     }
 
     public function restoreUser($id)
@@ -144,8 +158,9 @@ class TenantUserController extends Controller
 
         $record = User::withTrashed()->find($id);
         $record->restore(); // This restores the soft-deleted post
-
-        return to_route('users.index');
+        session()->flash('message', __('tenantuser.message.restore-message'));
+        session()->flash('error', 'success');
+        return to_route('users.index', ['page' => request('page')]);
         // Additional logic...
     }
 
@@ -156,7 +171,9 @@ class TenantUserController extends Controller
     {
         $record = User::withTrashed()->find($id);
         $record->forceDelete();
-        return to_route('users.index');
+        session()->flash('message', __('tenantuser.message.permanently-delete-message'));
+        session()->flash('error', 'danger');
+        return to_route('users.index', ['page' => request('page')]);
     }
 
 
@@ -169,6 +186,7 @@ class TenantUserController extends Controller
         $user = User::with(['roles', 'permissions'])->find(decrypt($id));
         $roles = Role::get();
         $permissions = Permission::get();
+
         return view('tenants.users.manage-permissions', compact('user', 'roles', 'permissions'));
     }
 
@@ -179,6 +197,10 @@ class TenantUserController extends Controller
         $user = User::find(decrypt($id));
         $user->syncRoles($request->roles);
         $user->syncPermissions($request->permissions);
+
+        session()->flash('message', __('tenantuser.message.save-permission-message'));
+        session()->flash('error', 'success');
+
         return redirect()->route('users.manage-permissions', $id);
     }
 }

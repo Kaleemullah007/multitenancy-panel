@@ -37,8 +37,9 @@ class TenantRequest extends FormRequest
             'status' => ['required', 'boolean'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed', Password::defaults()],
-            'domain_name' => ['required', 'string', 'unique:domains,domain'],
-            'photo' => 'required|file|image|mimes:jpeg,jpg,png|max:2048',
+            'domain_name' => ['required', 'string', 'unique:tenants,name'],
+            // 'photo' => 'required|file|image|mimes:jpeg,jpg,png|max:2048',
+            'photo' => 'nullable|file|image|mimes:jpeg,jpg,png|max:2048',
 
         ];
     }
@@ -81,6 +82,7 @@ class TenantRequest extends FormRequest
             'email' => __('tenant.message.error_email'),
             'password' => __('tenant.message.error_password'),
             'domain_name' => __('tenant.message.error_domain_name'),
+            'domain_name.unique' => __('tenant.message.error_domain_already'),
             'photo' => __('tenant.message.error_profile_photo'),
         ];
     }

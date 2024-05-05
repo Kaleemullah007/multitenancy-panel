@@ -8,6 +8,11 @@
                     <div class="card-header">{{ __('permission.edit_permission') }}</div>
 
                     <div class="card-body">
+                        @if (session()->has('message'))
+                            <div class="alert text-center alert-{{ session('error') }}">
+                                {{ session('message') }}
+                            </div>
+                        @endif
                         <form method="POST" action="{{ route('permissions.update', $permission->id) }}">
                             @csrf
                             @method('PUT')

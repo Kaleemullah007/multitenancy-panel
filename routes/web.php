@@ -29,6 +29,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
+    Route::get('tenant-renew/{tenant}', [TenantController::class, 'renew'])->name('tenants.renew');
     Route::delete('tenant-permanently-deleted/{tenant}', [TenantController::class, 'deletePermanently'])->name('tenants.deleted');
     Route::delete('tenant-restore/{tenant}', [TenantController::class, 'restore'])->name('tenants.restored');
     Route::resource('tenants', TenantController::class);

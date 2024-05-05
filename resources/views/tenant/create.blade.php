@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('tenant.create_user') }}</div>
                     <div class="card-body">
-                        <?php print_r($errors->all()); ?>
+
                         <form method="POST" action="{{ route('tenants.store') }}" enctype="multipart/form-data">
                             @csrf
 
