@@ -28,7 +28,6 @@ class TenantController extends Controller
     public function index()
     {
 
-        dd(date('d'));
         $tenants = Tenant::withTrashed()->with(['domains', 'user'])->paginate(config('app.per_page'));
 
         if ($tenants->lastPage() >= request('page')) {

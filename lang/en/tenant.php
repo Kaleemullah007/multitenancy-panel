@@ -49,7 +49,7 @@ return [
         'delete-message' => 'User deleted successfully',
         'restore-message' => 'User restored successfully',
         'permanently-delete-message' => 'User delete permanently successfully',
-
+        'renew-message' => 'User has renewed successfully',
         'error_name' => 'The name is required field',
         'error_roles' => 'Role is required field',
         'error_email' => 'Email is required field',

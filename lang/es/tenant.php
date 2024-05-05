@@ -47,7 +47,7 @@ return [
         'delete-message' => 'Usuario eliminada exitosamente',
         'restore-message' => 'Usuario restaurada con éxito',
         'permanently-delete-message' => 'Eliminación de usuario permanentemente exitosa',
-
+        'renew-message' => 'El usuario ha renovado con éxito',
 
         'error_name' => 'El nombre es campo obligatorio',
         'error_roles' => 'El rol es un campo obligatorio',
