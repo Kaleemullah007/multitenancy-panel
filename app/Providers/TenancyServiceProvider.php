@@ -42,23 +42,22 @@ class TenancyServiceProvider extends ServiceProvider
             ],
             Events\SavingTenant::class => [],
             Events\TenantSaved::class => [
+
                 // JobPipeline::make([
-                //     UpdateTenantStatus::class,
+                //     UpdateTenantJob::class,
                 // ])->send(function (Events\TenantSaved $event) {
                 //     return $event->tenant;
                 // })->shouldBeQueued(false)
-
-
             ],
-            Events\UpdatingTenant::class => [
-                JobPipeline::make([
-                    UpdateTenantJob::class,
-                ])->send(function (Events\UpdatingTenant $event) {
-                    return $event->tenant;
-                })->shouldBeQueued(false)
+            // Events\UpdatingTenant::class => [
+            //     // JobPipeline::make([
+            //     //     UpdateTenantJob::class,
+            //     // ])->send(function (Events\UpdatingTenant $event) {
+            //     //     return $event->tenant;
+            //     // })->shouldBeQueued(false)
 
 
-            ],
+            // ],
             Events\TenantUpdated::class => [],
             Events\DeletingTenant::class => [],
             Events\TenantDeleted::class => [
@@ -105,6 +104,15 @@ class TenancyServiceProvider extends ServiceProvider
             // Resource syncing
             Events\SyncedResourceSaved::class => [
                 Listeners\UpdateSyncedResource::class,
+            ],
+            Events\UpdatingTenant::class => [
+                JobPipeline::make([
+                    UpdateTenantJob::class,
+                ])->send(function (Events\UpdatingTenant $event) {
+                    return $event->tenant;
+                })->shouldBeQueued(false)
+
+
             ],
 
             // Fired only when a synced resource is changed in a different DB than the origin DB (to avoid infinite loops)

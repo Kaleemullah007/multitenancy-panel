@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -27,6 +28,11 @@ class User extends Authenticatable
         'email',
         'password',
         'status',
+        'plan_id',
+        'plan_name',
+        'validity',
+        'start_date',
+        'end_date'
     ];
 
     /**
@@ -64,5 +70,11 @@ class User extends Authenticatable
     public function tenant(): HasOne
     {
         return $this->hasOne(Tenant::class, 'user_id', 'id');
+    }
+
+    //  User Plan
+    public function plan(): BelongsTo
+    {
+        return $this->belongsTo(Plan::class);
     }
 }

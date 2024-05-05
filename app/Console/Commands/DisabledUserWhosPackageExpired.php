@@ -34,7 +34,7 @@ class DisabledUserWhosPackageExpired extends Command
                 $user->status = 0;   // Check status is 0, 1,2
                 $user->save();
                 $tenant = $user->tenant;
-                $tenant->update(['status' => 2]);
+                $tenant->update(['status' => 3]);
                 // $tenant->save();
             }
             info('User expired today ' . $users->count());

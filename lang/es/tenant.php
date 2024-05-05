@@ -16,13 +16,15 @@ return [
     'create_user' => 'Crear usuario',
     'edit_user' => 'editar usuario',
     'users' => 'Usuarias',
+    'tenants' => 'Inquilinas',
     'table' => [
         '#' => 'No Señor',
         'name' => 'Nombre',
         'email' => 'Correo electrónico',
         'role' => 'Role',
         'domains' => 'dominios',
-        'action' => 'Acción'
+        'action' => 'Acción',
+        'plan' => 'Plan',
     ],
     'form' => [
         'name' => 'Nombre',
@@ -33,7 +35,8 @@ return [
         'permissions' => 'permisos',
         'domain' => 'Dominio',
         'profile_photo' => 'Foto de perfil',
-        'status' => 'Estado'
+        'status' => 'Estado',
+        'plan' => 'Plan',
     ],
     'message' => [
         'save-message' => 'Usuario creada con éxito',
