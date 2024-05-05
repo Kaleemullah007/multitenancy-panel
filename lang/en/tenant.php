@@ -17,6 +17,7 @@ return [
     'edit_user' => 'Edit User',
     'users' => 'Users',
     'tenants' => 'Tenants',
+    'renew' => 'Renew',
 
     'user_title' => 'Manage :user permissions',
     'table' => [
@@ -27,6 +28,7 @@ return [
         'action' => 'Action',
         'domains' => 'domains',
         'plan' => 'Plan',
+        'date' => 'Dates',
     ],
     'form' => [
         '#' => 'Sr. No',
@@ -45,6 +47,8 @@ return [
         'save-message' => 'User created successfully',
         'update-message' => 'User updated successfully',
         'delete-message' => 'User deleted successfully',
+        'restore-message' => 'User restored successfully',
+        'permanently-delete-message' => 'User delete permanently successfully',
 
         'error_name' => 'The name is required field',
         'error_roles' => 'Role is required field',
@@ -52,6 +56,8 @@ return [
         'error_domain' => 'Domain is required field',
         'error_password' => 'Password is required field',
         'error_profile_photo' => 'Profile Photo is required field, file type either jpeg,jpg,png',
+        'error_domain_already' => 'Sub-domain is already exist',
+
 
 
 

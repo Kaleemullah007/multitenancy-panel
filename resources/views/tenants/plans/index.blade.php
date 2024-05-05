@@ -4,6 +4,11 @@
         <a class="btn btn-lg bg-primary" href="{{ route('plans.create') }}">{{ __('plan.create') }}</a>
     @endhaspermission
     <table class="table">
+        @if (session()->has('message'))
+            <div class="alert text-center alert-{{ session('error') }}">
+                {{ session('message') }}
+            </div>
+        @endif
         <thead>
             <tr>
                 <th scope="col">{{ __('plan.table.#') }}</th>
@@ -15,24 +20,39 @@
             </tr>
         </thead>
         <tbody>
-            @haspermission('plan_view')
-                @foreach ($plans as $key => $plan)
-                    <tr>
-                        <th scope="row">{{ $key + 1 }}</th>
-                        <td>{{ $plan->name }}</td>
-                        <td>{{ $plan->description }}</td>
-                        <td>{{ $plan->validity_month }}</td>
-                        <td>{{ $plan->price }}</td>
-                        <td>
-                            @haspermission('plan_edit')
-                                <a href="{{ route('plans.edit', $plan->id) }}">{{ __('plan.edit') }}</a>
-                            @endhaspermission
-                            @include('tenants.plans.delete', ['record' => $plan])
+            @php
+                if (request('page') > 1) {
+                    $counter = (request('page') - 1) * config('app.per_page') + 1;
+                } else {
+                    $counter = 1;
+                }
 
-                        </td>
-                    </tr>
-                @endforeach
-            @endhaspermission
+            @endphp
+            @if ($plans->count() > 0)
+                @haspermission('plan_view')
+                    @foreach ($plans as $key => $plan)
+                        <tr>
+                            <th scope="row">{{ $counter++ }}</th>
+                            <td>{{ $plan->name }}</td>
+                            <td>{{ $plan->description }}</td>
+                            <td>{{ $plan->validity_month }}</td>
+                            <td>{{ $plan->price }}</td>
+                            <td>
+                                @haspermission('plan_edit')
+                                    <a
+                                        href="{{ route('plans.edit', $plan->id) }}?page={{ $plans->currentPage() }}">{{ __('plan.edit') }}</a>
+                                @endhaspermission
+                                @include('tenants.plans.delete', ['record' => $plan])
+
+                            </td>
+                        </tr>
+                    @endforeach
+                @endhaspermission
+            @else
+                <tr>
+                    <td colspan="6" class="text-center">{{ __('general.no-record') }}</td>
+                </tr>
+            @endif
         </tbody>
     </table>
     <div class="container">

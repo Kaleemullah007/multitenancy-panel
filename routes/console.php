@@ -10,4 +10,11 @@ Artisan::command('inspire', function () {
 
 
 
-Schedule::command('make:user-disable')->everyMinute();
+Schedule::command('make:user-disable')->everyMinute()->at('23:59');
+Schedule::command('user:reminder-1')->daily()->at('23:59');
+Schedule::command('user:reminder-7')->weekly()->sundays()->at("23:59");
+Schedule::command('user:reminder-15')->weekly()->mondays()
+    ->when(function () {
+        return date('W') % 2;
+    })->at("23:59");
+Schedule::command('user:reminder-30')->monthly();

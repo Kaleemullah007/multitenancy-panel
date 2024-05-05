@@ -29,8 +29,10 @@ class UpdatePermissionRequest extends FormRequest
     {
         return [
             'name' => __('permission.message.error_name'),
+            'name.unique' => __('permission.message.error_name_unique'),
         ];
     }
+
     public function attributes(): array
     {
         return [

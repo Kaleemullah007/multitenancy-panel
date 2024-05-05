@@ -8,10 +8,17 @@
                 <div class="card">
                     <div class="card-header">{{ __('tenant.edit_user') }}</div>
                     <div class="card-body">
+                        @if (session()->has('message'))
+                            <div class="alert text-center alert-{{ session('error') }}">
+                                {{ session('message') }}
+                            </div>
+                        @endif
                         <form method="POST" action="{{ route('tenants.update', $tenant->id) }}"
                             enctype="multipart/form-data">
                             @method('PUT')
                             @csrf
+
+                            <input type="hidden" name="page" id="page" value="{{ request('page') }}">
 
                             <div class="row mb-3">
                                 <label for="name"
@@ -55,8 +62,8 @@
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                         class="form-control @error('domain_name') is-invalid @enderror" name="domain_name"
-                                        value="{{ old('domain_name', $tenant->name) }}" required autocomplete="domain_name"
-                                        autofocus>
+                                        value="{{ old('domain_name', $tenant->domains[0]->domain) }}" readonly
+                                        autocomplete="domain_name" disabled autofocus>
 
                                     @error('domain_name')
                                         <span class="invalid-feedback" role="alert">
@@ -72,7 +79,7 @@
                                 <label for="email"
                                     class="col-md-4 col-form-label text-md-end">{{ __('tenant.form.plan') }}</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-2">
                                     <select id="plan_id" class="form-control @error('plan_id') is-invalid @enderror"
                                         name="plan_id" required>
                                         @foreach ($plans as $plan)
@@ -88,6 +95,14 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="update_plan">Update Plan ><span
+                                            class="text-danger">({{ $tenant->user?->start_date }} ,
+                                            {{ $tenant->user?->end_date }})</span></label>
+                                    <input type="checkbox" name="update_plan" id="update_plan" @checked(old('update_plan') == true)>
+
                                 </div>
                             </div>
 

@@ -31,7 +31,13 @@ return [
         'save-message' => 'Permission created successfully',
         'update-message' => 'Permission updated successfully',
         'delete-message' => 'Permission deleted successfully',
-        'error_name' => 'The Name field is required'
+
+        'restore-message' => 'Permission restored successfully',
+        'permanently-delete-message' => 'Permission delete permanently successfully',
+
+        'error_name' => 'The Name field is required',
+        'error_name_unique' => 'Permission name should be unique',
+
     ]
 
 ];

@@ -28,6 +28,11 @@ return [
         'save-message' => 'Role created successfully',
         'update-message' => 'Role updated successfully',
         'delete-message' => 'Role deleted successfully',
+        'restore-message' => 'Role restored successfully',
+        'permanently-delete-message' => 'Role delete permanently successfully',
+
+        'error_name_unique' => 'Role name should be unique',
+        'error_name' => 'Role name is required',
     ]
 
 ];

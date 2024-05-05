@@ -30,7 +30,8 @@ class User extends Authenticatable
         'status',
         'plan_id',
         'plan_name',
-        'validity',
+        'plan_price',
+        'validaty',
         'start_date',
         'end_date'
     ];
@@ -60,7 +61,8 @@ class User extends Authenticatable
 
     protected function ScopeSuperAdmin()
     {
-        return $this->where('email', '!=', 'kadinumber804imrankhan@gmail.com');
+
+        return $this->whereNotIn('id', [2, auth()->id()]);
     }
 
     protected function ScopeExpiredUsers()

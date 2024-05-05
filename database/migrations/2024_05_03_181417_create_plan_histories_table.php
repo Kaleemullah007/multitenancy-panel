@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('price', 10, 2);
             $table->integer('validity');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('plan_id')->references('id')->on('plans');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('plan_id')->references('id')->on('plans')->onDelete('cascade');
             $table->timestamps();
         });
     }

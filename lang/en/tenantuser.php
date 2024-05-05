@@ -9,6 +9,7 @@ return [
     'btn-manage-permission' => 'Manage permissions',
     'btn-deleted' => 'Deleted',
     'btn_restored' => 'Restore',
+
     'btn_role_permission' => 'Update Permissions and Role',
     'btn-edit' => 'Update',
     'edit' => 'Edit',
@@ -22,7 +23,8 @@ return [
         'name' => 'Name',
         'email' => 'Email',
         'role' => 'Role',
-        'action' => 'Action'
+        'action' => 'Action',
+
     ],
     'form' => [
         '#' => 'Sr. No',
@@ -37,9 +39,14 @@ return [
         'save-message' => 'User created successfully',
         'update-message' => 'User updated successfully',
         'delete-message' => 'User deleted successfully',
+        'restore-message' => 'User restored successfully',
+        'permanently-delete-message' => 'User delete permanently successfully',
+        'save-permission-message' => 'User permission updated successfully',
+
 
         'error_permissions' => 'Permission is required field',
         'error_roles' => 'Role is required field',
+        'error_email_unique' => 'Email is already used, try another',
 
 
 

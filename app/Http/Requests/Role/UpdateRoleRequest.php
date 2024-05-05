@@ -25,4 +25,11 @@ class UpdateRoleRequest extends FormRequest
             'name' => 'required|max:255|unique:roles,name,' . $this->role->id
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'name' => 'required|max:255',
+            'name.unique' => __('role.message.error_name_unique'),
+        ];
+    }
 }

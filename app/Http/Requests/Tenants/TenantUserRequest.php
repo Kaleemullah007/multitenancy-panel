@@ -45,6 +45,7 @@ class TenantUserRequest extends FormRequest
     {
         return [
             'name' => __('permission.form.name'),
+            'email.unique' => __('tenantuser.message.error_email_unique'),
         ];
     }
 }

@@ -37,8 +37,15 @@ return [
         'save-message' => 'Usuario creada con éxito',
         'update-message' => 'Usuario actualizada con éxito',
         'delete-message' => 'Usuario eliminado exitosamente',
+
+        'restore-message' => 'Usuario restaurado con éxito',
+        'permanently-delete-message' => 'Eliminación de usuario permanentemente exitosa',
+        'save-permission-message' => 'Permiso de usuario actualizado exitosamente',
+
+
         'error_permissions' => 'El permiso es un campo requerido',
         'error_roles' => 'El rol es un campo obligatorio',
+        'error_email_unique' => 'El correo electrónico ya está en uso, prueba con otro.',
     ]
 
 ];

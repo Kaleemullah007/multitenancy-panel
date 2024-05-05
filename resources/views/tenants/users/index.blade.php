@@ -11,6 +11,15 @@
         @endif
     </div>
 
+    @php
+        if (request('page') > 1) {
+            $counter = (request('page') - 1) * config('app.per_page') + 1;
+        } else {
+            $counter = 1;
+        }
+
+    @endphp
+
     <table class="table">
         <thead>
             <tr>
@@ -22,33 +31,39 @@
             </tr>
         </thead>
         <tbody>
+            @if ($users->count() > 0)
+                @foreach ($users as $key => $user)
+                    <tr>
+                        <th scope="row">{{ $counter++ }}</th>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>
+                            @foreach ($user->roles as $role)
+                                <span class="badge bg-danger">{{ $role->name }} {{ $loop->last ? '' : ',' }}</span>
+                            @endforeach
+                        </td>
+                        <td>
+                            @haspermission('manage_permissions')
+                                <a
+                                    href="{{ route('users.manage-permissions', encrypt($user->id)) }}">{{ __('tenantuser.btn-manage-permission') }}</a>
+                            @endhaspermission
 
-            @foreach ($users as $key => $user)
+                            @haspermission('user_edit')
+                                <br>
+                                <a
+                                    href="{{ route('users.edit', $user->id) }}?page={{ $users->currentPage() }}">{{ __('tenantuser.edit') }}</a>
+                            @endhaspermission
+
+                            @include('tenants.users.delete')
+
+                        </td>
+                    </tr>
+                @endforeach
+            @else
                 <tr>
-                    <th scope="row">{{ $key + 1 }}</th>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>
-                        @foreach ($user->roles as $role)
-                            <span class="badge bg-danger">{{ $role->name }} {{ $loop->last ? '' : ',' }}</span>
-                        @endforeach
-                    </td>
-                    <td>
-                        @haspermission('manage_permissions')
-                            <a
-                                href="{{ route('users.manage-permissions', encrypt($user->id)) }}">{{ __('tenantuser.btn-manage-permission') }}</a>
-                        @endhaspermission
-
-                        @haspermission('user_edit')
-                            <br>
-                            <a href="{{ route('users.edit', $user->id) }}">{{ __('tenantuser.edit') }}</a>
-                        @endhaspermission
-
-                        @include('tenants.users.delete')
-
-                    </td>
+                    <td colspan="7" class="text-center">{{ __('general.no-record') }}</td>
                 </tr>
-            @endforeach
+            @endif
         </tbody>
     </table>
     @if ($users->count() > 0)

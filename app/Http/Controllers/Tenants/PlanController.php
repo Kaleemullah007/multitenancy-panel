@@ -8,6 +8,7 @@ use App\Http\Requests\StorePlanRequest;
 use App\Http\Requests\UpdatePlanRequest;
 use App\Models\Plan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PlanController extends Controller
 {
@@ -39,9 +40,11 @@ class PlanController extends Controller
     public function index()
     {
 
-        $plans = Plan::paginate($this->per_page);
-        // dd($plans);
-        return view('tenants.plans.index', compact('plans'));
+        $plans = Plan::withTrashed()->paginate(config('app.per_page'));
+        if ($plans->lastPage() >= request('page')) {
+            return view('tenants.plans.index', compact('plans'));
+        }
+        return to_route('plans.index', ['page' => request('page')]);
     }
 
     /**
@@ -67,6 +70,8 @@ class PlanController extends Controller
 
         Plan::create($request->validated());
 
+        session()->flash('message', __('plan.message.save-message'));
+        session()->flash('error', 'success');
         return to_route('plans.index');
     }
 
@@ -97,7 +102,8 @@ class PlanController extends Controller
 
         // dd($request->validated());
         $plan->update($request->validated());
-
+        session()->flash('message', __('plan.message.update-message'));
+        session()->flash('error', 'success');
         return view('tenants.plans.edit', compact('plan'));
     }
 
@@ -108,13 +114,16 @@ class PlanController extends Controller
     {
 
 
-        if ($plan->hasRole('ownerproduct')) {
+
+        if (Auth::user()->hasRole('ownerproduct')) {
             $plan->destroy($plan->id);
         } else {
             session()->flash('message', __('plan.message.error_auth_delete_message'));
             session()->flash('error', 'danger');
         }
-        return to_route('plans.index');
+        session()->flash('message', __('plan.message.delete-message'));
+        session()->flash('error', 'danger');
+        return to_route('plans.index', ['page' => request('page')]);
     }
 
     public function restore($id)
@@ -123,8 +132,9 @@ class PlanController extends Controller
 
         $record = Plan::withTrashed()->find($id);
         $record->restore(); // This restores the soft-deleted post
-
-        return to_route('plans.index');
+        session()->flash('message', __('plan.message.restore-message'));
+        session()->flash('error', 'success');
+        return to_route('plans.index', ['page' => request('page')]);
         // Additional logic...
     }
 
@@ -134,7 +144,10 @@ class PlanController extends Controller
     public function deletePermanently($id)
     {
         $record = Plan::withTrashed()->find($id);
+        $record->user()->update(['plan_id' => null]);
         $record->forceDelete();
-        return to_route('plans.index');
+        session()->flash('message', __('plan.message.permanently-delete-message'));
+        session()->flash('error', 'danger');
+        return to_route('plans.index', ['page' => request('page')]);
     }
 }

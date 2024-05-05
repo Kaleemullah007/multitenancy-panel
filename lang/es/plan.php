@@ -36,6 +36,10 @@ return [
         'save-message' => 'Plan creado exitosamente',
         'update-message' => 'Plan actualizado exitosamente',
         'delete-message' => 'Plan eliminado exitosamente',
+        'restore-message' => 'Plan restaurado con éxito',
+        'permanently-delete-message' => 'Plan de eliminación permanente con éxito',
+
+
         'error_name' => 'El campo de nombre es obligatorio.',
         'error_description' => 'El campo de descripción es obligatorio.',
         'error_validity_month' => 'El campo del mes de validez es obligatorio.',

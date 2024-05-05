@@ -37,6 +37,7 @@ class UpdateTenantUserRequest extends FormRequest
             'name' => __('tenant.message.error_name'),
             'email' => __('tenant.message.error_email'),
             'password' => __('tenant.message.error_password'),
+            'email.unique' => __('tenantuser.message.error_email_unique'),
 
         ];
     }

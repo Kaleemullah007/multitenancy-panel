@@ -8,6 +8,12 @@
                     <div class="card-header">{{ __('role.edit_role') }}</div>
 
                     <div class="card-body">
+                        @if (session()->has('message'))
+                            <div class="alert text-center alert-{{ session('error') }}">
+                                {{ session('message') }}
+                            </div>
+                        @endif
+
                         <form method="POST" action="{{ route('roles.update', $role->id) }}">
                             @csrf
                             @method('PUT')

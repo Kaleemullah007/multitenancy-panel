@@ -12,6 +12,11 @@
                     </div>
 
                     <div class="card-body">
+                        @if (session()->has('message'))
+                            <div class="alert text-center alert-{{ session('error') }}">
+                                {{ session('message') }}
+                            </div>
+                        @endif
                         <form method="POST" action="{{ route('plans.update', $plan->id) }}">
                             @csrf
                             @method('PUT')
