@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\Tenants\PlanController;
 use App\Http\Middleware\Localization;
@@ -40,4 +41,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('plans', PlanController::class);
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::resource('/profile', ProfileController::class);
 });

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\Tenants\HomeController;
 use App\Http\Controllers\Tenants\Permission\PermissionController;
@@ -63,4 +64,5 @@ Route::middleware([
 
 
     Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+    Route::resource('/profile', ProfileController::class);
 })->middleware('auth');

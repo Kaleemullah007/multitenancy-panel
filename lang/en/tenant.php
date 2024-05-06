@@ -18,6 +18,7 @@ return [
     'users' => 'Users',
     'tenants' => 'Tenants',
     'renew' => 'Renew',
+    'btn-update-profile'=>'Update Profile',
 
     'user_title' => 'Manage :user permissions',
     'table' => [

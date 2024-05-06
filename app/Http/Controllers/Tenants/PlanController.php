@@ -64,12 +64,7 @@ class PlanController extends Controller
     public function store(StorePlanRequest $request)
     {
 
-
-
-
-
         Plan::create($request->validated());
-
         session()->flash('message', __('plan.message.save-message'));
         session()->flash('error', 'success');
         return to_route('plans.index');
@@ -88,9 +83,6 @@ class PlanController extends Controller
      */
     public function edit(Plan $plan)
     {
-        //$user = Plan::with(['roles', 'permissions'])->find(decrypt($id));
-
-
         return view('tenants.plans.edit', compact('plan'));
     }
 
@@ -100,7 +92,6 @@ class PlanController extends Controller
     public function update(UpdatePlanRequest $request, Plan $plan)
     {
 
-        // dd($request->validated());
         $plan->update($request->validated());
         session()->flash('message', __('plan.message.update-message'));
         session()->flash('error', 'success');
@@ -108,12 +99,10 @@ class PlanController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified as Softdelete.
      */
     public function destroy(Plan $plan)
     {
-
-
 
         if (Auth::user()->hasRole('ownerproduct')) {
             $plan->destroy($plan->id);
@@ -126,9 +115,12 @@ class PlanController extends Controller
         return to_route('plans.index', ['page' => request('page')]);
     }
 
+    /**
+     * Restore the specified from Softdelete.
+     */
+
     public function restore($id)
     {
-
 
         $record = Plan::withTrashed()->find($id);
         $record->restore(); // This restores the soft-deleted post
@@ -139,8 +131,9 @@ class PlanController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Permanently delete Record including database
      */
+
     public function deletePermanently($id)
     {
         $record = Plan::withTrashed()->find($id);

@@ -52,17 +52,7 @@ class TenantController extends Controller
     public function store(TenantRequest $request)
     {
         $data = $request->validated();
-        // dd($data);
-
-        // $filename = $request->photo->getClientOriginalName();
-        // $request->photo->storeAs('photos', $filename);
-        // $file = request()->file('photos');
-        // $path = $request->photo->storeAs('avatars');
-
-
-
-
-
+ 
         $user  = User::create([
             'name' => $data['name'],
             'email' => $data['email'],

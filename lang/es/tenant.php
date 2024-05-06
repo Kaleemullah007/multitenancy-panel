@@ -18,7 +18,7 @@ return [
     'users' => 'Usuarias',
     'tenants' => 'Inquilinas',
     'renew' => 'Renovar',
-
+    'btn-update-profile' => 'Actualización del perfil',
     'table' => [
         '#' => 'No Señor',
         'name' => 'Nombre',
