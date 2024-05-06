@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TenantController;
@@ -42,4 +43,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('/profile', ProfileController::class);
+
+    Route::get('/contact-message', [ContactController::class, 'index'])->name('contact-message');
+    Route::get('/reply', [ContactController::class, 'create'])->name('reply');
+    Route::post('/reply', [ContactController::class, 'store'])->name('reply');
+    Route::resource('/contacts', ContactController::class);
 });
