@@ -52,7 +52,7 @@ class TenantController extends Controller
     public function store(TenantRequest $request)
     {
         $data = $request->validated();
- 
+
         $user  = User::create([
             'name' => $data['name'],
             'email' => $data['email'],

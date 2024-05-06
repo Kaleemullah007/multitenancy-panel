@@ -95,10 +95,10 @@
         </nav>
 
 
-        <ul class="navbar inline-block">
+        <ul class="inline-block list-group list-group-horizontal">
             {{-- dd(app('auth')->user()->getAllPermissions()->toArray(),
         app('auth')->user()->can('permissions.read'), app('auth')->user()->hasPermissionTo('permissions.read')); --}}
-            @haspermission('user_view')
+            {{-- @haspermission('user_view')
                 <li class="nav-item list-unstyled"><a href="{{ route('users.index') }}" class="btn btn-lg bg-primary">
                         {{ __('permission.users') }}</a></li>
             @endhaspermission
@@ -110,7 +110,25 @@
                 <li class="nav-item list-unstyled"><a href="{{ route('roles.index') }}"
                         class="btn btn-lg bg-primary">{{ __('permission.roles') }}</a>
                 </li>
+            @endhaspermission --}}
+
+            @haspermission('tenant_view')
+                <li class="list-group-item text-decoration-none">
+                    <a href="{{ route('tenants.index') }}" class="btn btn-lg bg-primary">{{ __('tenant.tenants') }}</a>
+                </li>
             @endhaspermission
+
+            @haspermission('plan_view')
+                <li class="list-group-item text-decoration-none">
+                    <a href="{{ route('plans.index') }}" class="btn btn-lg bg-primary">{{ __('plan.plans') }}</a>
+                </li>
+            @endhaspermission
+            <li class="list-group-item text-decoration-none">
+                <a href="{{ route('contacts.index') }}"
+                    class="btn btn-lg bg-primary">Contacts{{ __('permission.roles') }}</a>
+            </li>
+
+
         </ul>
         <main class="py-4">
             @yield('content')

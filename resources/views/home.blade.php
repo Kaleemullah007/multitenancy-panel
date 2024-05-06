@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <ul class="list-group list-group-horizontal flex justify-content-center">
-            @haspermission('tenant_view')
+            {{-- @haspermission('tenant_view')
                 <li class="list-group-item text-decoration-none">
                     <a href="{{ route('tenants.index') }}" class="btn btn-lg bg-primary">{{ __('tenant.tenants') }}</a>
                 </li>
@@ -14,7 +14,10 @@
                     <a href="{{ route('plans.index') }}" class="btn btn-lg bg-primary">{{ __('plan.plans') }}</a>
                 </li>
             @endhaspermission
-
+            <li class="list-group-item text-decoration-none">
+                <a href="{{ route('contacts.index') }}"
+                    class="btn btn-lg bg-primary">Contacts{{ __('permission.roles') }}</a>
+            </li> --}}
         </ul>
         <div class="row justify-content-center">
 
