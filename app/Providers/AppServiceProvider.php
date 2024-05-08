@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\AliasLoader;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,11 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
-        // dd($this->centralDomain());
+        $loader = AliasLoader::getInstance();
+
+        // Add your aliases
+
+        $loader->alias('DataTables', Yajra\DataTables\Facades\DataTables::class);
     }
 
     /**
