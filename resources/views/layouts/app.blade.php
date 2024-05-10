@@ -13,12 +13,31 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+
+    <style>
+        body {
+            padding: 0;
+            margin 0;
+        }
+
+        div.page-layout {
+            height: 295.5mm;
+            width: 209mm;
+        }
+    </style>
+    <style>
+        .page-break {
+            page-break-after: always;
+        }
+    </style>
 </head>
 
-<body>
+<body style="margin:0; padding:0;">
+    <div style="height: 28px;">&nbsp;</div>
     <div id="app">
 
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -134,7 +153,11 @@
             @yield('content')
         </main>
     </div>
+    @stack('scripts')
 </body>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
 
 <script>
     setTimeout(() => {

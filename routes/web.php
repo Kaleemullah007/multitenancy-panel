@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TenantController;
@@ -48,4 +49,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/reply', [ContactController::class, 'create'])->name('reply');
     Route::post('/reply', [ContactController::class, 'store'])->name('reply');
     Route::resource('/contacts', ContactController::class);
+
+    // Tenant Import and export
+    Route::get('/file-import', [HomeController::class, 'importView'])->name('file-import');
+    Route::post('/import', [HomeController::class, 'import'])->name('import');
+    Route::get('/export-users', [HomeController::class, 'exportUsers'])->name('export-users');
 });

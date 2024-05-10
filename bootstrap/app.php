@@ -35,6 +35,11 @@ return Application::configure(basePath: dirname(__DIR__))
 
         ]);
     })
+    // $provider->alias([
+    //     'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+    //     'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class
+    // ]);
+
 
     // $middleware->alias([
     //     'DataTables' => Yajra\DataTables\Facades\DataTables::class,
