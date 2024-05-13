@@ -75,7 +75,9 @@
                                 </div>
                             </form>
 
-                            @include('contacts.replies')
+                            @haspermission('contact_view_reply')
+                                @include('contacts.replies')
+                            @endhaspermission
                         </div>
                     </div>
                 </div>

@@ -130,6 +130,15 @@ class TenancyServiceProvider extends ServiceProvider
         $this->bootEvents();
         $this->mapRoutes();
 
+
+        // InitializeTenancyByDomain::$onFail = function ($exception, $request, $next) {
+        //     return redirect('http://my-domain.com');
+        //     };
+        \Stancl\Tenancy\Middleware\InitializeTenancyByDomain::$onFail = function ($exception, $request, $next) {
+            session()->flash('message', 'No account found in the system, Please try to administrator, Please');
+            return redirect('http://localhost:8000/contact-us');
+        };
+
         $this->makeTenancyMiddlewareHighestPriority();
     }
 

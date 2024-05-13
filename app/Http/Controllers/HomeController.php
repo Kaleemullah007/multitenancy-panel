@@ -9,6 +9,7 @@ use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Browsershot\Browsershot;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class HomeController extends Controller
 {
@@ -29,20 +30,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $html = view('tenants.admin.result')->render();
-        // $dompdf = new Dompdf();
-        // $dompdf->loadHtml($html);
 
-        // // (Optional) Setup the paper size and orientation
-        // $dompdf->setPaper('A4', 'landscape');
-
-        // // Render the HTML as PDF
-        // $dompdf->render();
-
-        // // Output the generated PDF to Browser
-        // $dompdf->stream();
-
-        return view('tenants.admin.result');
+        return view('home');
     }
 
     public function importView()
@@ -55,8 +44,12 @@ class HomeController extends Controller
         Excel::import(new ImportUser, $request->file('file')->store('files'));
         return redirect()->back();
     }
-    function exportUsers()
+    function exportUsers(Request $request)
     {
-        return Excel::download(new ExportUser, 'users.csv');
+
+        if (in_array($request->format, array('csv', 'xlsx')))
+            return Excel::download(new ExportUser, 'users.csv');
+        else
+            abort(403, "Invalid format type, It would be csv or xlsx"); //abort(404, );
     }
 }

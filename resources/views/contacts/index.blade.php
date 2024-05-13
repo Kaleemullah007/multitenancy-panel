@@ -47,10 +47,15 @@
                                             <td>{{ $contact->subject }}</td>
                                             <td>{{ $contact->message }}</td>
                                             <td>{{ $contact->created_at?->diffForHumans() }}</td>
-                                            <td><a href="{{ route('contacts.edit', [$contact->id]) }}?page={{ $contacts->currentPage() }}"
-                                                    class="btn btn-danger">
-                                                    {{ str(__('contact.table.reply'))->plural($contact->replies_count) }}
-                                                    ({{ $contact->replies_count }})
+                                            <td>
+                                                @haspermission('contact_reply')
+                                                    <a href="{{ route('contacts.edit', [$contact->id]) }}?page={{ $contacts->currentPage() }}"
+                                                        class="btn btn-danger">
+                                                        {{ str(__('contact.table.reply'))->plural($contact->replies_count) }}
+                                                        ({{ $contact->replies_count }})
+                                                    @endhaspermission
+
+
                                                 </a>
                                             </td>
                                         </tr>

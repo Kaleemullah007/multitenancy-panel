@@ -18,7 +18,14 @@ return [
     'users' => 'Users',
     'tenants' => 'Tenants',
     'renew' => 'Renew',
-    'btn-update-profile'=>'Update Profile',
+    'btn-update-profile' => 'Update Profile',
+
+
+    'btn-export-csv' => 'Export Users csv',
+    'btn-export-xlsx' => 'Export Users xlsx',
+    'btn-import-cvs' => 'Import Users csv',
+    'btn-export-pdf' => 'Export Users in PDF',
+
 
     'user_title' => 'Manage :user permissions',
     'table' => [
@@ -30,6 +37,7 @@ return [
         'domains' => 'domains',
         'plan' => 'Plan',
         'date' => 'Dates',
+        'avatar' => 'Image',
     ],
     'form' => [
         '#' => 'Sr. No',

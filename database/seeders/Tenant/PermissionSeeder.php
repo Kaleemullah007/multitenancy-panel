@@ -21,10 +21,12 @@ class PermissionSeeder extends Seeder
             ['name' => 'user_delete', 'guard_name' => 'web'],
             ['name' => 'user_force_delete', 'guard_name' => 'web'],
             ['name' => 'user_restore', 'guard_name' => 'web'],
-            ['name' => 'user_export:csv', 'guard_name' => 'web'],
-            ['name' => 'user_export:pdf', 'guard_name' => 'web'],
-            ['name' => 'user_export:excel', 'guard_name' => 'web'],
             ['name' => 'manage_permissions', 'guard_name' => 'web'],
+            ['name' => 'user_export_csv', 'guard_name' => 'web'],
+            ['name' => 'user_export_pdf', 'guard_name' => 'web'],
+            ['name' => 'user_export_excel', 'guard_name' => 'web'],
+            ['name' => 'user_import_csv', 'guard_name' => 'web'],
+
             // roles
             ['name' => 'roles_create', 'guard_name' => 'web'],
             ['name' => 'roles_view', 'guard_name' => 'web'],

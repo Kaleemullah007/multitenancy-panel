@@ -9,8 +9,10 @@ use App\Models\Tenant;
 use App\Models\User;
 use App\Services\PlanHistory;
 use Carbon\Carbon;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Stancl\Tenancy\Database\Models\Domain;
@@ -179,7 +181,16 @@ class TenantController extends Controller
             unset($data['password']);
         }
 
+        // Update Profile and Delete image from the directory
         if ($request->has('photo')) {
+            $user = $tenant;
+
+            $file_path = storage_path() . '/app/public/' . $user->file;
+            //You can also check existance of the file in storage.
+            if (File::exists($file_path)) {
+                unlink($file_path); //delete from storage
+            }
+
             $path = Storage::disk('public')->putFile('photos', $request->file('photo'));
             $data['file'] = $path;
         }
@@ -279,5 +290,23 @@ class TenantController extends Controller
         session()->flash('error', 'danger');
 
         return to_route('tenants.index', ['page' => request('page')]);
+    }
+
+    function exportPdf()
+    {
+        $tenants = User::all();
+        // dd($tenants);
+        $html = view('tenants.admin.result', compact('tenants'))->render();
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream();
     }
 }

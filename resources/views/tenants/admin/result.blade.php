@@ -18,38 +18,57 @@
         .result-card {
             background-color: #fff;
             padding
+        }
     </style>
 </head>
 
 <body>
-    <div class="result-card">
-        <h2>Matriculation Result</h2>
-        <div class="student-info">
-            <p>Name: John Doe</p>
-            <p>Roll Number: 123456</p>
-        </div>
-        <div class="subject-result">
-            <div class="subject">
-                <p>Subject</p>
-                <p>Total Marks</p>
-                <p>Obtained Marks</p>
-                <p>Grade</p>
+    <table class="table">
+        @if (session()->has('message'))
+            <div class="alert text-center alert-{{ session('error') }}">
+                {{ session('message') }}
             </div>
-            <div class="subject">
-                <p>English</p>
-                <p>100</p>
-                <p>85</p>
-                <p class="grade">A</p>
-            </div>
-            <div class="subject">
-                <p>Mathematics</p>
-                <p>100</p>
-                <p>90</p>
-                <p class="grade">A+</p>
-            </div>
-            <!-- Add more subjects as needed -->
-        </div>
-    </div>
+        @endif
+        <thead>
+            <tr>
+                <th scope="col">{{ __('tenant.table.#') }}</th>
+                <th scope="col">{{ __('tenant.table.name') }}</th>
+                <th scope="col">{{ __('tenant.table.email') }}</th>
+                <th scope="col">{{ __('tenant.table.date') }}</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @php
+                if (request('page') > 1) {
+                    $counter = (request('page') - 1) * config('app.per_page') + 1;
+                } else {
+                    $counter = 1;
+                }
+
+            @endphp
+
+
+            @if ($tenants->count() > 0)
+                @foreach ($tenants as $key => $tenant)
+                    <tr>
+                        <th scope="row">{{ $counter++ }}</th>
+                        <td>{{ $tenant->name }}</td>
+                        <td>{{ $tenant->email }}</td>
+
+
+                        <td>{{ $tenant->created_at->diffForHumans() }}</td>
+
+                    </tr>
+                @endforeach
+            @else
+                <tr>
+                    <td colspan="6" class="text-center">{{ __('general.no-record') }}</td>
+                </tr>
+            @endif
+        </tbody>
+    </table>
+
 </body>
 
 </html>

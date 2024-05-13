@@ -20,7 +20,11 @@
             </li> --}}
         </ul>
         <div class="row justify-content-center">
-
+            @if (session()->has('message'))
+                <div class="alert text-center alert-{{ session('error', 'danger') }}">
+                    {{ session('message') }}
+                </div>
+            @endif
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Dashboard') }}</div>
@@ -32,10 +36,7 @@
                             </div>
                         @endif
 
-
                         {{ __('You are logged in!') }} <a href="{{ route('file-import') }}">Import</a>
-
-
 
 
                     </div>

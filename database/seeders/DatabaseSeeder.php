@@ -30,9 +30,10 @@ class DatabaseSeeder extends Seeder
             ['name' => 'tenant_delete', 'guard_name' => 'web'],
             ['name' => 'tenant_force_delete', 'guard_name' => 'web'],
             ['name' => 'tenant_restore', 'guard_name' => 'web'],
-            ['name' => 'tenant_export:csv', 'guard_name' => 'web'],
-            ['name' => 'tenant_export:pdf', 'guard_name' => 'web'],
-            ['name' => 'tenant_export:excel', 'guard_name' => 'web'],
+            ['name' => 'user_export_csv', 'guard_name' => 'web'],
+            ['name' => 'user_export_pdf', 'guard_name' => 'web'],
+            ['name' => 'user_export_excel', 'guard_name' => 'web'],
+            ['name' => 'user_import_csv', 'guard_name' => 'web'],
             // Plan
             ['name' => 'plan_create', 'guard_name' => 'web'],
             ['name' => 'plan_view', 'guard_name' => 'web'],
@@ -42,7 +43,23 @@ class DatabaseSeeder extends Seeder
             ['name' => 'plan_restore', 'guard_name' => 'web'],
             ['name' => 'plan_export:csv', 'guard_name' => 'web'],
             ['name' => 'plan_export:pdf', 'guard_name' => 'web'],
-            ['name' => 'plan_export:excel', 'guard_name' => 'web']
+            ['name' => 'plan_export:excel', 'guard_name' => 'web'],
+
+            ['name' => 'contact_view', 'guard_name' => 'web'],
+            ['name' => 'contact_reply', 'guard_name' => 'web'],
+            ['name' => 'contact_view_reply', 'guard_name' => 'web'],
+
+            // // roles
+            // ['name' => 'roles_create', 'guard_name' => 'web'],
+            // ['name' => 'roles_view', 'guard_name' => 'web'],
+            // ['name' => 'roles_edit', 'guard_name' => 'web'],
+            // ['name' => 'roles_delete', 'guard_name' => 'web'],
+            // ['name' => 'roles_force_delete', 'guard_name' => 'web'],
+            // ['name' => 'roles_restore', 'guard_name' => 'web'],
+            // ['name' => 'roles_export:csv', 'guard_name' => 'web'],
+            // ['name' => 'roles_export:pdf', 'guard_name' => 'web'],
+            // ['name' => 'roles_export:excel', 'guard_name' => 'web'],
+
 
         ]);
 

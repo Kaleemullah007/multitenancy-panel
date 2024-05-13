@@ -22,7 +22,8 @@
                 </div>
             </div>
             <button class="btn btn-primary">Import Users</button>
-            <a download class="btn btn-success" href="{{ route('export-users', ['id' => 1]) }} ">Export
+            <a download class="btn btn-success"
+                href="{{ route('export-users', ['id' => 1, 'format' => 'csv']) }} ">Export
                 Users</a>
         </form>
     </div>

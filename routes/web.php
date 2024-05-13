@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\ProfileController;
@@ -25,17 +26,34 @@ Route::get('/signin', function () {
     return view('tenants.auth.signin');
 });
 
+
+Route::get('/contact-us', function () {
+    // return view('home');
+    return view('contact-us');
+});
+
+
+
 Route::get('/', function () {
     // return view('home');
     return to_route('login');
 });
+Route::get('captache', [ContactUsController::class, 'loadCapatche'])->name('contactus.loadCapatche');
+Route::resource('/contactus', ContactUsController::class);
+
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::get('tenant-renew/{tenant}', [TenantController::class, 'renew'])->name('tenants.renew');
     Route::delete('tenant-permanently-deleted/{tenant}', [TenantController::class, 'deletePermanently'])->name('tenants.deleted');
     Route::delete('tenant-restore/{tenant}', [TenantController::class, 'restore'])->name('tenants.restored');
+
+    Route::get('tenant-export-pdf', [TenantController::class, 'exportPdf'])->name('tenants.pdf');
+
     Route::resource('tenants', TenantController::class);
+
+
+
 
 
     Route::delete('plan-permanently-deleted/{tenant}', [PlanController::class, 'deletePermanently'])->name('plans.deleted');
@@ -49,6 +67,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/reply', [ContactController::class, 'create'])->name('reply');
     Route::post('/reply', [ContactController::class, 'store'])->name('reply');
     Route::resource('/contacts', ContactController::class);
+
 
     // Tenant Import and export
     Route::get('/file-import', [HomeController::class, 'importView'])->name('file-import');
