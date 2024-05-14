@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\Tenant;
 
+use App\Models\Setting;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -21,12 +22,12 @@ class PermissionSeeder extends Seeder
             ['name' => 'user_delete', 'guard_name' => 'web'],
             ['name' => 'user_force_delete', 'guard_name' => 'web'],
             ['name' => 'user_restore', 'guard_name' => 'web'],
-            ['name' => 'manage_permissions', 'guard_name' => 'web'],
             ['name' => 'user_export_csv', 'guard_name' => 'web'],
             ['name' => 'user_export_pdf', 'guard_name' => 'web'],
             ['name' => 'user_export_excel', 'guard_name' => 'web'],
             ['name' => 'user_import_csv', 'guard_name' => 'web'],
 
+            ['name' => 'manage_permissions', 'guard_name' => 'web'],
             // roles
             ['name' => 'roles_create', 'guard_name' => 'web'],
             ['name' => 'roles_view', 'guard_name' => 'web'],
@@ -34,20 +35,56 @@ class PermissionSeeder extends Seeder
             ['name' => 'roles_delete', 'guard_name' => 'web'],
             ['name' => 'roles_force_delete', 'guard_name' => 'web'],
             ['name' => 'roles_restore', 'guard_name' => 'web'],
-            ['name' => 'roles_export:csv', 'guard_name' => 'web'],
-            ['name' => 'roles_export:pdf', 'guard_name' => 'web'],
-            ['name' => 'roles_export:excel', 'guard_name' => 'web'],
+            ['name' => 'roles_export_csv', 'guard_name' => 'web'],
+            ['name' => 'roles_export_pdf', 'guard_name' => 'web'],
+            ['name' => 'roles_export_excel', 'guard_name' => 'web'],
+            ['name' => 'roles_import_csv', 'guard_name' => 'web'],
 
-            // permission
+            // permissions
             ['name' => 'permissions_create', 'guard_name' => 'web'],
             ['name' => 'permissions_view', 'guard_name' => 'web'],
             ['name' => 'permissions_edit', 'guard_name' => 'web'],
             ['name' => 'permissions_delete', 'guard_name' => 'web'],
             ['name' => 'permissions_force_delete', 'guard_name' => 'web'],
             ['name' => 'permissions_restore', 'guard_name' => 'web'],
-            ['name' => 'permissions_export:csv', 'guard_name' => 'web'],
-            ['name' => 'permissions_export:pdf', 'guard_name' => 'web'],
-            ['name' => 'permissions_export:excel', 'guard_name' => 'web'],
+            ['name' => 'permissions_export_csv', 'guard_name' => 'web'],
+            ['name' => 'permissions_export_pdf', 'guard_name' => 'web'],
+            ['name' => 'permissions_export_excel', 'guard_name' => 'web'],
+            ['name' => 'permissions_import_csv', 'guard_name' => 'web'],
+
+
+            // Placeholders
+            ['name' => 'placeholders_create', 'guard_name' => 'web'],
+            ['name' => 'placeholders_view', 'guard_name' => 'web'],
+            ['name' => 'placeholders_edit', 'guard_name' => 'web'],
+            ['name' => 'placeholders_delete', 'guard_name' => 'web'],
+            ['name' => 'placeholders_force_delete', 'guard_name' => 'web'],
+            ['name' => 'placeholders_restore', 'guard_name' => 'web'],
+            ['name' => 'placeholders_export_csv', 'guard_name' => 'web'],
+            ['name' => 'placeholders_export_pdf', 'guard_name' => 'web'],
+            ['name' => 'placeholders_export_excel', 'guard_name' => 'web'],
+            ['name' => 'placeholders_import_csv', 'guard_name' => 'web'],
+
+
+
+            // emailtemplate_templates
+            ['name' => 'emailtemplates_create', 'guard_name' => 'web'],
+            ['name' => 'emailtemplates_view', 'guard_name' => 'web'],
+            ['name' => 'emailtemplates_edit', 'guard_name' => 'web'],
+            ['name' => 'emailtemplates_delete', 'guard_name' => 'web'],
+            ['name' => 'emailtemplates_force_delete', 'guard_name' => 'web'],
+            ['name' => 'emailtemplates_restore', 'guard_name' => 'web'],
+            ['name' => 'emailtemplates_export_csv', 'guard_name' => 'web'],
+            ['name' => 'emailtemplates_export_pdf', 'guard_name' => 'web'],
+            ['name' => 'emailtemplates_export_excel', 'guard_name' => 'web'],
+            ['name' => 'emailtemplates_import_csv', 'guard_name' => 'web'],
+
+
+            // email or sms  schedule
+            ['name' => 'emailtemplates_schedule', 'guard_name' => 'web'],
+            ['name' => 'sms_schedule', 'guard_name' => 'web'],
+
+
 
         ]);
         Role::insert([
@@ -57,6 +94,20 @@ class PermissionSeeder extends Seeder
             ['name' => 'Tester', 'guard_name' => 'web'],
             ['name' => 'Developer', 'guard_name' => 'web'],
             ['name' => 'Account', 'guard_name' => 'web']
+        ]);
+
+        Setting::insert([
+            ['name' => 't1', 'setting_type' => 'timezone', 'value' => 'Asia/Karachi'],
+            ['name' => 't2', 'setting_type' => 'timezone', 'value' => 'America/Lima'],
+            ['name' => 't3', 'setting_type' => 'timezone', 'value' => 'Asia/Dubai'],
+
+
+            ['name' => 'd1', 'setting_type' => 'date_format', 'value' => 'Y-m-d'],
+            ['name' => 'd2', 'setting_type' => 'date_format', 'value' => 'Y/m/d'],
+            ['name' => 'd3', 'setting_type' => 'date_format', 'value' => 'Y:m:y'],
+            ['name' => 'd4', 'setting_type' => 'date_format', 'value' => 'd/m/Y'],
+            ['name' => 'd5', 'setting_type' => 'date_format', 'value' => 'd-m-Y'],
+            ['name' => 'd6', 'setting_type' => 'date_format', 'value' => 'd:m:Y'],
         ]);
     }
 }

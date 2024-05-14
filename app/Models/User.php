@@ -79,4 +79,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Plan::class);
     }
+
+    //  User Bank details
+    // public function bankDetail(): BelongsTo
+    // {
+    //     return $this->belongsTo(BankDetail::class, 'user_id', 'id');
+    // }
 }
