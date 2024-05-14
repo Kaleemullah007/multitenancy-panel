@@ -13,12 +13,31 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+
+    <style>
+        body {
+            padding: 0;
+            margin 0;
+        }
+
+        div.page-layout {
+            height: 295.5mm;
+            width: 209mm;
+        }
+    </style>
+    <style>
+        .page-break {
+            page-break-after: always;
+        }
+    </style>
 </head>
 
-<body>
+<body style="margin:0; padding:0;">
+    <div style="height: 28px;">&nbsp;</div>
     <div id="app">
 
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -98,7 +117,7 @@
         <ul class="inline-block list-group list-group-horizontal">
             {{-- dd(app('auth')->user()->getAllPermissions()->toArray(),
         app('auth')->user()->can('permissions.read'), app('auth')->user()->hasPermissionTo('permissions.read')); --}}
-            {{-- @haspermission('user_view')
+            @haspermission('user_view')
                 <li class="nav-item list-unstyled"><a href="{{ route('users.index') }}" class="btn btn-lg bg-primary">
                         {{ __('permission.users') }}</a></li>
             @endhaspermission
@@ -110,7 +129,9 @@
                 <li class="nav-item list-unstyled"><a href="{{ route('roles.index') }}"
                         class="btn btn-lg bg-primary">{{ __('permission.roles') }}</a>
                 </li>
-            @endhaspermission --}}
+            @endhaspermission
+
+
 
             @haspermission('tenant_view')
                 <li class="list-group-item text-decoration-none">
@@ -123,10 +144,17 @@
                     <a href="{{ route('plans.index') }}" class="btn btn-lg bg-primary">{{ __('plan.plans') }}</a>
                 </li>
             @endhaspermission
-            <li class="list-group-item text-decoration-none">
-                <a href="{{ route('contacts.index') }}"
-                    class="btn btn-lg bg-primary">Contacts{{ __('permission.roles') }}</a>
-            </li>
+            @haspermission('contact_view')
+                <li class="list-group-item text-decoration-none">
+                    <a href="{{ route('contacts.index') }}" class="btn btn-lg bg-primary">{{ __('contact.contacts') }}</a>
+                </li>
+            @endhaspermission
+
+            {{-- @haspermission('tenant_view')
+                <li class="list-group-item text-decoration-none">
+                    <a href="{{ route('roles.index') }} " class="btn btn-lg bg-primary">{{ __('permission.roles') }}</a>
+                </li>
+            @endhaspermission --}}
 
 
         </ul>
@@ -134,7 +162,11 @@
             @yield('content')
         </main>
     </div>
+    @stack('scripts')
 </body>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
 
 <script>
     setTimeout(() => {

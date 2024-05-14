@@ -37,6 +37,8 @@ return [
         'error_email' => 'The email field is required',
         'error_subject' => 'The subject field is required',
         'error_message' => 'The message field is required',
+        'error_captache' => 'The Captache is required',
+        'error_captache_invalid' => 'Please enter correct Captache',
     ]
 
 ];

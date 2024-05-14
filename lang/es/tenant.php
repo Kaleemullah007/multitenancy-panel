@@ -19,6 +19,16 @@ return [
     'tenants' => 'Inquilinas',
     'renew' => 'Renovar',
     'btn-update-profile' => 'Actualización del perfil',
+
+
+
+    'btn-export-csv' => 'Exportar usuarios csv',
+    'btn-export-xlsx' => 'Exportar usuarias xlsx',
+    'btn-import-cvs' => 'Importar usuarios csv',
+    'btn-export-pdf' => 'Exportar usuarias en PDF',
+
+
+
     'table' => [
         '#' => 'No Señor',
         'name' => 'Nombre',
@@ -28,6 +38,7 @@ return [
         'action' => 'Acción',
         'plan' => 'Plan',
         'date' => 'fechas',
+        'avatar' => 'Imagen',
     ],
     'form' => [
         'name' => 'Nombre',

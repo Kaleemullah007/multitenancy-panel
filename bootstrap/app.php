@@ -6,6 +6,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Support\Facades\Route;
+use NunoMaduro\Collision\Provider;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -34,6 +35,20 @@ return Application::configure(basePath: dirname(__DIR__))
 
         ]);
     })
+    // $provider->alias([
+    //     'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+    //     'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class
+    // ]);
+
+
+    // $middleware->alias([
+    //     'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+    // ])
+    // ->withProviders(function (Provider) {
+    //     $provider->alias([
+    //         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+    //     ]);
+    // })
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
