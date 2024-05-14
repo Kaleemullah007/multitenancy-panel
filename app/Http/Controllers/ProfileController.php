@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateProfileRequest;
+use App\Models\BankDetail;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -45,7 +47,10 @@ class ProfileController extends Controller
      */
     public function edit(User $profile)
     {
-        return view('edit-profile', compact('profile'));
+        $bank_detail = BankDetail::where('status', 1)->latest()->first();
+        $timezone = Setting::where('setting_type', 'timezone')->get();
+        $dateformat = Setting::where('setting_type', 'date_format')->get();
+        return view('edit-profile', compact('profile', 'timezone', 'dateformat', 'bank_detail'));
     }
 
     /**
@@ -55,7 +60,9 @@ class ProfileController extends Controller
     {
 
 
-        $data = $request->validated();
+        $data = $request->only(['email', 'timezone', 'date_format', 'currency', 'name', 'password', 'currency']);
+        $bank_details = $request->except(['email', 'timezone', 'date_format', 'currency', 'name', 'password', '_token', '_method', 'password_confirmation']);
+        // dd($data, $bank_details);
         // Update password if provided
         if ($request->has('password')) {
             $data['password'] = bcrypt($data['password']);
@@ -66,6 +73,9 @@ class ProfileController extends Controller
         $profile->update($data);
 
 
+
+        BankDetail::where('status', 1)->update(['status' => 0]);
+        BankDetail::create($bank_details);
         // Optionally, you can return a response indicating success
         return to_route('profile.edit', [$profile->id])->with(['message' => 'Profile updated successfully']);
     }

@@ -3,10 +3,13 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\LocalizationController;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TenantController;
+use App\Http\Controllers\Tenants\Emailtemplate\EmailTemplateController;
 use App\Http\Controllers\Tenants\HomeController;
 use App\Http\Controllers\Tenants\Permission\PermissionController;
+use App\Http\Controllers\Tenants\Placeholder\PlaceholderController;
 use App\Http\Controllers\Tenants\Role\RoleController;
 use App\Http\Controllers\Tenants\TenantUserController;
 use App\Http\Middleware\RevalidateBackHistory;
@@ -61,6 +64,20 @@ Route::middleware([
     Route::delete('role-permanently-deleted/{id}', [RoleController::class, 'deletePermanently'])->name('roles.user-deleted');
     Route::delete('role-restore/{id}', [RoleController::class, 'restoreUser'])->name('roles.user-restored');
     Route::resource('roles', RoleController::class)->middleware('auth');
+
+
+
+    Route::delete('placholder-permanently-deleted/{id}', [PlaceholderController::class, 'deletePermanently'])->name('placeholders.deleted');
+    Route::delete('placholder-restore/{id}', [PlaceholderController::class, 'restored'])->name('placeholders.restored');
+    Route::resource('placeholders', PlaceholderController::class)->middleware('auth');
+
+
+    Route::delete('emailtemplate-permanently-deleted/{id}', [EmailTemplateController::class, 'deletePermanently'])->name('emailtemplates.deleted');
+    Route::delete('emailtemplate-restore/{id}', [EmailTemplateController::class, 'restored'])->name('emailtemplates.restored');
+    Route::resource('emailtemplates', EmailTemplateController::class)
+
+        ->middleware('auth');
+
 
 
     Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');

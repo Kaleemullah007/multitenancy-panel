@@ -131,6 +131,18 @@
                 </li>
             @endhaspermission
 
+            @haspermission('placeholders_view')
+                <li class="nav-item list-unstyled"><a href="{{ route('placeholders.index') }}"
+                        class="btn btn-lg bg-primary">{{ __('placeholder.placeholders') }}</a>
+                </li>
+            @endhaspermission
+
+            @haspermission('emailtemplates_view')
+                <li class="nav-item list-unstyled"><a href="{{ route('emailtemplates.index') }}"
+                        class="btn btn-lg bg-primary">{{ __('emailtemplate.emailtemplates') }}</a>
+                </li>
+            @endhaspermission
+
 
 
             @haspermission('tenant_view')
@@ -167,7 +179,7 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
 <script>
     setTimeout(() => {
         $("#checkAll").click(function() {
@@ -183,7 +195,60 @@
                 url, '_blank').focus();;
         });
 
+
+
     }, 1000);
+
+    // function Copy(id) {
+    //     setTimeout(function() {
+    //         $('#copied_tip').remove();
+    //     }, 1500);
+
+    //     cc = $("#" + id).attr('rel');
+
+    //     $("#" + cc).append("<div class='tip' id='copied_tip'>Copied!</div>");
+    //     text = $("#" + cc).attr('rel');
+
+    //     alert(text)
+
+
+    //     var input = document.createElement('input');
+    //     input.setAttribute('value', text);
+    //     document.body.appendChild(input);
+    //     input.select();
+    //     var result = document.execCommand('copy');
+    //     document.body.removeChild(input)
+
+    //     return result;
+    // }
+    function copyToClipboard(elementId) {
+
+        // Create a "hidden" input
+        elementId = $("#" + elementId).attr('rel');
+        var aux = document.createElement("input");
+
+        text = $("#" + elementId).attr('rel');
+        // Assign it the value of the specified element
+        aux.setAttribute("value", text.trim());
+
+        // Append it to the body
+        document.body.appendChild(aux);
+
+        // Highlight its content
+        aux.select();
+
+        // Copy the highlighted text
+        document.execCommand("copy");
+
+        // Remove it from the body
+        document.body.removeChild(aux);
+
+        let textarea = document.getElementById("body");
+        textarea.focus();
+        var start = '{';
+        var end = ' }';
+        textarea.value += start + document.getElementById(elementId).innerHTML.trim() + end;
+    }
 </script>
 
 </html>

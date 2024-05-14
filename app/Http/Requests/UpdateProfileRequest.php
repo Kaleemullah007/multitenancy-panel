@@ -25,6 +25,42 @@ class UpdateProfileRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . auth()->id(),
             'password' => 'nullable|string|min:6|confirmed',
+            'private_key' => 'nullable|string|min:10',
+            'public_key' => 'nullable|string|min:10',
+            'secret_key' => 'nullable|string|min:10',
+            't_private_key' => 'nullable|string|min:10',
+            't_public_key' => 'nullable|string|min:10',
+            't_secret_key' => 'nullable|string|min:10',
+            'is_prod' => 'required|boolean',
+            'user_id' => 'required|numeric',
+            'status' => 'required|boolean',
+            'currency' => 'required|string',
         ];
+    }
+    public function prepareForValidation()
+    {
+        if (!$this->get('is_prod')) {
+            $this->merge([
+                'is_prod' => false,
+                't_private_key' => $this->get('private_key'),
+                't_public_key' => $this->get('public_key'),
+                't_secret_key' => $this->get('secret_key'),
+                'private_key' => null,
+                'public_key' => null,
+                'secret_key' => null,
+            ]);
+        } else {
+            $this->merge([
+                'is_prod' => true,
+                't_private_key' => null,
+                't_public_key' => null,
+                't_secret_key' => null,
+            ]);
+        }
+
+        $this->merge([
+            'user_id' => auth()->id(),
+            'status' => 1
+        ]);
     }
 }
