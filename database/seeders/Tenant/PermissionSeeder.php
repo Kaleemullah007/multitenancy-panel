@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\Tenant;
 
+use App\Models\Placeholder;
 use App\Models\Setting;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -108,6 +109,23 @@ class PermissionSeeder extends Seeder
             ['name' => 'd4', 'setting_type' => 'date_format', 'value' => 'd/m/Y'],
             ['name' => 'd5', 'setting_type' => 'date_format', 'value' => 'd-m-Y'],
             ['name' => 'd6', 'setting_type' => 'date_format', 'value' => 'd:m:Y'],
+        ]);
+
+        Placeholder::create([
+            ['name' => 'Full Name', 'key_name' => '{full_name}', 'status' => 1],
+            ['name' => 'Phone', 'key_name' => '{phone}', 'status' => 1],
+            ['name' => 'Contact Email', 'key_name' => '{contact_email}', 'status' => 1],
+            ['name' => 'Contact Phone', 'key_name' => '{contact_phone}', 'status' => 1],
+            ['name' => 'Contact website', 'key_name' => '{contact_website}', 'status' => 1],
+            ['name' => 'First Name', 'key_name' => '{first_name}', 'status' => 1],
+            ['name' => 'Last Name', 'key_name' => '{last_name}', 'status' => 1],
+            ['name' => 'Logo Link', 'key_name' => '{logo_link}', 'status' => 1],
+            ['name' => 'Website', 'key_name' => '{website}', 'status' => 1],
+            ['name' => 'Contact us Link', 'key_name' => '{contact_us_link}', 'status' => 1],
+            ['name' => 'Message Link', 'key_name' => '{message}', 'status' => 1],
+            ['name' => 'Header Heading', 'key_name' => '{header_heading}', 'status' => 1],
+            ['name' => 'Footer Message', 'key_name' => '{footer_message}', 'status' => 1],
+
         ]);
     }
 }

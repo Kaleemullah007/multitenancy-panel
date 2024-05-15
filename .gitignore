@@ -4,6 +4,7 @@
 /public/assets
 /public/hot
 /public/storage
+/storage
 /storage/*.key
 /storage/photos
 /storage/app/
