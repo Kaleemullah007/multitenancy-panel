@@ -31,7 +31,11 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
-    protected $tries = 3;
+    // protected $tries = 3;
+    protected $maxAttempts = 3; // Default is 5
+    protected $decayMinutes = 2; // Default is 1
+
+
 
     /**
      * Create a new controller instance.
@@ -42,29 +46,31 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    public function login(AuthRequest $request)
-    {
+    // public function login(AuthRequest $request)
+    // {
 
 
-        $user = User::whereEmail($request->email)->first();
-        if ($user == null) {
-            session()->flash('message', __('auth.no_email'));
-            return to_route('login');
-        }
-        if ($user->status == 0) {
-            session()->flash('message', __('auth.in_active_user'));
-            return to_route('login');
-        } else if ($user->status == 2) {
-            session()->flash('message', __('auth.suspend_user'));
-            return to_route('login');
-        }
+    //     $this->hasTooManyLoginAttempts($request);
+    //     $user = User::whereEmail($request->email)->first();
+    //     if ($user == null) {
+    //         session()->flash('message', __('auth.no_email'));
+    //         return to_route('login');
+    //     }
+    //     if ($user->status == 0) {
+    //         session()->flash('message', __('auth.in_active_user'));
+    //         return to_route('login');
+    //     } else if ($user->status == 2) {
+    //         session()->flash('message', __('auth.suspend_user'));
+    //         return to_route('login');
+    //     }
 
 
-        if (Auth::attempt($request->validated())) {
-            return redirect('/home')->with('message', __('auth.sucess'));
-        }
+    //     if (Auth::attempt($request->validated())) {
+    //         return redirect('/home')->with('message', __('auth.sucess'));
+    //     }
 
 
-        return back()->with('message', __('auth.failed'));
-    }
+    //     return back()->with('message', __('auth.failed'));
+    // }
+
 }

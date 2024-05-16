@@ -35,6 +35,7 @@ class UpdateProfileRequest extends FormRequest
             'user_id' => 'required|numeric',
             'status' => 'required|boolean',
             'currency' => 'required|string',
+            'photo' => 'nullable|file|image|mimes:jpeg,jpg,png|max:2048',
         ];
     }
     public function prepareForValidation()
@@ -62,5 +63,16 @@ class UpdateProfileRequest extends FormRequest
             'user_id' => auth()->id(),
             'status' => 1
         ]);
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name' => __('user.message.error_name'),
+            'email' => __('user.message.error_email'),
+            'password' => __('user.message.error_password'),
+            'password_confirmation' => __('user.message.error_password_confirm'),
+            'photo' => __('user.message.error_profile_photo')
+        ];
     }
 }

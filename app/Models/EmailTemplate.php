@@ -18,4 +18,9 @@ class EmailTemplate extends Model
             'template_type' => TemplateType::class,
         ];
     }
+
+    protected function scopeActive()
+    {
+        return $this->where('status', 1);
+    }
 }

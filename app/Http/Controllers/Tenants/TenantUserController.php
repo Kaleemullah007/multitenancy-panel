@@ -132,7 +132,7 @@ class TenantUserController extends Controller
         session()->flash('message', __('tenantuser.message.update-message'));
         session()->flash('error', 'success');
 
-        return view('tenants.users.edit', compact('user'));
+        return to_route('users.edit', $user->id);
     }
 
     /**

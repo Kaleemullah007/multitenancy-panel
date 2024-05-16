@@ -83,6 +83,22 @@ class PermissionSeeder extends Seeder
             ['name' => 'emailtemplates_schedule', 'guard_name' => 'web'],
             ['name' => 'sms_schedule', 'guard_name' => 'web'],
 
+            // Compaign
+            ['name' => 'campaigns_create', 'guard_name' => 'web'],
+            ['name' => 'campaigns_view', 'guard_name' => 'web'],
+            ['name' => 'campaigns_edit', 'guard_name' => 'web'],
+            ['name' => 'campaigns_delete', 'guard_name' => 'web'],
+            ['name' => 'campaigns_force_delete', 'guard_name' => 'web'],
+            ['name' => 'campaigns_restore', 'guard_name' => 'web'],
+            ['name' => 'campaigns_export_csv', 'guard_name' => 'web'],
+            ['name' => 'campaigns_export_pdf', 'guard_name' => 'web'],
+            ['name' => 'campaigns_export_excel', 'guard_name' => 'web'],
+            ['name' => 'campaigns_import_csv', 'guard_name' => 'web'],
+
+            ['name' => 'campaigns_secdule_message', 'guard_name' => 'web'],
+
+
+
 
         ]);
         Role::insert([

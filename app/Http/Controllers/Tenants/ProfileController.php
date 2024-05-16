@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Tenants;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateProfileRequest;
-use App\Http\Requests\UpdateTenantProfileRequest;
 use App\Models\BankDetail;
 use App\Models\Setting;
 use App\Models\User;
@@ -52,27 +52,29 @@ class ProfileController extends Controller
      */
     public function edit(User $profile)
     {
-
-
-        return view('edit-profile-owner', compact('profile'));
+        $bank_detail = BankDetail::where('status', 1)->latest()->first();
+        $timezone = Setting::where('setting_type', 'timezone')->get();
+        $dateformat = Setting::where('setting_type', 'date_format')->get();
+        return view('edit-profile', compact('profile', 'timezone', 'dateformat', 'bank_detail'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTenantProfileRequest $request, User $profile)
+    public function update(UpdateProfileRequest $request, User $profile)
     {
 
 
-        $data = $request->only(['email', 'name', 'password', 'photo']);
-
+        $data = $request->only(['email', 'timezone', 'date_format', 'currency', 'name', 'password', 'currency', 'photo']);
+        $bank_details = $request->except(['email', 'timezone', 'date_format', 'currency', 'name', 'password', '_token', '_method', 'password_confirmation', 'photo']);
+        // dd($data, $bank_details);
+        // Update password if provided
         if ($request->has('password')) {
             $data['password'] = bcrypt($data['password']);
         } else {
             unset($data['password']);
         }
 
-        // dd($profile);
         if ($request->has('photo')) {
             $user = $profile;
 
@@ -95,6 +97,9 @@ class ProfileController extends Controller
         $profile->update($data);
 
 
+
+        BankDetail::where('status', 1)->update(['status' => 0]);
+        BankDetail::create($bank_details);
         // Optionally, you can return a response indicating success
         return to_route('profile.edit', [$profile->id])->with(['message' => 'Profile updated successfully']);
     }

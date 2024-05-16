@@ -33,7 +33,8 @@ class User extends Authenticatable
         'plan_price',
         'validaty',
         'start_date',
-        'end_date'
+        'end_date',
+        'file'
     ];
 
     /**

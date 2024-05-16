@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\LocalizationController;
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\Tenants\Emailtemplate\EmailTemplateController;
 use App\Http\Controllers\Tenants\HomeController;
 use App\Http\Controllers\Tenants\Permission\PermissionController;
 use App\Http\Controllers\Tenants\Placeholder\PlaceholderController;
+use App\Http\Controllers\Tenants\ProfileController;
 use App\Http\Controllers\Tenants\Role\RoleController;
 use App\Http\Controllers\Tenants\TenantUserController;
 use App\Http\Middleware\RevalidateBackHistory;
@@ -82,4 +83,9 @@ Route::middleware([
 
     Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
     Route::resource('/profile', ProfileController::class);
+
+
+    Route::delete('campaign-permanently-deleted/{id}', [CampaignController::class, 'deletePermanently'])->name('campaigns.deleted');
+    Route::delete('campaign-restore/{id}', [CampaignController::class, 'restored'])->name('campaigns.restored');
+    Route::resource('campaigns', CampaignController::class);
 })->middleware('auth');
