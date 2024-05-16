@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Compaign extends Model
+class Campaign extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = ['id'];
@@ -27,16 +27,18 @@ class Compaign extends Model
     }
 
 
-    protected function userType(): Attribute
+    protected  function userType(): Attribute
     {
+
         return Attribute::make(
             get: null,
-            set: fn (array $value) => implode(',', $value),
+            set: fn (mixed $value) => $value ? implode(',', $value) : null,
         );
     }
 
     // public function setUserTypeattributes($value)
     // {
-    //     $this->attributes['user_type'] = implode(',', $value);
+
+    //     return $this->attributes['user_type'] = implode(',', $value);
     // }
 }

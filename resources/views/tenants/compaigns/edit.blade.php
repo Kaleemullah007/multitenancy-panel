@@ -13,7 +13,7 @@
                                 {{ session('message') }}
                             </div>
                         @endif
-                        <form method="POST" action="{{ route('compaigns.update', $compaign->id) }}">
+                        <form method="POST" action="{{ route('campaigns.update', $campaign->id) }}">
                             @csrf
                             @method('PUT')
                             {{-- Name --}}
@@ -28,7 +28,7 @@
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ old('name', $compaign->name) }}" autocomplete="name" autofocus>
+                                        value="{{ old('name', $campaign->name) }}" autocomplete="name" autofocus>
 
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -48,11 +48,11 @@
                                 <div class="col-md-6">
                                     <input id="type_email" type="radio" class="@error('type') is-invalid @enderror"
                                         name="type" autocomplete="type" value="0" autofocus
-                                        @checked(old('type', $compaign->type->value) == 0)>
+                                        @checked(old('type', $campaign->type->value) == 0)>
                                     <label for="type_email">Email</label>
                                     <input id="type_sms" type="radio" class="@error('type') is-invalid @enderror"
                                         name="type" autocomplete="type" autofocus value="1"
-                                        @checked(old('type', $compaign->type->value) == 1)>
+                                        @checked(old('type', $campaign->type->value) == 1)>
                                     <label for="type_sms">SMS</label>
 
 
@@ -74,7 +74,7 @@
 
                                     <select name="email_template_id" id="email_template_id">
                                         @foreach ($emails as $email)
-                                            <option value="{{ $email->id }}" @selected($compaign->email_tempplate_id == $email->id)>
+                                            <option value="{{ $email->id }}" @selected($campaign->email_tempplate_id == $email->id)>
                                                 {{ $email->subject }}</option>
                                         @endforeach
 
@@ -97,7 +97,7 @@
                                     <select name="user_type[]" id="user_type" multiple>
                                         <option value="all">All</option>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->name }}" @selected(in_array($role->name, explode(',', $compaign->user_type)))>
+                                            <option value="{{ $role->name }}" @selected(in_array($role->name, explode(',', $campaign->user_type)))>
                                                 {{ $role->name }}</option>
                                         @endforeach
                                     </select>
@@ -136,7 +136,7 @@
 
                                 <div class="col-md-6">
                                     <input id="status" type="checkbox" class="@error('status') is-invalid @enderror"
-                                        name="status" @checked(old('status', $compaign->status)) autocomplete="status" autofocus>
+                                        name="status" @checked(old('status', $campaign->status)) autocomplete="status" autofocus>
 
                                     @error('status')
                                         <span class="invalid-feedback" role="alert">

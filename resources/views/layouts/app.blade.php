@@ -131,6 +131,14 @@
                 </li>
             @endhaspermission
 
+
+            @haspermission('campaigns_view')
+                <li class="nav-item list-unstyled"><a href="{{ route('campaigns.index') }}"
+                        class="btn btn-lg bg-primary">{{ __('compaigns.campaigns') }}</a>
+                </li>
+            @endhaspermission
+
+
             @haspermission('placeholders_view')
                 <li class="nav-item list-unstyled"><a href="{{ route('placeholders.index') }}"
                         class="btn btn-lg bg-primary">{{ __('placeholder.placeholders') }}</a>

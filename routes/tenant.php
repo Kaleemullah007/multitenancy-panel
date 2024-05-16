@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\CompaignController;
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\LocalizationController;
 
 use App\Http\Controllers\TenantController;
@@ -85,7 +85,7 @@ Route::middleware([
     Route::resource('/profile', ProfileController::class);
 
 
-    Route::delete('compaign-permanently-deleted/{id}', [CompaignController::class, 'deletePermanently'])->name('compaigns.deleted');
-    Route::delete('compaign-restore/{id}', [CompaignController::class, 'restored'])->name('compaigns.restored');
-    Route::resource('compaigns', CompaignController::class);
+    Route::delete('campaign-permanently-deleted/{id}', [CampaignController::class, 'deletePermanently'])->name('campaigns.deleted');
+    Route::delete('campaign-restore/{id}', [CampaignController::class, 'restored'])->name('campaigns.restored');
+    Route::resource('campaigns', CampaignController::class);
 })->middleware('auth');

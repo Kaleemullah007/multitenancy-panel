@@ -4,12 +4,14 @@ namespace App\Services\Compaign;
 
 use App\Jobs\EmailOrSmsJob;
 use App\Models\Placeholder;
+use App\Models\ScheduleMessageHistory;
 use App\Models\User;
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
 
 class changeTemplateContent
 {
+
     /**
      * Create a new class instance.
      */
@@ -18,7 +20,7 @@ class changeTemplateContent
     //     //
     // }
 
-    public function prepareData($template, $data)
+    public function prepareData($template, $data, $campaign)
     {
 
         // dd($data['published_at']);
@@ -44,11 +46,12 @@ class changeTemplateContent
         //     // $user->givePermissionTo([$request->name]);
         // }
 
-        $this->changeMessage($template, $users, $totalDuration);
+        $this->changeMessage($template, $users, $totalDuration, $campaign);
         return true;
     }
-    public function changeMessage($template, $users, $totalDuration)
+    public function changeMessage($template, $users, $totalDuration, $campaign)
     {
+
 
         // $template = "Hello : {full_name} <br> Firstname: {first_name} <br>
         // Last Name: {last_name}
@@ -102,7 +105,33 @@ class changeTemplateContent
                     $temp = str_replace($placeholder->key_name, $user->name, $temp);
             }
 
-            dispatch(new EmailOrSmsJob($temp, $user, $template, auth()->id()))->delay(Carbon::now()->addSeconds($totalDuration));;
+            // $id =  dispatch(new EmailOrSmsJob($temp, $user, $template, auth()->id(), $campaign))->delay(Carbon::now()->addSeconds($totalDuration));
+
+
+            $job = (new EmailOrSmsJob($temp, $user, $template, auth()->id(), $campaign))->delay($totalDuration);
+            $job_id =  app(\Illuminate\Contracts\Bus\Dispatcher::class)->dispatch($job);
+            $this->campaignHistory($totalDuration, $user, $template, auth()->id(), $campaign, $job_id);
+
+            // $id  = EmailOrSmsJob::dispatch($temp, $user, $template, auth()->id(), $campaign)->delay(Carbon::now()->addSeconds($totalDuration))->getJobId();
         }
+    }
+
+
+    function campaignHistory($totalDuration,  $user,  $template,  $loggedUser_id,  $campaign, $job_id)
+    {
+
+        $history = [
+            'is_sent' => now()->subSeconds($totalDuration),
+            'sent_at' => now()->addSeconds($totalDuration),
+            'receiver_id' => $user->id,
+            'email_template_id' => $template->id,
+            'user_id' => $loggedUser_id,
+            'job_id' => $job_id,
+            'campaign_id' => $campaign->id,
+            'sent' => 'N'
+
+        ];
+
+        return ScheduleMessageHistory::create($history);
     }
 }

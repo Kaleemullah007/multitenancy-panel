@@ -4,9 +4,8 @@ namespace App\Http\Requests;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateCompaignRequest extends FormRequest
+class StoreCampaignRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,16 +23,16 @@ class UpdateCompaignRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:255', Rule::unique('compaigns')->where('status', 1)->where('name', $this->get('name'))->ignore($this->compaign->id)],
+            'name' => 'required|max:255|unique:campaigns,name',
             'user_type' => 'required',
             'user_type' => 'required|array|max:5',
+            'email_template_id' => 'required|max:255',
             'type' => 'required',
             'published_at' => 'required|date_format:Y-m-d H:i:s',
             'status' => 'required|boolean',
             'user_id' => 'required|numeric'
         ];
     }
-
     public function messages(): array
     {
         return [
@@ -70,9 +69,12 @@ class UpdateCompaignRequest extends FormRequest
                 'type' => true,
             ]);
         }
+
+
+
         if (!$this->get('published_at')) {
             $this->merge([
-                'published_at' => now()->format('mm/dd/Y H:i:s'),
+                'published_at' => now()->format('Y-m-d H:i:s'),
             ]);
         } else {
             $date = Carbon::parse($this->get('published_at'))->format('Y-m-d H:i:s');

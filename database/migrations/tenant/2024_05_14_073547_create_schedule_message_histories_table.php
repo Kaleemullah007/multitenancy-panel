@@ -13,12 +13,17 @@ return new class extends Migration
     {
         Schema::create('schedule_message_histories', function (Blueprint $table) {
             $table->id();
+            $table->string('sent')->default('N');
+            $table->string('message')->nullable();
             $table->timestamp('is_sent')->nullable()->comment('When sent from the queue');
             $table->timestamp('sent_at')->nullable()->comment('Sent or not sent');
             $table->unsignedBigInteger('receiver_id');
             $table->unsignedBigInteger('email_template_id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('receiver_id')->references('id')->on('users');
+            $table->interface('job_id')->nullable();
+
+            $table->foreign('campaign_id')->references('id')->on('campaigns');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('email_template_id')->references('id')->on('email_templates');
             $table->timestamps();

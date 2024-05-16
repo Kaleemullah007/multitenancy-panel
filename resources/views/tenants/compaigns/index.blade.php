@@ -30,22 +30,22 @@
                 }
 
             @endphp
-            @if ($compaigns->count() > 0)
-                @foreach ($compaigns as $key => $compaign)
+            @if ($campaigns->count() > 0)
+                @foreach ($campaigns as $key => $campaign)
                     <tr>
                         <th scope="row">{{ $counter++ }}</th>
-                        <td>{{ $compaign->name }}</td>
-                        <td>{{ $compaign->user_type }}</td>
-                        <td>{{ $compaign->email_template_id }}</td>
-                        <td>{{ $compaign->published_at }}</td>
-                        <td>{{ $compaign->type->getlabelText() }}</td>
-                        <td>{{ $compaign->status }}</td>
+                        <td>{{ $campaign->name }}</td>
+                        <td>{{ $campaign->user_type }}</td>
+                        <td>{{ $campaign->email_template_id }}</td>
+                        <td>{{ $campaign->published_at }}</td>
+                        <td>{{ $campaign->type->getlabelText() }}</td>
+                        <td>{{ $campaign->status }}</td>
 
                         <td>
-                            {{-- @haspermission('compaigns_edit') --}}
-                            <a
-                                href="{{ route('compaigns.edit', $compaign->id) }}?page={{ $compaigns->currentPage() }}">{{ __('compaign.edit') }}</a>
-                            {{-- @endhaspermission --}}
+                            @haspermission('campaigns_edit')
+                                <a
+                                    href="{{ route('campaigns.edit', $campaign->id) }}?page={{ $campaigns->currentPage() }}">{{ __('compaign.edit') }}</a>
+                            @endhaspermission
                             @include('tenants.compaigns.delete')
 
                         </td>
@@ -59,6 +59,6 @@
         </tbody>
     </table>
     <div class="container">
-        {{ $compaigns->onEachSide(5)->links() }}
+        {{ $campaigns->onEachSide(5)->links() }}
     </div>
 @endsection

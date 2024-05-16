@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('compaign.create_compaign') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('compaigns.store') }}">
+                        <form method="POST" action="{{ route('campaigns.store') }}">
                             @csrf
                             {{-- Name --}}
                             <div class="row mb-3">
@@ -16,7 +16,8 @@
                                     class="col-md-4 col-form-label text-md-end">{{ __('compaign.form.name') }}</label>
 
 
-                                <?php print_r($errors->all()); ?>
+                                <?php //print_r($errors->all());
+                                ?>
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror" name="name"
