@@ -69,9 +69,6 @@ class TenantController extends Controller
 
 
         ]);
-        // dd($user_id);
-
-
 
         $data['user_id'] = $user->id;
 
@@ -88,24 +85,22 @@ class TenantController extends Controller
             $path = Storage::disk('public')->putFile('photos', $request->file('photo'));
             $tenant_data['file'] = $path;
         }
+
+        // Creating tenant and subdomain
         $tenant = Tenant::create($tenant_data);
-        // dd($path);
         $tenant->domains()->create([
             'domain' => $data['domain_name'] . '.' . config('app.domain')
         ]);
 
-
         session()->flash('message', __('tenant.message.save-message'));
         session()->flash('error', 'success');
+
         return to_route('tenants.index');
     }
 
-
+    // Renew Plan
     function renew(Tenant $tenant)
     {
-
-
-
 
         $user = $tenant->user;
         $end_date = $tenant->user->end_date;
@@ -120,9 +115,6 @@ class TenantController extends Controller
 
         $start_date = date('Y-m-d');
         $end_date = Carbon::parse($end_date)->addMonths($plan->validity_month)->format('Y-m-d');
-
-        // dd($end_date);
-
 
         $data['start_date'] = $start_date;
         $data['end_date'] = $end_date;
@@ -209,6 +201,7 @@ class TenantController extends Controller
         ]);
 
         $update_plan = request('update_plan');
+        // If Plan change then histroy created
         if ($update_plan == 'on') {
             $user = $tenant->user;
 
@@ -227,29 +220,19 @@ class TenantController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    // Softdelete
     public function destroy($tenant)
     {
 
-        // if ($user->hasRole('Admin')) {
-
-        //     session()->flash('message', 'You can not delete admin.');
-        //     session()->flash('error', 'danger');
-
-        //     // $user->save();
-
-        // } else {
-
         $tenant = Tenant::withTrashed()->find($tenant);
-        // dd($tenant);
-        // $tenant->destroy($tenant->id);
         $tenant->deleted_at  = now();
         $tenant->save();
-        // }
         session()->flash('message', __('tenant.message.delete-message'));
         session()->flash('error', 'danger');
         return to_route('tenants.index', ['page' => request('page')]);
     }
 
+    // Restored
     public function restore($id)
     {
 
@@ -264,6 +247,7 @@ class TenantController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * Permanently deleted record
      */
     public function deletePermanently($id)
     {
@@ -275,13 +259,8 @@ class TenantController extends Controller
             session()->flash('error', 'danger');
             return to_route('tenants.index', ['page' => request('page')]);
         }
-
-        // Domain::where('tenant_id', $record->id)->delete();
         $record->domains()->delete();
-        // $record->planHistory()->delete();
-
         $user  = User::withTrashed()->where('id', $record->user_id)->first();
-        // dd($user);
         if (!is_null($user))
             $user->forceDelete();
 
@@ -292,14 +271,13 @@ class TenantController extends Controller
         return to_route('tenants.index', ['page' => request('page')]);
     }
 
+    //  Export Users in pdf
     function exportPdf()
     {
         $tenants = User::all();
-        // dd($tenants);
         $html = view('tenants.admin.result', compact('tenants'))->render();
         $dompdf = new Dompdf();
         $dompdf->loadHtml($html);
-
         // (Optional) Setup the paper size and orientation
         $dompdf->setPaper('A4', 'landscape');
 

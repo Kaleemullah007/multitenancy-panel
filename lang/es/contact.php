@@ -22,6 +22,7 @@ return [
         'reply_to' => 'Responder a',
         'reply_to_email' => 'Responder a un correo electrónico',
         'reply_message' => 'Mensaje respondido',
+        'photo' => 'Foto',
 
     ],
     'form' => [
@@ -30,6 +31,7 @@ return [
         'subject' => 'Sujeto',
         'message' => 'Mensaje',
         'reply' => 'Responder',
+        'photo' => 'Selecciona cualquier foto',
     ],
     'message' => [
         'save-message' => 'Respondida a la usuaria con éxito',
@@ -37,6 +39,7 @@ return [
         'error_email' => 'El campo de correo electrónico es obligatorio.',
         'error_subject' => 'El campo de asunto es obligatorio',
         'error_message' => 'El campo del mensaje es obligatorio.',
+        'error_contact_photo' => 'La foto es un campo obligatorio; el tipo de archivo es jpeg,jpg,png',
     ]
 
 ];

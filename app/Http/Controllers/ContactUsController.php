@@ -5,14 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreContactRequest;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ContactUsController extends Controller
 {
+    // Store Captache
     public function store(StoreContactRequest $request)
     {
+        $data = $request->except(['captache', '_token']);
 
+        if ($request->has('photo')) {
+            $path = Storage::disk('public')->putFile('contacts', $request->file('photo'));
+            $data['file'] = $path;
+        }
 
-        Contact::Create($request->except(['captache', '_token']));
+        Contact::Create($data);
+
         return redirect()->back()->with('message', 'Administrator will contact with you soon')->withFragment('contact');
     }
 

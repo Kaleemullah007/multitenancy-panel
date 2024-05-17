@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    @haspermission('compaigns_create')
-        <a class="btn btn-lg bg-primary" href="{{ route('compaigns.create') }}">{{ __('compaign.create') }}</a>
+    @haspermission('campaigns_create')
+        <a class="btn btn-lg bg-primary" href="{{ route('campaigns.create') }}">{{ __('compaign.create') }}</a>
     @endhaspermission
     <table class="table">
         @if (session()->has('message'))
@@ -53,7 +53,7 @@
                 @endforeach
             @else
                 <tr>
-                    <td colspan="3" class="text-center">{{ __('general.no-record') }}</td>
+                    <td colspan="8" class="text-center">{{ __('general.no-record') }}</td>
                 </tr>
             @endif
         </tbody>

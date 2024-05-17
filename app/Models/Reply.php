@@ -10,6 +10,8 @@ class Reply extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    // Receiver details
     public function receiver(): BelongsTo
     {
         return $this->belongsTo(contact::class, 'receiver_id', 'id');

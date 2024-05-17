@@ -31,18 +31,7 @@ class UpdateEmailTemplateRequest extends FormRequest
         ];
     }
 
-    public function messages(): array
-    {
-        return [
-            'title' => __('emailtemplate.message.error_title'),
-            'title.unique' => __('emailtemplate.message.error_title_unique'),
-            'subject' => __('emailtemplate.message.error_subject'),
-            'title' => __('emailtemplate.message.error_body'),
-            'template_type' => __('emailtemplate.message.error_template_type'),
-            'status' => __('emailtemplate.message.error_status'),
-
-        ];
-    }
+    // Add some value before checking request
     public function prepareForValidation()
     {
         if (!$this->get('status')) {
@@ -63,5 +52,19 @@ class UpdateEmailTemplateRequest extends FormRequest
                 'template_type' => true,
             ]);
         }
+    }
+
+    //  show message in respective selected lang
+    public function messages(): array
+    {
+        return [
+            'title' => __('emailtemplate.message.error_title'),
+            'title.unique' => __('emailtemplate.message.error_title_unique'),
+            'subject' => __('emailtemplate.message.error_subject'),
+            'title' => __('emailtemplate.message.error_body'),
+            'template_type' => __('emailtemplate.message.error_template_type'),
+            'status' => __('emailtemplate.message.error_status'),
+
+        ];
     }
 }

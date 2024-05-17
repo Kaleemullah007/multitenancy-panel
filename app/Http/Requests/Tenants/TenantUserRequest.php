@@ -32,6 +32,7 @@ class TenantUserRequest extends FormRequest
         ];
     }
 
+    // Add some value before checking request
     protected function prepareForValidation()
     {
         if (!$this->get('status')) {

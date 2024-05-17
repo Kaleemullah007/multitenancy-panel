@@ -40,6 +40,7 @@ class UpdateTenantRequest extends FormRequest
             'status' => ['required', 'boolean'],
         ];
     }
+    // Add some value before checking request
     protected function prepareForValidation()
     {
 
@@ -80,7 +81,7 @@ class UpdateTenantRequest extends FormRequest
             ]);
         }
     }
-
+    //  show message in respective selected lang
     public function messages(): array
     {
         return [

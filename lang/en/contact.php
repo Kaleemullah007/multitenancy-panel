@@ -22,6 +22,7 @@ return [
         'reply_to' => 'Reply To',
         'reply_to_email' => 'Reply To Email',
         'reply_message' => 'Replied Message',
+        'photo' => 'Photo',
 
     ],
     'form' => [
@@ -30,6 +31,7 @@ return [
         'subject' => 'Subject',
         'message' => 'Message',
         'reply' => 'Reply',
+        'photo' => 'Select any photo',
     ],
     'message' => [
         'save-message' => 'Replied to user successfully',
@@ -39,6 +41,7 @@ return [
         'error_message' => 'The message field is required',
         'error_captache' => 'The Captache is required',
         'error_captache_invalid' => 'Please enter correct Captache',
+        'error_contact_photo' => 'Photo is required field, file type either jpeg,jpg,png',
     ]
 
 ];

@@ -122,56 +122,56 @@
                         {{ __('permission.users') }}</a></li>
             @endhaspermission
             @haspermission('permissions_view')
-                <li class="nav-item list-unstyled"><a href="{{ route('permissions.index') }}"
+                <li class="nav-item list-unstyled   ms-2"><a href="{{ route('permissions.index') }}"
                         class="btn btn-lg bg-primary">{{ __('permission.permissions') }}</a></li>
             @endhaspermission
             @haspermission('roles_view')
-                <li class="nav-item list-unstyled"><a href="{{ route('roles.index') }}"
+                <li class="nav-item list-unstyled ms-2"><a href="{{ route('roles.index') }}"
                         class="btn btn-lg bg-primary">{{ __('permission.roles') }}</a>
                 </li>
             @endhaspermission
 
 
-            @haspermission('campaigns_view')
-                <li class="nav-item list-unstyled"><a href="{{ route('campaigns.index') }}"
-                        class="btn btn-lg bg-primary">{{ __('compaigns.campaigns') }}</a>
-                </li>
-            @endhaspermission
 
 
             @haspermission('placeholders_view')
-                <li class="nav-item list-unstyled"><a href="{{ route('placeholders.index') }}"
+                <li class="nav-item list-unstyled ms-2"><a href="{{ route('placeholders.index') }}"
                         class="btn btn-lg bg-primary">{{ __('placeholder.placeholders') }}</a>
                 </li>
             @endhaspermission
 
             @haspermission('emailtemplates_view')
-                <li class="nav-item list-unstyled"><a href="{{ route('emailtemplates.index') }}"
+                <li class="nav-item list-unstyled ms-2"><a href="{{ route('emailtemplates.index') }}"
                         class="btn btn-lg bg-primary">{{ __('emailtemplate.emailtemplates') }}</a>
                 </li>
             @endhaspermission
 
+            @haspermission('campaigns_view')
+                <li class="nav-item list-unstyled ms-2"><a href="{{ route('campaigns.index') }}"
+                        class="btn btn-lg bg-primary">{{ __('compaign.campaigns') }}</a>
+                </li>
+            @endhaspermission
 
 
             @haspermission('tenant_view')
-                <li class="list-group-item text-decoration-none">
+                <li class="list-group-item text-decoration-none ms-2">
                     <a href="{{ route('tenants.index') }}" class="btn btn-lg bg-primary">{{ __('tenant.tenants') }}</a>
                 </li>
             @endhaspermission
 
             @haspermission('plan_view')
-                <li class="list-group-item text-decoration-none">
+                <li class="list-group-item text-decoration-none ms-2">
                     <a href="{{ route('plans.index') }}" class="btn btn-lg bg-primary">{{ __('plan.plans') }}</a>
                 </li>
             @endhaspermission
             @haspermission('contact_view')
-                <li class="list-group-item text-decoration-none">
+                <li class="list-group-item text-decoration-none ms-2">
                     <a href="{{ route('contacts.index') }}" class="btn btn-lg bg-primary">{{ __('contact.contacts') }}</a>
                 </li>
             @endhaspermission
 
             {{-- @haspermission('tenant_view')
-                <li class="list-group-item text-decoration-none">
+                <li class="list-group-item text-decoration-none ms-2">
                     <a href="{{ route('roles.index') }} " class="btn btn-lg bg-primary">{{ __('permission.roles') }}</a>
                 </li>
             @endhaspermission --}}
@@ -254,7 +254,7 @@
         let textarea = document.getElementById("body");
         textarea.focus();
         var start = '{';
-        var end = ' }';
+        var end = '}';
         textarea.value += start + document.getElementById(elementId).innerHTML.trim() + end;
     }
 </script>

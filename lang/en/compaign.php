@@ -6,14 +6,14 @@ return [
     'btn-cancel' => 'Cancel',
     'btn-reset' => 'Reset',
     'btn_permanently_deleted' => 'permanently deleted',
-    'btn-deleted' => 'deleted',
+    'btn-deleted' => 'Deleted',
     'btn_restored' => 'Restore',
     'btn-edit' => 'Update',
-    'edit' => 'edit',
+    'edit' => 'Edit',
     'create' => 'Create',
     'create_compaign' => 'Create Compaign',
     'edit_compaign' => 'Edit Compaign',
-    'compaigns' => 'Campaigns',
+    'campaigns' => 'Campaigns',
     'table' => [
         '#' => 'Sr. No',
         'name' => 'Name',
@@ -55,6 +55,8 @@ return [
         'error_status' => 'The Status field is required',
         'error_user_id' => 'The User Id field is required',
         'error_published_at' => 'The Published At field is required',
+        'error_schedule_message' => ', and no Scheduled message for users',
+        'success_schedule_message' => ', and scheduled message for users'
 
 
 

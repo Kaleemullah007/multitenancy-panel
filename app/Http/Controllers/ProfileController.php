@@ -59,6 +59,9 @@ class ProfileController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * Update photo
+     * Password
+     * Remove photo if new uploaded
      */
     public function update(UpdateTenantProfileRequest $request, User $profile)
     {
@@ -96,7 +99,7 @@ class ProfileController extends Controller
 
 
         // Optionally, you can return a response indicating success
-        return to_route('profile.edit', [$profile->id])->with(['message' => 'Profile updated successfully']);
+        return to_route('profile.edit', [$profile->id])->with(['message' => __('user.message.update-message')]);
     }
 
     /**

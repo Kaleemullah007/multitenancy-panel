@@ -95,11 +95,12 @@ class EmailTemplateController extends Controller
     public function update(UpdateEmailTemplateRequest $request, EmailTemplate $emailtemplate)
     {
         $data = $request->validated();
+        $oldemailtemplate = $emailtemplate;
         $emailtemplate->update($data);
 
         session()->flash('message', __('emailtemplate.message.update-message'));
         session()->flash('error', 'success');
-        return view('tenants.emailtemplates.edit', compact('emailtemplate'));
+        return to_route('emailtemplates.edit',   $oldemailtemplate->id);
     }
 
     /**

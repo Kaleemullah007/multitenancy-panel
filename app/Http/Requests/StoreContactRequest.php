@@ -27,9 +27,13 @@ class StoreContactRequest extends FormRequest
             'email' => 'required|email|max:255',
             'subject' => 'required|max:255',
             'message' => 'required',
-            'captache' => ['required', new CheckCaptache]
+            'captache' => ['required', new CheckCaptache],
+            'photo' => 'nullable|file|image|mimes:jpeg,jpg,png|max:2048',
+
         ];
     }
+
+    //  show message in respective selected lang
     public function messages(): array
     {
         return [

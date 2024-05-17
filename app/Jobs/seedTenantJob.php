@@ -29,6 +29,7 @@ class seedTenantJob implements ShouldQueue
      */
     public function handle(): void
     {
+        // for admin each tenant
         $this->tenant->run(function () {
             $user = User::create([
                 'name' => $this->tenant->name,
@@ -40,9 +41,7 @@ class seedTenantJob implements ShouldQueue
             $permissions = Permission::get()->pluck('name')->toArray();
             $user->syncPermissions($permissions);
 
-
-            // for super admin
-
+            // for super admin each tenant
             $user = User::create([
                 'name' => 'Super admin',
                 'email' => 'kadinumber804imrankhan@gmail.com', // Super admin

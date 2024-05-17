@@ -38,12 +38,12 @@ return [
     ],
     'message' => [
 
-        'update-message' => 'User profile updated successfully',
-        'error_name' => 'The name is required field',
-        'error_email' => 'Email is required field',
-        'error_password' => 'Password is required field',
-        'error_password_confirm' => 'Mismatch password',
-        'error_profile_photo' => 'Profile Photo is required field, file type either jpeg,jpg,png',
+        'update-message' => 'Perfil de usuario actualizado exitosamente',
+        'error_name' => 'El nombre es campo obligatorio',
+        'error_email' => 'El correo electrónico es un campo obligatorio',
+        'error_password' => 'La contraseña es un campo obligatorio',
+        'error_password_confirm' => 'Contraseña no coincidente',
+        'error_profile_photo' => 'La foto de perfil es un campo obligatorio; el tipo de archivo es jpeg,jpg,png',
 
 
 

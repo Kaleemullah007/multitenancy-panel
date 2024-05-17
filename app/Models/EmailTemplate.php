@@ -12,6 +12,7 @@ class EmailTemplate extends Model
     use HasFactory, SoftDeletes;
     protected $guarded = ['id'];
 
+    // Casting 0,1 to string for showing email or sms
     protected function casts(): array
     {
         return [
@@ -19,6 +20,7 @@ class EmailTemplate extends Model
         ];
     }
 
+    //  show only active email templates
     protected function scopeActive()
     {
         return $this->where('status', 1);

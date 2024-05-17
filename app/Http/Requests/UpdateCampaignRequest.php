@@ -24,7 +24,7 @@ class UpdateCampaignRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:255', Rule::unique('campaigns')->where('status', 1)->where('name', $this->get('name'))->ignore($this->compaign->id)],
+            'name' => ['required', 'max:255', Rule::unique('campaigns')->where('status', 1)->where('name', $this->get('name'))->ignore($this->campaign->id)],
             'user_type' => 'required',
             'user_type' => 'required|array|max:5',
             'type' => 'required',
@@ -48,6 +48,8 @@ class UpdateCampaignRequest extends FormRequest
 
         ];
     }
+
+    // Add some value before checking request
     public function prepareForValidation()
     {
         if (!$this->get('status')) {

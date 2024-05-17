@@ -25,6 +25,8 @@ class UpdateRoleRequest extends FormRequest
             'name' => 'required|max:255|unique:roles,name,' . $this->role->id
         ];
     }
+
+    //  show message in respective selected lang
     public function messages(): array
     {
         return [
