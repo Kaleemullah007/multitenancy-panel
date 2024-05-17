@@ -38,6 +38,8 @@ class UpdateProfileRequest extends FormRequest
             'photo' => 'nullable|file|image|mimes:jpeg,jpg,png|max:2048',
         ];
     }
+
+    // Add some value before check request
     public function prepareForValidation()
     {
         if (!$this->get('is_prod')) {
@@ -65,6 +67,7 @@ class UpdateProfileRequest extends FormRequest
         ]);
     }
 
+    //  show message in respective selected lang
     public function messages(): array
     {
         return [

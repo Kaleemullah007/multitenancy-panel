@@ -51,7 +51,7 @@ class EmailOrSmsJob implements ShouldQueue
         else if ($this->template->template_type->value == 0)
             info($this->temp . 'Email ');
 
-        // For sending email or SMS
+        // For sending email or SMS  Update message to tenant database
         ScheduleMessageHistory::where('job_id', $this->job->getJobId())->update(['sent' => 'Y', 'message' => $this->temp]);
         echo $this->job->getJobId();
     }
@@ -62,35 +62,10 @@ class EmailOrSmsJob implements ShouldQueue
 
         // Avaialble Functions
         // https://github.com/illuminate/queue/blob/master/Jobs/DatabaseJob.php
+        // Update message to tenant database
         Queue::failing(function (JobFailed $event) {
-            // $event->connectionName
-            // $event->job
-            // echo "<pre>";
-            // $data  = $event->job->payload()['data']['command'];
 
             ScheduleMessageHistory::where('job_id', $event->job->getJobRecord()->id)->update(['sent' => 'N', 'message' => 'Not sent to user']);
-
-
-
-            // $event->exception
         });
-
-        // Perform actions with the job ID (e.g., sending a notification)
     }
-
-    // public function fail(Throwable $ex)
-    // {
-    //     dd($this->historyobj);
-    //     $uuid = $this->historyobj->job_id;
-
-    //     info("Job UUID: " . $uuid);
-
-
-    //     // dd($this->template->title);
-    //     // try {
-    //     //     Log::debug('MyNotification failed');
-    //     // } catch (Exception $e) {
-    //     //     Log::debug($e->getMessage());
-    //     // }
-    // }
 }

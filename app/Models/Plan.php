@@ -17,6 +17,7 @@ class Plan extends Model
         return $this->hasOne(User::class);
     }
 
+    // Show only active plans
     function ScopeActivePlans()
     {
         return $this->where('status', 1);

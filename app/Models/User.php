@@ -60,16 +60,20 @@ class User extends Authenticatable
         ];
     }
 
+    // Scope for hide super admin
     protected function ScopeSuperAdmin()
     {
 
         return $this->whereNotIn('id', [2, auth()->id()]);
     }
 
+    // Add Where class to Query for expired users
     protected function ScopeExpiredUsers()
     {
         return $this->whereDate('end_date', '<=', now()->format('Y-m-d'))->whereNotNull('end_date')->where('actioned', 0);
     }
+
+    // User tenant Detail
     public function tenant(): HasOne
     {
         return $this->hasOne(Tenant::class, 'user_id', 'id');
@@ -80,10 +84,4 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Plan::class);
     }
-
-    //  User Bank details
-    // public function bankDetail(): BelongsTo
-    // {
-    //     return $this->belongsTo(BankDetail::class, 'user_id', 'id');
-    // }
 }

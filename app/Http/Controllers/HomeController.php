@@ -34,21 +34,26 @@ class HomeController extends Controller
         return view('home');
     }
 
+    // View import view
     public function importView()
     {
 
         return view('tenant.import');
     }
+
+    // import file
     function import(Request $request)
     {
         Excel::import(new ImportUser, $request->file('file')->store('files'));
         return redirect()->back();
     }
+
+    // export file csv or xlsx
     function exportUsers(Request $request)
     {
 
         if (in_array($request->format, array('csv', 'xlsx')))
-            return Excel::download(new ExportUser, 'users.csv');
+            return Excel::download(new ExportUser, 'users.' . $request->format);
         else
             abort(403, "Invalid format type, It would be csv or xlsx"); //abort(404, );
     }

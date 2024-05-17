@@ -33,6 +33,7 @@ class Tenant extends BaseTenant implements TenantWithDatabase
         ];
     }
 
+    // Casting user password to hash before saving into the database
     protected function password(): Attribute
     {
         return Attribute::make(
@@ -46,6 +47,7 @@ class Tenant extends BaseTenant implements TenantWithDatabase
         return $this->belongsTo(User::class);
     }
 
+    // User plan history
     public function planHistory(): HasMany
     {
         return $this->hasMany(PlanHistory::class, 'user_id', 'user_id');

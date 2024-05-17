@@ -25,17 +25,20 @@ class StorePermissionRequest extends FormRequest
             'name' => 'required|max:255|unique:permissions,name'
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => __('permission.form.name'),
+        ];
+    }
+
+    //  show message in respective selected lang
     public function messages(): array
     {
         return [
             'name' => __('permission.message.error_name'),
             'name.unique' => __('permission.message.error_name_unique'),
-        ];
-    }
-    public function attributes(): array
-    {
-        return [
-            'name' => __('permission.form.name'),
         ];
     }
 }

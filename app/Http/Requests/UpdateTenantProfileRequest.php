@@ -28,7 +28,7 @@ class UpdateTenantProfileRequest extends FormRequest
             'photo' => 'nullable|file|image|mimes:jpeg,jpg,png|max:2048',
         ];
     }
-
+    //  show message in respective selected lang
     public function messages(): array
     {
         return [

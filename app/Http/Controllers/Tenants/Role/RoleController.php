@@ -87,10 +87,11 @@ class RoleController extends Controller
     public function update(UpdateRoleRequest $request, Role $role)
     {
         $data = $request->validated();
+        $oldrole = $role;
         $role->update($data);
         session()->flash('message', __('role.message.update-message'));
         session()->flash('error', 'success');
-        return view('tenants.roles.edit', compact('role'));
+        return to_route('roles.edit', [$oldrole->id]);
     }
 
     /**

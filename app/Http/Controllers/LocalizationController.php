@@ -8,6 +8,7 @@ class LocalizationController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * Set lang in the sessoin and redirect back to page
      */
     public function index($locale)
     {

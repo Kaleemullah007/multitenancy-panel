@@ -30,16 +30,7 @@ class UpdatePlanRequest extends FormRequest
         ];
     }
 
-    public function messages(): array
-    {
-        return [
-            'name' => __('plan.message.error_name'),
-            'name.unique' => __('plan.message.error_name_unique'),
-            'description' => __('plan.message.error_description'),
-            'price' => __('plan.message.error_price'),
-            'validity_month' => __('plan.message.error_validity_month')
-        ];
-    }
+    // Add some value before checking request
     protected function prepareForValidation()
     {
         if (!$this->get('status')) {
@@ -51,5 +42,17 @@ class UpdatePlanRequest extends FormRequest
                 'status' => true,
             ]);
         }
+    }
+
+    //  show message in respective selected lang
+    public function messages(): array
+    {
+        return [
+            'name' => __('plan.message.error_name'),
+            'name.unique' => __('plan.message.error_name_unique'),
+            'description' => __('plan.message.error_description'),
+            'price' => __('plan.message.error_price'),
+            'validity_month' => __('plan.message.error_validity_month')
+        ];
     }
 }

@@ -12,24 +12,14 @@ use Spatie\Permission\Models\Role;
 class changeTemplateContent
 {
 
-    /**
-     * Create a new class instance.
-     */
-    // public function __construct()
-    // {
-    //     //
-    // }
+    // Set Queue for sending email and sms to users
 
     public function prepareData($template, $data, $campaign)
     {
 
-        // dd($data['published_at']);
         $startTime = Carbon::parse($data['published_at']);
         $finishTime = Carbon::parse(now());
-
         $totalDuration = (int)$finishTime->diffInSeconds($startTime);
-
-
         $users = User::whereHas("roles", function ($q) use ($data) {
             $q->Where(function ($query)  use ($data) {
 
@@ -42,38 +32,14 @@ class changeTemplateContent
             });
         })->where('status', 1)->get();
 
-        // foreach ($users as $user) {
-        //     // $user->givePermissionTo([$request->name]);
-        // }
-
         $this->changeMessage($template, $users, $totalDuration, $campaign);
         return true;
     }
+
+    // Change placeholders to Acutally Values of user details
     public function changeMessage($template, $users, $totalDuration, $campaign)
     {
 
-
-        // $template = "Hello : {full_name} <br> Firstname: {first_name} <br>
-        // Last Name: {last_name}
-        // <br>
-        // Contact Phone: {contact_phone}
-        // <br>
-        // website : {website}
-        // <br>
-        // contact_us_link : {contact_us_link}
-        // <br>
-
-        // logo-link : {logo_link}
-        // <br>
-        // message : {message}
-        // <br>
-        // footer-message : {footer_message}
-        // <br>
-        // header-heading: {header_heading}
-        // <br>
-
-
-        // ";
 
         $placeholders = Placeholder::where('status', 1)->get();
 
@@ -133,5 +99,29 @@ class changeTemplateContent
         ];
 
         return ScheduleMessageHistory::create($history);
+    }
+
+    protected function dummyTemplate(): string
+    {
+        return '
+        Hello : {full_name}
+        <br> Firstname: {first_name} <br>
+        Last Name: {last_name}
+        <br>
+        Contact Phone: {contact_phone}
+        <br>
+        website : {website}
+        <br>
+        contact_us_link : {contact_us_link}
+        <br>
+
+        logo-link : {logo_link}
+        <br>
+        message : {message}
+        <br>
+        footer-message : {footer_message}
+        <br>
+        header-heading: {header_heading}
+        ';
     }
 }

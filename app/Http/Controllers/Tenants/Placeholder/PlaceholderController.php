@@ -92,11 +92,11 @@ class PlaceholderController extends Controller
     public function update(UpdatePlaceholderRequest $request, Placeholder $placeholder)
     {
         $data = $request->validated();
+        $oldplaceholder =         $placeholder;
         $placeholder->update($data);
-
         session()->flash('message', __('placeholder.message.update-message'));
         session()->flash('error', 'success');
-        return view('tenants.placeholders.edit', compact('placeholder'));
+        return to_route('placeholders.edit', [$oldplaceholder->id]);
     }
 
     /**

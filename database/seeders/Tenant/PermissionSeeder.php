@@ -126,7 +126,7 @@ class PermissionSeeder extends Seeder
             ['name' => 'd6', 'setting_type' => 'date_format', 'value' => 'd:m:Y'],
         ]);
 
-        Placeholder::create([
+        Placeholder::insert([
             ['name' => 'Full Name', 'key_name' => '{full_name}', 'status' => 1],
             ['name' => 'Phone', 'key_name' => '{phone}', 'status' => 1],
             ['name' => 'Contact Email', 'key_name' => '{contact_email}', 'status' => 1],

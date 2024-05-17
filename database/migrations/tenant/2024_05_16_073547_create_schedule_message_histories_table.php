@@ -20,8 +20,9 @@ return new class extends Migration
             $table->unsignedBigInteger('receiver_id');
             $table->unsignedBigInteger('email_template_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('campaign_id');
             $table->foreign('receiver_id')->references('id')->on('users');
-            $table->interface('job_id')->nullable();
+            $table->integer('job_id')->nullable();
 
             $table->foreign('campaign_id')->references('id')->on('campaigns');
             $table->foreign('user_id')->references('id')->on('users');

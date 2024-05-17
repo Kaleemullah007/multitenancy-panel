@@ -32,6 +32,7 @@
                                     <th scope="col">{{ __('contact.table.email') }}</th>
                                     <th scope="col">{{ __('contact.table.subject') }}</th>
                                     <th scope="col">{{ __('contact.table.message') }}</th>
+                                    <th scope="col">{{ __('contact.table.photo') }}</th>
                                     <th scope="col">{{ __('contact.table.date') }}</th>
                                     <th scope="col">{{ __('contact.table.action') }}</th>
                                 </tr>
@@ -46,6 +47,10 @@
                                             <td>{{ $contact->email }}</td>
                                             <td>{{ $contact->subject }}</td>
                                             <td>{{ $contact->message }}</td>
+                                            <td> <a href="<?php echo asset('/storage/app/public/' . $contact->file); ?>" target="_blank" rel="noopener noreferrer">
+                                                    <img src="<?php echo asset('/storage/app/public/' . $contact->file); ?>"
+                                                        class="w-25 img-fluid  img-thumbnail"></a>
+                                            </td>
                                             <td>{{ $contact->created_at?->diffForHumans() }}</td>
                                             <td>
                                                 @haspermission('contact_reply')

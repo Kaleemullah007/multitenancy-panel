@@ -33,20 +33,8 @@ class StoreCampaignRequest extends FormRequest
             'user_id' => 'required|numeric'
         ];
     }
-    public function messages(): array
-    {
-        return [
-            'name' => __('compaign.message.error_name'),
-            'name.unique' => __('compaign.message.error_name_unique'),
-            'user_type' => __('compaign.message.error_user_type'),
-            'template_type' => __('compaign.message.error_template_type'),
-            'type' => __('compaign.message.error_type'),
-            'published_at' => __('compaign.message.error_published_at'),
-            'status' => __('compaign.message.error_status'),
-            'user_id' => __('compaign.message.error_user_id'),
 
-        ];
-    }
+    // Add some value before checking request
     public function prepareForValidation()
     {
         if (!$this->get('status')) {
@@ -85,5 +73,21 @@ class StoreCampaignRequest extends FormRequest
         $this->merge([
             'user_id' => auth()->id(),
         ]);
+    }
+
+    //  show message in respective selected lang
+    public function messages(): array
+    {
+        return [
+            'name' => __('compaign.message.error_name'),
+            'name.unique' => __('compaign.message.error_name_unique'),
+            'user_type' => __('compaign.message.error_user_type'),
+            'template_type' => __('compaign.message.error_template_type'),
+            'type' => __('compaign.message.error_type'),
+            'published_at' => __('compaign.message.error_published_at'),
+            'status' => __('compaign.message.error_status'),
+            'user_id' => __('compaign.message.error_user_id'),
+
+        ];
     }
 }

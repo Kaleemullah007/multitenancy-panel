@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\RevalidateBackHistory;
 use App\Models\Campaign;
 use App\Http\Requests\StoreCampaignRequest;
 use App\Http\Requests\UpdateCampaignRequest;
@@ -19,31 +20,33 @@ use Spatie\Permission\Models\Role;
 class CampaignController extends Controller
 {
 
-    // public function __construct()
-    // {
-    //     $this->middleware(RevalidateBackHistory::class);
+    protected $service_template;
+    public function __construct(changeTemplateContent $service_template)
+    {
+        $this->middleware(RevalidateBackHistory::class);
 
-    //     $this->middleware('permission:emailtemplates_view', [
-    //         'only' => 'index'
-    //     ]);
-    //     $this->middleware('permission:emailtemplates_edit', [
-    //         'only' => ['edit', 'update']
-    //     ]);
+        $this->middleware('permission:campaigns_view', [
+            'only' => 'index'
+        ]);
+        $this->middleware('permission:campaigns_edit', [
+            'only' => ['edit', 'update']
+        ]);
 
-    //     $this->middleware('permission:emailtemplates_delete', [
-    //         'only' => ['destroy']
-    //     ]);
+        $this->middleware('permission:campaigns_delete', [
+            'only' => ['destroy']
+        ]);
 
-    //     $this->middleware('permission:emailtemplates_restore', [
-    //         'only' => ['restoreUser']
-    //     ]);
-    //     $this->middleware('permission:emailtemplates_force_delete', [
-    //         'only' => ['deletePermanently']
-    //     ]);
-    //     $this->middleware('permission:emailtemplates_create', [
-    //         'only' => ['create', 'store']
-    //     ]);
-    // }
+        $this->middleware('permission:campaigns_restore', [
+            'only' => ['restoreUser']
+        ]);
+        $this->middleware('permission:campaigns_force_delete', [
+            'only' => ['deletePermanently']
+        ]);
+        $this->middleware('permission:campaigns_create', [
+            'only' => ['create', 'store']
+        ]);
+        $this->service_template = $service_template;
+    }
 
     /**
      * Display a listing of the resource.
@@ -76,13 +79,21 @@ class CampaignController extends Controller
 
         $campaign  = Campaign::create($data);
 
-        $email = new changeTemplateContent();
-        $template = $campaign->emailTemplate;
-        $campaignObject  = $campaign;
 
-        $email->prepareData($template, $data, $campaignObject);
 
-        session()->flash('message', __('compaign.message.save-message'));
+        if ($campaign->status == 0) {
+            $status_mesage = __('compaign.message.error_schedule_message');
+        } else {
+
+            $template = $campaign->emailTemplate;
+            $this->service_template->prepareData($template, $data, $campaign);
+            $status_mesage = __('compaign.message.success_schedule_message');
+        }
+
+
+
+
+        session()->flash('message', __('compaign.message.save-message') . $status_mesage);
         session()->flash('error', 'success');
         return to_route('campaigns.index', ['page' => request('page')]);
     }
@@ -108,7 +119,7 @@ class CampaignController extends Controller
 
         $totalDuration = (int)$startTime->diffInMinutes($finishTime);
         // dd($startTime->format('Y-m-d H:i:s'), $finishTime->format('Y-m-d H:i:s'), $totalDuration);
-        if ($totalDuration > 20) {
+        if ($totalDuration > 60) {
             session()->flash('message', __('compaign.message.no-edit'));
             session()->flash('error', 'warning');
             return to_route('campaigns.index', ['page' => request('page')]);
@@ -136,6 +147,7 @@ class CampaignController extends Controller
         $data = $request->validated();
 
         $jobs_id = ScheduleMessageHistory::where(['campaign_id' => $campaign->id, 'sent' => 'N'])->get()->pluck('job_id', 'id');
+
         if ($jobs_id->count() > 0) {
             DB::connection('mysql')->table('jobs')->whereIn('id', $jobs_id->values())->delete();
             ScheduleMessageHistory::whereIn('id', $jobs_id->keys())->delete();
@@ -145,14 +157,20 @@ class CampaignController extends Controller
 
         $campaign->update($data);
 
-        $email = new changeTemplateContent();
-        $template = $campaign->emailTemplate;
-        $email->prepareData($template, $data, $campaignObject);
 
-        session()->flash('message', __('compaign.message.update-message'));
+        if ($campaignObject->status == 0) {
+            $status_mesage = __('compaign.message.error_schedule_message');
+        } else {
+
+            $template = $campaign->emailTemplate;
+            $this->service_template->prepareData($template, $data, $campaignObject);
+
+            $status_mesage = __('compaign.message.success_schedule_message');
+        }
+
+        session()->flash('message', __('compaign.message.save-message') . $status_mesage);
         session()->flash('error', 'success');
-        return to_route('campaigns.edit',   $campaign->id);
-        // view('tenants.compaigns.edit', compact('campaign'));
+        return to_route('campaigns.edit',   $campaignObject->id);
     }
 
 

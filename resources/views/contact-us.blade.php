@@ -23,7 +23,7 @@
                                 </li>
                             @endforeach
                         </ul>
-                        <form action="{{ route('contactus.store') }}" method="post">
+                        <form action="{{ route('contactus.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
 
                             <div class="row">
@@ -73,7 +73,18 @@
                                     </div>
                                 </div>
 
-
+                                <div class="col-md-6 md-mb-30 mt-4">
+                                    <div class="contact__two-right-form-item conbix-contact-item">
+                                        <span class="far fa-envelope-open"></span>
+                                        <label for="photo">{{ __('contact.form.photo') }}</label>
+                                        <input type="file" name="photo"
+                                            class="form-control @error('photo') is-invalid @enderror"
+                                            value="{{ old('photo') }}">
+                                        @error('photo')
+                                            <div class="error">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
 
                                 <div class="row justify-content-between">
                                     <span class="far fa-comments"></span>

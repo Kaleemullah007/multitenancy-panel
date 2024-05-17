@@ -28,6 +28,7 @@ class UpdateContactRequest extends FormRequest
         ];
     }
 
+    // Add some value before checking request
     protected function prepareForValidation()
     {
         $this->merge([
@@ -36,6 +37,7 @@ class UpdateContactRequest extends FormRequest
         ]);
     }
 
+    //  show message in respective selected lang
     public function messages(): array
     {
         return [

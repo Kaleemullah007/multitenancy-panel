@@ -91,11 +91,11 @@ class PlanController extends Controller
      */
     public function update(UpdatePlanRequest $request, Plan $plan)
     {
-
+        $oldplan = $plan;
         $plan->update($request->validated());
         session()->flash('message', __('plan.message.update-message'));
         session()->flash('error', 'success');
-        return view('tenants.plans.edit', compact('plan'));
+        return to_route('plans.edit', [$oldplan->id]);
     }
 
     /**

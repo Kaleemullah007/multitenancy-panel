@@ -27,14 +27,7 @@ class UpdatePlaceholderRequest extends FormRequest
             'status' => 'required|boolean'
         ];
     }
-    public function messages(): array
-    {
-        return [
-            'name' => __('placeholder.message.error_name'),
-            'key_name.unique' => __('placeholder.message.error_key_name'),
-            'key_name.unique' => __('placeholder.message.error_name_unique'),
-        ];
-    }
+    // Add some values before checking request
     public function prepareForValidation()
     {
         if (!$this->get('status')) {
@@ -46,5 +39,15 @@ class UpdatePlaceholderRequest extends FormRequest
                 'status' => true,
             ]);
         }
+    }
+
+    //  show message in respective selected lang
+    public function messages(): array
+    {
+        return [
+            'name' => __('placeholder.message.error_name'),
+            'key_name.unique' => __('placeholder.message.error_key_name'),
+            'key_name.unique' => __('placeholder.message.error_name_unique'),
+        ];
     }
 }

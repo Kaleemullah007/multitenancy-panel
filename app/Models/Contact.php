@@ -10,6 +10,8 @@ class Contact extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    // Show replies of each replies
     public function replies(): HasMany
     {
         return $this->hasMany(Reply::class, 'receiver_id', 'id');
