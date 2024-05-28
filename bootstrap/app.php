@@ -10,6 +10,7 @@ use NunoMaduro\Collision\Provider;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
+        
         // web: __DIR__ . '/../routes/web.php',
         commands: __DIR__ . '/../routes/console.php',
         health: '/up',
@@ -19,6 +20,9 @@ return Application::configure(basePath: dirname(__DIR__))
             foreach ($central_domains as $domain) {
                 Route::middleware('web')->domain($domain)
                     ->group(base_path('routes/web.php'));
+
+                Route::prefix('api')->middleware(['api'])->domain($domain)
+                ->group(base_path('routes/api.php'));
             }
         },
 
@@ -32,23 +36,12 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+            
 
         ]);
+    
     })
-    // $provider->alias([
-    //     'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-    //     'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class
-    // ]);
-
-
-    // $middleware->alias([
-    //     'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-    // ])
-    // ->withProviders(function (Provider) {
-    //     $provider->alias([
-    //         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-    //     ]);
-    // })
+    
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
