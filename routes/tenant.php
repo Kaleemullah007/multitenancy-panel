@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Api\TestController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\LocalizationController;
 
@@ -16,6 +17,7 @@ use App\Http\Controllers\Tenants\TenantUserController;
 use App\Http\Middleware\RevalidateBackHistory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
@@ -32,6 +34,14 @@ use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 */
 
 
+
+Route::prefix('api')->middleware([
+    'api',
+    InitializeTenancyByDomain::class,
+    PreventAccessFromCentralDomains::class,
+])->group(function () {
+    include base_path('routes/api.php');
+});
 Route::middleware([
     'web',
     InitializeTenancyByDomain::class,
