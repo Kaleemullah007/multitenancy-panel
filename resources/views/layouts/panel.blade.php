@@ -28,8 +28,9 @@
 
         {{-- SideNav --}}
         @include('tenants.includes.sidenav')
-
+        <div class="page-wrapper">
         @yield('content')
+        </div>
 
     </div>
 

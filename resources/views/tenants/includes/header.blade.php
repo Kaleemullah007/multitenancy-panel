@@ -41,21 +41,17 @@
 
         <li class="nav-item dropdown has-arrow flag-nav">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0);" role="button">
-                <img src="assets/img/flags/us1.png" alt="" height="20">
+                <img src="assets/img/flags/{{ session('localization','us')}}.png" alt="" height="20">
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a href="javascript:void(0);" class="dropdown-item">
-                    <img src="assets/img/flags/us.png" alt="" height="16"> English
+
+                @foreach (config('localizations.locales') as $locale)
+
+                <a href="{{ route('localization', $locale) }}" class="dropdown-item {{ session('localization') == $locale ? 'active' : '' }}">
+                    <img src="assets/img/flags/{{ $locale}}.png" alt="" height="16">{{ strtoupper($locale) }}
                 </a>
-                <a href="javascript:void(0);" class="dropdown-item">
-                    <img src="assets/img/flags/fr.png" alt="" height="16"> French
-                </a>
-                <a href="javascript:void(0);" class="dropdown-item">
-                    <img src="assets/img/flags/es.png" alt="" height="16"> Spanish
-                </a>
-                <a href="javascript:void(0);" class="dropdown-item">
-                    <img src="assets/img/flags/de.png" alt="" height="16"> German
-                </a>
+
+            @endforeach
             </div>
         </li>
 

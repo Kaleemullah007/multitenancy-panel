@@ -1,32 +1,32 @@
-@extends('layouts.app')
+@extends('layouts.panel')
 
 @section('content')
     @haspermission('tenant_create')
-        <a href="{{ route('tenants.create') }}" class="btn btn-lg bg-primary">{{ __('tenant.create_user') }}</a>
+        <a class="btn btn-submit me-2" href="{{ route('tenants.create') }}" >{{ __('tenant.create_user') }}</a>
     @endhaspermission
     @haspermission('tenant_view')
-        <a href="{{ route('tenants.index') }}" class="btn btn-lg bg-primary">{{ __('tenant.users') }}</a>
+        <a class="btn btn-submit me-2" href="{{ route('tenants.index') }}" >{{ __('tenant.users') }}</a>
     @endhaspermission
 
 
     @haspermission('user_import_csv')
-        <a href="{{ route('file-import') }}" class="btn btn-lg bg-primary">{{ __('tenant.btn-import-cvs') }}</a>
+        <a class="btn btn-submit me-2" href="{{ route('file-import') }}" >{{ __('tenant.btn-import-cvs') }}</a>
     @endhaspermission
 
     @haspermission('user_export_csv')
-        <a href="{{ route('export-users', ['id' => 1, 'format' => 'csv']) }}"
-            class="btn btn-lg bg-primary">{{ __('tenant.btn-export-csv') }}</a>
+        <a class="btn btn-submit me-2" href="{{ route('export-users', ['id' => 1, 'format' => 'csv']) }}"
+            >{{ __('tenant.btn-export-csv') }}</a>
     @endhaspermission
 
 
     @haspermission('user_export_excel')
-        <a href="{{ route('export-users', ['id' => 1, 'format' => 'xlxs']) }}"
-            class="btn btn-lg bg-primary">{{ __('tenant.btn-export-xlsx') }}</a>
+        <a class="btn btn-submit me-2" href="{{ route('export-users', ['id' => 1, 'format' => 'xlxs']) }}"
+            >{{ __('tenant.btn-export-xlsx') }}</a>
     @endhaspermission
 
 
     @haspermission('user_export_pdf')
-        <a href="{{ route('tenants.pdf') }}" download class="btn btn-lg bg-primary">{{ __('tenant.btn-export-pdf') }}</a>
+        <a class="btn btn-submit me-2" href="{{ route('tenants.pdf') }}" download >{{ __('tenant.btn-export-pdf') }}</a>
     @endhaspermission
 
 
@@ -35,14 +35,17 @@
 
 
 
+    <div class="card">
+        <div class="card-body">
+        
+        
 
 
 
 
 
-
-
-    <table class="table">
+    <div class="table-responsive">
+    <table class="table datanew dataTable no-footer">
         @if (session()->has('message'))
             <div class="alert text-center alert-{{ session('error') }}">
                 {{ session('message') }}
@@ -104,7 +107,9 @@
             @endif
         </tbody>
     </table>
-
+    </div>
+        </div>
+    </div>
     <div class="container">
         {{ $tenants->onEachSide(5)->links() }}
     </div>
