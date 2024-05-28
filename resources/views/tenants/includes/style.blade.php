@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="{{ url('assets/css/bootstrap.min.css') }}">
 
 <link rel="stylesheet" href="{{ url('assets/css/animate.css') }}">
-
+<link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="{{ url('assets/css/dataTables.bootstrap4.min.css') }}">
 
 <link rel="stylesheet" href="{{ url('assets/plugins/fontawesome/css/fontawesome.min.css') }}">

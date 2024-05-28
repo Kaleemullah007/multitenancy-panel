@@ -176,6 +176,7 @@ $(document).ready(function() {
             width: '100%'
         });
     }
+    
     if ($('.counter').length > 0) {
         $('.counter').counterUp({
             delay: 20,

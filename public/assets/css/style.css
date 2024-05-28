@@ -2633,6 +2633,10 @@ table.dataTable>thead .sorting:before,table.dataTable>thead .sorting_asc:before,
 	background: url(../img/icons/dropdown.svg) no-repeat 95% 50%;
 }
 
+.icon-adjustment {
+	height: 20px !important;
+	width: 20px !important;
+}
 .pagination li {
 	margin: 0 5px;
 }
