@@ -1,22 +1,25 @@
-@extends('layouts.app')
+@extends('layouts.panel')
 
 @section('content')
-    <div class="container">
-        <a href="{{ route('tenants.index') }}" class="btn btn-lg bg-primary">{{ __('tenant.tenants') }}</a>
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('tenant.create_user') }}</div>
-                    <div class="card-body">
-
+   
+       
+ 
+<div class="page-header">
+    <div class="page-title">
+        <h4>{{__('tenant.create_user')}}</h4>
+        <h6>{{__('tenant.description')}}  <a href="{{ route('tenants.index') }}" class="btn btn-primary">{{ __('tenant.tenants') }}</a></h6>
+    </div>
+</div>
+        <div class="card">
+            <div class="card-body">
+             
                         <form method="POST" action="{{ route('tenants.store') }}" enctype="multipart/form-data">
                             @csrf
-
-                            <div class="row mb-3">
+                            <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <div class="form-group">
                                 <label for="name"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('tenant.form.name') }}</label>
-
-                                <div class="col-md-6">
+                                    class="">{{ __('tenant.form.name') }}</label>
                                     <input id="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror" name="name"
                                         value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -26,14 +29,16 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div>
+                               
+                            </div>
                             </div>
 
-                            <div class="row mb-3">
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <div class="form-group">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('tenant.form.email') }}</label>
+                                    class="">{{ __('tenant.form.email') }}</label>
 
-                                <div class="col-md-6">
+                               
                                     <input id="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
                                         value="{{ old('email') }}" required autocomplete="email">
@@ -43,17 +48,17 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                               
                                 </div>
                             </div>
 
                             {{--  Plans --}}
 
-                            <div class="row mb-3">
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <div class="form-group">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('tenant.form.plan') }}</label>
-
-                                <div class="col-md-6">
-                                    <select id="plan_id" class="form-control @error('plan_id') is-invalid @enderror"
+                                    class="">{{ __('tenant.form.plan') }}</label>
+                                    <select id="plan_id" class="form-control select @error('plan_id') is-invalid @enderror"
                                         name="plan_id" required>
                                         @foreach ($plans as $plan)
                                             <option value=" {{ $plan->id }}" @selected(old('plan_id') == $plan->id)>
@@ -71,12 +76,11 @@
                             </div>
 
 
-                            <div class="row mb-3">
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <div class="form-group">
                                 <label for="domain_name"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('tenant.form.domain') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="name" type="text"
+                                    class="">{{ __('tenant.form.domain') }}</label>
+                                    <input id="domain_name" type="text"
                                         class="form-control @error('domain_name') is-invalid @enderror" name="domain_name"
                                         value="{{ old('domain_name') }}" required autocomplete="domain_name" autofocus>
 
@@ -88,11 +92,10 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <div class="form-group">
                                 <label for="password"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('tenant.form.password') }}</label>
-
-                                <div class="col-md-6">
+                                    class="">{{ __('tenant.form.password') }}</label>
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         required autocomplete="new-password">
@@ -105,33 +108,35 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <div class="form-group">
                                 <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('tenant.form.password_confirm') }}</label>
-
-                                <div class="col-md-6">
+                                    class="">{{ __('tenant.form.password_confirm') }}</label>
+                                
                                     <input id="password-confirm" type="password" class="form-control"
                                         name="password_confirmation" required autocomplete="new-password">
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <label for="file"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('tenant.form.profile_photo') }}</label>
 
-
-                                <div class="col-md-6">
-                                    <input id="file" type="file"
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label> {{ __('tenant.form.profile_photo') }}</label>
+                                    <div class="image-upload">
+                                        <input id="file" type="file"
                                         class="form-control @error('photo') is-invalid @enderror" name="photo">
-
+                                        @error('photo')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                        <div class="image-uploads">
+                                            <img src="/assets/img/icons/upload.svg" alt="img">
+                                            <h4>{{ __('tenant.form.upload_description') }}</h4>
+                                        </div>
+                                    </div>
                                 </div>
-                                @error('photo')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
-
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
@@ -140,10 +145,10 @@
                                     </button>
                                 </div>
                             </div>
+                        </div>
                         </form>
-                    </div>
-                </div>
+              
+                
             </div>
         </div>
-    </div>
 @endsection

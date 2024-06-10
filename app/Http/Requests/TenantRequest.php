@@ -81,6 +81,7 @@ class TenantRequest extends FormRequest
         return [
             'name' => __('tenant.message.error_name'),
             'email' => __('tenant.message.error_email'),
+            'email.unique' => __('tenant.message.error_email_unique'),
             'password' => __('tenant.message.error_password'),
             'domain_name' => __('tenant.message.error_domain_name'),
             'domain_name.unique' => __('tenant.message.error_domain_already'),
