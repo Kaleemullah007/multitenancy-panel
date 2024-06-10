@@ -14,7 +14,7 @@ return [
 
     'create_plan' => 'Create Plan',
     'edit_plan' => 'Edit Plan',
-    'plans' => 'Plans',
+    'plans' => 'Plan List',
     'table' => [
         '#' => 'Sr. No',
         'name' => 'Name',

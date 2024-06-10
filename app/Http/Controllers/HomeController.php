@@ -44,6 +44,8 @@ class HomeController extends Controller
     // import file
     function import(Request $request)
     {
+
+       
         Excel::import(new ImportUser, $request->file('file')->store('files'));
         return redirect()->back();
     }

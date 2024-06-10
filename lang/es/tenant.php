@@ -20,7 +20,8 @@ return [
     'renew' => 'Renovar',
     'btn-update-profile' => 'Actualización del perfil',
 
-
+    'create_user' => 'Agregar inquilina',
+    'description' => 'Crear nueva inquilina del sistema',
 
     'btn-export-csv' => 'Exportar usuarios csv',
     'btn-export-xlsx' => 'Exportar usuarias xlsx',
@@ -51,6 +52,13 @@ return [
         'profile_photo' => 'Foto de perfil',
         'status' => 'Estado',
         'plan' => 'Plan',
+        'upload_description'=>'Arrastra y suelta un archivo para cargar',
+         'file'=>'Drag and drop a file to upload Excel',
+         'file_upload_description'=>'Drag and drop a file to upload xlsx , csv',
+         'import_heading'=>'Import XLSX file',
+         'import_desc'=>'Upload files of tenants xlsx or csv file',
+         'import_save'=>'Import',
+         'export_btn'=>'Export',
     ],
     'message' => [
         'save-message' => 'Usuario creada con éxito',
@@ -67,8 +75,7 @@ return [
         'error_password' => 'La contraseña es un campo obligatorio',
         'error_profile_photo' => 'La foto de perfil es un campo obligatorio; el tipo de archivo es jpeg,jpg,png',
         'error_domain_already' => 'El subdominio ya existe',
-
-
+        'error_email_unique' => 'El correo electrónico ya está en uso, prueba con otro.',
 
     ]
 

@@ -13,12 +13,14 @@ return [
     'btn-edit' => 'Update',
     'edit' => 'Edit',
     'create' => 'Create',
-    'create_user' => 'Create User',
-    'edit_user' => 'Edit User',
+    'edit_user' => 'Edit Tenant',
     'users' => 'Users',
     'tenants' => 'Tenants',
     'renew' => 'Renew',
     'btn-update-profile' => 'Update Profile',
+
+    'create_user' => 'Add Tenant',
+    'description' => 'Create new tenant of the system',
 
 
     'btn-export-csv' => 'Export Users csv',
@@ -51,6 +53,14 @@ return [
         'profile_photo' => 'Profile Photo',
         'status' => 'Status',
         'plan' => 'Plan',
+        'upload_description'=>'Drag and drop a file to upload',
+        'file'=>'Drag and drop a file to upload Excel',
+        'file_upload_description'=>'Drag and drop a file to upload xlsx , csv',
+        'import_heading'=>'Import XLSX file',
+        'import_desc'=>'Upload files of tenants xlsx or csv file',
+        'import_save_btn'=>'Import Tenants',
+        'export_btn'=>'Export Tenants',
+        
     ],
     'message' => [
         'save-message' => 'User created successfully',
@@ -66,6 +76,7 @@ return [
         'error_password' => 'Password is required field',
         'error_profile_photo' => 'Profile Photo is required field, file type either jpeg,jpg,png',
         'error_domain_already' => 'Sub-domain is already exist',
+        'error_email_unique' => 'Email is already used, try another',
 
 
 
