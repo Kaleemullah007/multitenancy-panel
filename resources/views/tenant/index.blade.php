@@ -130,7 +130,7 @@
 
 
 
-
+ 
     <div class="table-responsive">
     <table class="table datanew dataTable no-footer">
         @if (session()->has('message'))
@@ -149,7 +149,7 @@
                 <th scope="col">{{ __('tenant.table.action') }}</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody >
             @php
                 if (request('page') > 1) {
                     $counter = (request('page') - 1) * config('app.per_page') + 1;
@@ -193,9 +193,9 @@
                     </tr>
                 @endforeach
             @else
-                <tr>
+                {{-- <tr>
                     <td colspan="6" class="text-center">{{ __('general.no-record') }}</td>
-                </tr>
+                </tr> --}}
             @endif
         </tbody>
     </table>
