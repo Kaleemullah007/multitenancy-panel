@@ -41,7 +41,9 @@ Route::get('/', function () {
 Route::get('captache', [ContactUsController::class, 'loadCapatche'])->name('contactus.loadCapatche');
 Route::resource('/contactus', ContactUsController::class);
 
-Auth::routes();
+Auth::routes(
+    ['register'=>false]
+);
 
 Route::middleware('auth')->group(function () {
     // Tenants
