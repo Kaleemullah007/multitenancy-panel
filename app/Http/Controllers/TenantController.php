@@ -177,11 +177,15 @@ class TenantController extends Controller
         if ($request->has('photo')) {
             $user = $tenant;
 
-            $file_path = storage_path() . '/app/public/' . $user->file;
-            //You can also check existance of the file in storage.
-            if (File::exists($file_path)) {
-                unlink($file_path); //delete from storage
+            if(!empty($user->file)){
+                $file_path = storage_path() . '/app/public/' . $user->file;
+            
+                //You can also check existance of the file in storage.
+                if (File::exists($file_path)) {
+                    unlink($file_path); //delete from storage
+                }
             }
+            
 
             $path = Storage::disk('public')->putFile('photos', $request->file('photo'));
             $data['file'] = $path;
