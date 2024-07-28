@@ -82,6 +82,7 @@ class ProfileController extends Controller
                 $file_path = storage_path() . '/app/public/' . $user->file;
                 // dd($file_path);
                 //You can also check existance of the file in storage.
+               
                 if (File::exists($file_path)) {
                     unlink($file_path); //delete from storage
                 }
