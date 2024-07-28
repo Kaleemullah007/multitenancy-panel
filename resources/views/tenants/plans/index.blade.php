@@ -4,7 +4,7 @@
 @section('content')
     <div class="page-header">
         <div class="page-title">
-            <h4>Product List</h4>
+            <h4>Plans List</h4>
             <h6>Manage your products</h6>
         </div>
         <div class="page-btn">
@@ -34,8 +34,8 @@
                         @haspermission('plan_create')
                         <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('plan.create_user') }}" href="{{ route('plans.create') }}" ><img src="assets/img/icons/users1.svg" class="icon-adjustment"  alt="img"></a></li>
                     @endhaspermission
-                    @haspermission('plan_view')
-                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('plan.users') }}" href="{{ route('plans.index') }}" ><img src="assets/img/icons/listing.svg" class="icon-adjustment" alt="img"></a></li>
+                    @haspermission('tenant_view')
+                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('tenant.users') }}" href="{{ route('tenants.index') }}" ><img src="assets/img/icons/listing.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
                 
                 
@@ -119,16 +119,6 @@
                     </div>
                 </div>
             </div>
-
-    
-
-
-
-            
-            
-
-
-
 
     
         <div class="table-responsive">
