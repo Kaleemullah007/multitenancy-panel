@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    @haspermission('plan_create')
+    @haspermission('plan_create') 
         <a class="btn btn-lg bg-primary" href="{{ route('plans.create') }}">{{ __('plan.create') }}</a>
     @endhaspermission
     <table class="table">

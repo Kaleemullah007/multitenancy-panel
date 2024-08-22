@@ -31,7 +31,6 @@ return [
         'secret_key' => 'Secret Key',
         'bank_name' => 'Bank Name',
         'is_production' => 'Is Production',
-        'profile_photo' => 'Profile Photo',
 
 
 

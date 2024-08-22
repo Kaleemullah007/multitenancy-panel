@@ -13,7 +13,7 @@ return [
     'create' => 'Create',
     'create_emailtemplate' => 'Create Email Temaplte',
     'edit_emailtemplate' => 'Edit Email Temaplte',
-    'emailtemplates' => 'Email Temapltes',
+    'emailtemplates' => 'Email Templates',
     'table' => [
         '#' => 'Sr. No',
         'subject' => 'Subject',
@@ -32,6 +32,9 @@ return [
         'template_type' => 'Template Type',
         'action' => 'Action',
         'btn' => 'Action',
+        'email' => 'Email',
+        'sms' => 'SMS',
+        'placeholder' => 'Placeholder',
     ],
     'message' => [
         'save-message' => 'EmailTemaplte created successfully',

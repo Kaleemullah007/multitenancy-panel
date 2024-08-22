@@ -9,7 +9,7 @@ use App\Http\Requests\Role\UpdateRoleRequest;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller
+class RoleController extends Controller 
 {
     public function __construct()
     {
@@ -30,6 +30,9 @@ class RoleController extends Controller
         ]);
         $this->middleware('permission:roles_force_delete', [
             'only' => ['deletePermanently']
+        ]);
+        $this->middleware('permission:permissions_create', [
+            'only' => ['create', 'store']
         ]);
     }
 

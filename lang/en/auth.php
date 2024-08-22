@@ -25,8 +25,24 @@ return [
     'title_email' => 'Email',
     'title_password' => 'Password',
     'remember_me' => 'Remember Me',
-    'forgot_password' => 'Forgot Your Password'
+    'forgot_password' => 'Forgot Your Password?',
+    
+    'log_in' => 'Log In',
+    'register' => 'Register',
+    'reset_password' => 'Reset Password',
+    'send_password_link' => 'Send Password Reset Link',
+    'confirm_password' => 'Confirm Password',
+    'confirm_text' => 'Please confirm your password before continuing.',
+    'title_name' => 'Name',
+    'verify_email' => 'Verify Your Email Address',
+    'fresh_link_sent' => 'A fresh verification link has been sent to your email address.',
+    'fresh_link_notice' => 'Before proceeding, please check your email for a verification link.If you did not then request another.',
+    'request_link_btn' => 'click here to request another',
 
+    'login_text' => 'Please login to your account',
+    'register_text' => 'Please Register your account',
+    'login_divider' => 'Already have an Account',
+    'verification' => 'Verification',
 
 
 ];

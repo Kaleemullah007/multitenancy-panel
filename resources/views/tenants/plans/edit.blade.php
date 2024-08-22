@@ -33,7 +33,7 @@
                         <div class="form-group">
                             <label for="name" class="">{{ __('plan.form.name') }}</label>
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                value="{{ old('name') }}" name="name"  required autocomplete="name" autofocus>
+                                value="{{ old('name',$plan->name) }}" name="name"  required autocomplete="name" autofocus>
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

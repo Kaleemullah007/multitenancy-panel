@@ -1,67 +1,68 @@
-@extends('layouts.app')
+@extends('layouts.panel')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('placeholder.edit_placeholder') }}</div>
+    <div class="page-header">
+        <div class="page-title">
+            <h4>{{ __('placeholder.edit_placeholder') }}</h4>
+            <h6>{{ __('placeholder.edit_placeholder') }} of the system 
+                @haspermission('placeholders_view')
+                    <a href="{{ route('placeholders.index') }}"
+                    class="btn btn-primary">{{ __('placeholder.placeholders') }}</a>
+                @endhaspermission
+                </h6>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            {{-- @haspermission('placeholder_view')
+                <a href="{{ route('placeholders.index') }}" class="btn btn-lg bg-primary">placeholders</a>
+            @endhaspermission --}}
+            @if (session()->has('message'))
+                <div class="alert text-center alert-{{ session('error') }}">
+                    {{ session('message') }}
+                </div>
+            @endif
+            <form method="POST" action="{{ route('placeholders.update', $placeholder->id) }}" enctype="multipart/form-data">
+                <div class="row">
+                    @method('PUT')
+                    @csrf
 
-                    <div class="card-body">
-                        @if (session()->has('message'))
-                            <div class="alert text-center alert-{{ session('error') }}">
-                                {{ session('message') }}
-                            </div>
-                        @endif
-                        <form method="POST" action="{{ route('placeholders.update', $placeholder->id) }}">
-                            @csrf
-                            @method('PUT')
-                            <div class="row mb-3">
-                                <label for="name"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('placeholder.form.name') }}</label>
+                    <input type="hidden" name="page" id="page" value="{{ request('page') }}">
 
-                                <div class="col-md-6">
-                                    <input id="name" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ old('name', $placeholder->name) }}" required autocomplete="name"
-                                        autofocus>
+                    <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label for="name" class="">{{ __('placeholder.form.name') }}</label>
+                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                                value="{{ old('name', $placeholder->name) }}" name="name" required autocomplete="name" autofocus>
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label for="key_name" class="">{{ __('placeholder.form.key_name') }}</label>
+                            <input id="key_name" type="text" class="form-control @error('key_name') is-invalid @enderror"
+                                value="{{ old('key_name', $placeholder->key_name) }}" name="key_name" required autocomplete="key_name" autofocus>
+                            @error('key_name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-lg-12 text-center ">
 
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="name"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('placeholder.form.key_name') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="name" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="key_name"
-                                        value="{{ old('name', $placeholder->key_name) }}" required autocomplete="name"
-                                        autofocus>
-
-                                    @error('key_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('placeholder.btn-edit') }}
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                        <button type="submit" class="btn btn-primary">
+                             {{ __('placeholder.btn-edit') }}
+                        </button>
                     </div>
                 </div>
-            </div>
+            </form>
+                    
         </div>
     </div>
 @endsection
+
