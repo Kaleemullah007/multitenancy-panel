@@ -40,4 +40,5 @@
 
 </html>
 @include('tenants.includes.script')
+
 @yield('script')
