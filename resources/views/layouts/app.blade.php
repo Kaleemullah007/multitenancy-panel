@@ -18,6 +18,28 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
 
+    {{-- ====== non generic auth ========= --}}
+        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.jpg">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+
+    <script src="assets/js/feather.min.js"></script>
+
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/js/script.js"></script>
+
+    {{-- ====== non generic auth ========= --}}
+
+
+
+
     <style>
         body {
             padding: 0;
@@ -34,13 +56,38 @@
             page-break-after: always;
         }
     </style>
+    <style>
+        .log-in {
+            background-size: cover;
+            min-height: 100vh;
+        }
+
+        .anchor-css,
+        .anchor-css:hover {
+            color: rgb(29, 29, 29);
+            text-decoration: none;
+        }
+
+        .sign-in-css {
+            border-radius: 10px;
+            width: 360px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .log-in-logo {
+            height: 100px;
+            width: 140px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 
 <body style="margin:0; padding:0;">
-    <div style="height: 28px;">&nbsp;</div>
+    {{-- <div style="height: 28px;">&nbsp;</div> --}}
     <div id="app">
 
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        {{-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -54,14 +101,13 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
+                    Left Side Of Navbar
                     <ul class="navbar-nav me-auto">
 
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
+                    Right Side Of Navbar
                     <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -69,11 +115,7 @@
                                 </li>
                             @endif
 
-                            {{-- @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif --}}
+                           
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -111,7 +153,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
 
 
         <ul class="inline-block list-group list-group-horizontal">
@@ -178,7 +220,7 @@
 
 
         </ul>
-        <main class="py-4">
+        <main class="">
             @yield('content')
         </main>
     </div>

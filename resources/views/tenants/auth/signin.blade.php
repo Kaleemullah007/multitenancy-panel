@@ -81,8 +81,10 @@
                                 </li>
                             </ul>
                         </div>
+                        
                     </div>
                 </div>
+                
                 <div class="login-img">
                     <img src="assets/img/login.jpg" alt="img">
                 </div>
@@ -90,6 +92,7 @@
         </div>
     </div>
 
+    
     <script src="assets/js/jquery-3.6.0.min.js"></script>
 
     <script src="assets/js/feather.min.js"></script>

@@ -52,15 +52,13 @@
                                                         class="w-25 img-fluid  img-thumbnail"></a>
                                             </td>
                                             <td>{{ $contact->created_at?->diffForHumans() }}</td>
-                                            <td>
+                                            <td> 
                                                 @haspermission('contact_reply')
                                                     <a href="{{ route('contacts.edit', [$contact->id]) }}?page={{ $contacts->currentPage() }}"
                                                         class="btn btn-danger">
                                                         {{ str(__('contact.table.reply'))->plural($contact->replies_count) }}
                                                         ({{ $contact->replies_count }})
-                                                    @endhaspermission
-
-
+                                                    @endhaspermission  
                                                 </a>
                                             </td>
                                         </tr>

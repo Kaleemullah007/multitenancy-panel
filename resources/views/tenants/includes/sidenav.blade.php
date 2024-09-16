@@ -5,7 +5,7 @@
 
                 
                 <li class="{{request()->is('dashboard')?'active':''}}">
-                    <a href="index"><img src="/assets/img/icons/dashboard.svg" alt="img"><span>
+                    <a href="{{ route('dashboard') }}"><img src="/assets/img/icons/dashboard.svg" alt="img"><span>
                             Dashboard</span> </a>
                 </li>
                 @haspermission('tenant_view')

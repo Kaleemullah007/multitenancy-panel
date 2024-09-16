@@ -155,6 +155,7 @@ class TenantController extends Controller
      */
     public function edit(Tenant $tenant)
     {
+        
         $tenant->load('domains');
         $plans = Plan::ActivePlans()->get();
         return view('tenant.edit', compact('tenant', 'plans'));
@@ -177,15 +178,11 @@ class TenantController extends Controller
         if ($request->has('photo')) {
             $user = $tenant;
 
-            if(!empty($user->file)){
-                $file_path = storage_path() . '/app/public/' . $user->file;
-            
-                //You can also check existance of the file in storage.
-                if (File::exists($file_path)) {
-                    unlink($file_path); //delete from storage
-                }
+            $file_path = storage_path() . '/app/public/' . $user->file;
+            //You can also check existance of the file in storage.
+            if (File::exists($file_path)) {
+                unlink($file_path); //delete from storage
             }
-            
 
             $path = Storage::disk('public')->putFile('photos', $request->file('photo'));
             $data['file'] = $path;

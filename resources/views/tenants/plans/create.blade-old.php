@@ -35,7 +35,7 @@
                                 <div class="col-md-6">
                                     <textarea id="description" type="text" class="form-control @error('description') is-invalid @enderror"
                                         name="description" autocomplete="description" autofocus>{{ old('description') }}</textarea>
-
+ 
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -90,8 +90,8 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div>
-
+                            </div>      
+                            
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

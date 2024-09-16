@@ -31,6 +31,9 @@ return [
         'status' => 'Estado',
         'template_type' => 'Tipo de plantilla',
         'btn' => 'Action',
+        'email' => 'correo electrónico',
+        'sms' => 'SMS',
+        'placeholder' => 'marcador de posición',  
     ],
     'message' => [
         'save-message' => 'EmailTemaplte creado exitosamente',

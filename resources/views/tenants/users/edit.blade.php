@@ -1,59 +1,70 @@
-@extends('layouts.app')
+@extends('layouts.panel')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('tenantuser.edit_user') }}</div>
+    <div class="page-header">
+        <div class="page-title">
+            <h4>{{ __('tenantuser.edit_user') }}</h4>
+            <h6>{{ __('tenantuser.edit_user') }} of the system 
+                @haspermission('users_view')
+                    <a href="{{ route('users.index') }}"
+                    class="btn btn-primary">{{ __('tenantuser.users') }}</a>
+                @endhaspermission
+                </h6>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            {{-- @haspermission('plan_view')
+                <a href="{{ route('plans.index') }}" class="btn btn-lg bg-primary">Plans</a>
+            @endhaspermission --}}
+            {{-- @if (session()->has('message'))
+                <div class="alert text-center alert-{{ session('error') }}">
+                    {{ session('message') }}
+                </div>
+            @endif --}}
+            <form method="POST" action="{{ route('users.update', $user->id) }}" enctype="multipart/form-data">
+                <div class="row">
+                    @method('PUT')
+                    @csrf
 
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('users.update', $user->id) }}">
-                            @csrf
-                            @method('PUT')
-                            <div class="row mb-3">
-                                <label for="name"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('tenantuser.form.name') }}</label>
+                    <input type="hidden" name="page" id="page" value="{{ request('page') }}">
 
-                                <div class="col-md-6">
-                                    <input id="name" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
+                    <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label for="name" class="">{{ __('tenantuser.form.name') }}</label>
+                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                                value="{{ old('name', $user->name) }}"name="name" required autocomplete="name" autofocus>
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    
+                    {{-- email --}}
+                    <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label for="email" class="">{{ __('tenantuser.form.email') }}</label>
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                value="{{ old('email', $user->email) }}" name="email" required autocomplete="email" autofocus>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
 
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="email"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('tenantuser.form.email') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="email" type="email"
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email', $user->email) }}" required autocomplete="email">
-
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            @php
+                    @php
                                 $user_roles = $user->roles->pluck('name')->toArray();
                                 $user_permissions = $user->permissions->pluck('name')->toArray();
-                            @endphp
+                    @endphp
 
-                            <div class="row mb-3">
-                                <label for="email"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('tenantuser.form.roles') }}</label>
-
-                                <div class="col-md-6">
+                    {{-- roles --}}
+                    <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label for="validity_month" class="">{{ __('tenantuser.form.roles') }}</label>
                                     <select id="roles" type="text"
                                         class="form-control @error('roles') is-invalid @enderror" name="roles[]" multiple
                                         required autocomplete="roles" autofocus>
@@ -70,49 +81,42 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div>
-                            </div>
+                        </div>
+                    </div>
+                    {{--  password --}}
+                    <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="form-group">
+                                                        
+                            <label for="password" class="">{{ __('tenantuser.form.password') }}</label>
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
+                                name="password" autocomplete="password">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    {{--  confirm password --}}          
+                    <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="form-group">
+                                                        
+                            <label for="password_confirmation" class="">{{ __('tenantuser.form.password_confirm') }}</label>
+                            <input id="password_confirmation" type="password" class="form-control"
+                                name="password_confirmation" autocomplete="password_confirmation">
+                        </div>
+                    </div>
 
+                    <div class="col-lg-12 text-center ">
 
-
-                            <div class="row mb-3">
-                                <label for="password"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('tenantuser.form.password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
-                                        autocomplete="new-password">
-
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('tenantuser.form.password_confirm') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control"
-                                        name="password_confirmation" autocomplete="new-password">
-                                </div>
-                            </div>
-
-                            <div class="row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('tenantuser.btn-edit') }}
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                        <button type="submit" class="btn btn-primary">
+                            {{ __('tenantuser.btn-edit') }}
+                        </button>
                     </div>
                 </div>
-            </div>
+            </form>
+                    
         </div>
     </div>
 @endsection
+

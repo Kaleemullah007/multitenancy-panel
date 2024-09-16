@@ -8,8 +8,10 @@
             <h6>Manage your products</h6>
         </div>
         <div class="page-btn">
+            @haspermission('plan_create')
             <a href="{{ route('plans.create') }}" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img"
                     class="me-1">{{ __('plan.create') }}</a>
+                    @endhaspermission
         </div>
     </div>
 
@@ -31,9 +33,9 @@
                 <div class="wordset">
                     <ul>
 
-                        @haspermission('plan_create')
+                        {{-- @haspermission('plan_create')
                         <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('plan.create_user') }}" href="{{ route('plans.create') }}" ><img src="assets/img/icons/users1.svg" class="icon-adjustment"  alt="img"></a></li>
-                    @endhaspermission
+                    @endhaspermission --}}
                     @haspermission('tenant_view')
                         <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('tenant.users') }}" href="{{ route('tenants.index') }}" ><img src="assets/img/icons/listing.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
@@ -150,6 +152,7 @@
 
 
                 @if ($plans->count() > 0)
+                    @haspermission('plan_view')
                     @foreach ($plans as $key => $plan)
                         <tr>
                             <th scope="row">{{ $counter++ }}</th>
@@ -160,15 +163,17 @@
                             <td>{{ $plan->price }}</td>
 
                             <td> 
+                                @haspermission('plan_edit')
                                 <a 
                                     href="{{ route('plans.edit', $plan->id) }}?page={{ $plans->currentPage() }}" title="{{ __('plan.edit') }}" data-bs-toggle="tooltip" data-bs-placement="top"><img
                                     src="assets/img/icons/edit.svg"  class="icon-adjustment" alt="img"></a>
-                                
+                                @endhaspermission
                                 @include('tenants.plans.delete', ['record' => $plan])
                             
                             </td>
                         </tr>
                     @endforeach
+                    @endhaspermission
                 @else
                     {{-- <tr>
                         <td colspan="6" class="text-center">{{ __('general.no-record') }}</td>

@@ -53,7 +53,7 @@ class ProfileController extends Controller
     public function edit(User $profile)
     {
 
-
+        // dd('sdfs');
         return view('edit-profile-owner', compact('profile'));
     }
 
