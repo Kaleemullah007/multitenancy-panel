@@ -236,15 +236,8 @@
             $('input:checkbox').not(this).prop('checked', this.checked);
         });
 
-        $(".mybutton").click(function(event) {
-            // event.preventDefault();
-            var link = $("#" + this.id).attr('rel');
-
-            url = link + ":8000/login";
-            window.open("http://" +
-                url, '_blank').focus();;
-        });
-
+       
+    
 
 
     }, 1000);
