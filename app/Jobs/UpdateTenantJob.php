@@ -37,7 +37,7 @@ class UpdateTenantJob implements ShouldQueue
             $this->tenant->run(function () {
                 $user = User::where('email', $this->tenant->email)->first();
                 if (!is_null($user)) {
-
+                
                     $user->update([
                         'password' => $this->tenant->password,
                         'file' => $this->tenant->file,
