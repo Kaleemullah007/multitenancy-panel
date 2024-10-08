@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TenantRequest;
 use App\Http\Requests\UpdateTenantRequest;
+use App\Mail\RenewalMail;
 use App\Models\Plan;
 use App\Models\Tenant;
 use App\Models\User;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Stancl\Tenancy\Database\Models\Domain;
 
@@ -158,8 +160,17 @@ class TenantController extends Controller
         ]);
 
         $this->plan_history->create($data);
+
+        $user = $user->refresh();
+        Mail::to($user->email)->send(new RenewalMail($user));
+
+
         session()->flash('message', __('tenant.message.renew-message'));
         session()->flash('error', 'success');
+
+
+
+
         return to_route('tenants.index', ['page' => request('page')]);
     }
 
