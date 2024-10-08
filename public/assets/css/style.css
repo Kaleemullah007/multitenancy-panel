@@ -619,6 +619,11 @@ strong {
 	background-color: #ff9f43!important;
 	border-color: #ff9f43!important;
 }
+.btn-primary:hover {
+	color: #fff;
+	background-color: #1b2850!important;
+	border-color: #1b2850!important;
+}
 
 .avatar {
 	background-color: transparent;
@@ -3572,6 +3577,7 @@ div#global-loader .whirly-loader:not(:required) {
 	-webkit-transform-origin: 50% 50%;
 	-ms-transform-origin: 50% 50%;
 	border-radius: 100%;
+	
 }
 
 @keyframes loader {

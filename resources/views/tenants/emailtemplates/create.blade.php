@@ -1,14 +1,15 @@
 @extends('layouts.panel')
 @section('content')
-<div class="page-header">
-    <div class="page-title">
-        <h4>{{ __('emailtemplate.create_emailtemplate') }}</h4>
-        @haspermission('view_emailtemplates')
-        <h6>{{ __('emailtemplate.emailtemplates') }} <a href="{{ route('emailtemplates.index') }}" class="btn btn-primary">{{ __('emailtemplate.emailtemplates') }}</a></h6>
-        @endhaspermission
-
+<div class="page-header my-3 mx-4">
+        <div class="page-title">
+            <h3>{{ __('emailtemplate.create_emailtemplate') }}</h3>
+        </div>
+        <div class="page-btn">
+            @haspermission('emailtemplates_view')
+                <a href="{{ route('emailtemplates.index') }}" class="btn btn-added">{{ __('emailtemplate.emailtemplates') }}</a>
+            @endhaspermission
+        </div>
     </div>
-</div>
 <div class="card">
     <div class="card-body">
 
@@ -58,8 +59,8 @@
                 <div class="col-lg-4 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="template_type" class="">{{ __('emailtemplate.form.template_type') }}</label>
-                        <input id="template_type" type="checkbox" class="@error('template_type') is-invalid @enderror" name="template_type" value="{{ old('template_type') }}" autocomplete="template_type" autofocus value="0" @checked(old('status'))> Email
-                        <input id="template_type" type="checkbox" class="@error('template_type') is-invalid @enderror" name="template_type" value="{{ old('template_type') }}" autocomplete="template_type" autofocus value="1" @checked(old('status')==1)> SMS
+                        <input id="template_type" type="checkbox" class="@error('template_type') is-invalid @enderror" name="template_type" value="{{ old('template_type') }}" autocomplete="template_type" autofocus value="0" @checked(old('status'))>{{ __('emailtemplate.form.email') }}
+                        <input id="template_type" type="checkbox" class="@error('template_type') is-invalid @enderror" name="template_type" value="{{ old('template_type') }}" autocomplete="template_type" autofocus value="1" @checked(old('status')==1)>{{ __('emailtemplate.form.sms') }}
                         @error('template_type')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -81,8 +82,8 @@
                 </div>
 
 
-                <div class="row mb-0">
-                    <div class="col-md-6 offset-md-4">
+                <div class="row mb-0 text-center">
+                    <div class="">
                         <button type="submit" class="btn btn-primary">
                             {{ __('emailtemplate.btn-save') }}
                         </button>
@@ -94,5 +95,9 @@
     </div>
 </div>
 @include('tenants.emailtemplates.modal')
+
+@endsection
+
+@section('scripts')
 
 @endsection

@@ -17,7 +17,7 @@
                 @endphp
                 @foreach ($replies as $reply)
                     <tr>
-                        <th scope="row">{{ $counter++ }}</th>
+                        <td scope="row">{{ $counter++ }}</td>
                         <td>{{ $reply->receiver->name }}</td>
                         <td>{{ $reply->receiver->email }}</td>
                         <td>{{ $reply->receiver->message }}</td>
@@ -28,7 +28,7 @@
                 @endforeach
             @else
                 <tr>
-                    <td colspan="5" class="text-center">{{ __('general.no-record') }}</td>
+                    <td colspan="6" class="text-center">{{ __('general.no-record') }}</td>
                 </tr>
             @endif
         </tbody>

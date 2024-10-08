@@ -2,19 +2,17 @@
 
 
 @section('content')
-    <div class="page-header">
-        <div class="page-title">
-            <h4>Users List</h4>
-            <h6>Manage your Users</h6>
-        </div>
-        <div class="page-btn">
-             @haspermission('user_create')
-            <a href="{{ route('users.create') }}" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img"
-                    class="me-1">{{ __('tenantuser.create') }}</a>
-                    @endhaspermission
-        </div>
+<div class="page-header my-3 mx-4">
+    <div class="page-title">
+        <h3>{{ __('tenantuser.users') }}</h3>
     </div>
-
+    <div class="page-btn">
+        @haspermission('user_create')
+        <a href="{{ route('users.create') }}" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img"
+                class="me-1">{{ __('tenantuser.create_user') }}</a>
+            @endhaspermission
+    </div>
+</div>
     <div class="card">
         <div class="card-body">
             <div class="table-top">
@@ -33,29 +31,29 @@
                 <div class="wordset">
                     <ul>
 
-                        {{-- @haspermission('user_create')
-                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('user.create_user') }}" href="{{ route('users.create') }}" ><img src="assets/img/icons/users1.svg" class="icon-adjustment"  alt="img"></a></li>
-                    @endhaspermission --}}
-                    @haspermission('user_view')
+                        @haspermission('user_create')
+                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('tenantuser.create_user') }}" href="{{ route('users.create') }}" ><img src="assets/img/icons/users1.svg" class="icon-adjustment"  alt="img"></a></li>
+                    @endhaspermission
+                    {{-- @haspermission('user_view')
                         <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('user.users') }}" href="{{ route('users.index') }}" ><img src="assets/img/icons/listing.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
-                
+                 --}}
                 
                 
                 
                     @haspermission('user_export_csv')
-                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('user.btn-export-csv') }}" href="{{ route('export-users', ['id' => 1, 'format' => 'csv']) }}"><img src="assets/img/icons/csv.svg" class="icon-adjustment" alt="img"></a></li>
+                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('tenantuser.btn-export-csv') }}" href="{{ route('export-users', ['id' => 1, 'format' => 'csv']) }}"><img src="assets/img/icons/csv.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
                 
                 
                     @haspermission('user_export_excel')
-                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('user.btn-export-xlsx') }}" href="{{ route('export-users', ['id' => 1, 'format' => 'xlxs']) }}"><img src="assets/img/icons/excel2.svg" class="icon-adjustment" alt="img"></a></li>
+                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('tenantuser.btn-export-xlsx') }}" href="{{ route('export-users', ['id' => 1, 'format' => 'xlsx']) }}"><img src="assets/img/icons/excel2.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
                     @haspermission('user_export_pdf')
-                    <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('user.btn-export-pdf') }}" href="{{ route('tenants.pdf') }}" download ><img src="assets/img/icons/pdf.svg" class="icon-adjustment" alt="img"></a></li>
+                    <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('tenantuser.btn-export-pdf') }}" href="{{ route('tenants.pdf') }}" download ><img src="assets/img/icons/pdf.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
                     @haspermission('user_import_csv')
-                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('user.btn-import-cvs') }}" href="{{ route('file-import') }}" ><img src="assets/img/icons/import.svg" class="icon-adjustment" alt="img"></a></li>
+                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('tenantuser.btn-import-cvs') }}" href="{{ route('file-import') }}" ><img src="assets/img/icons/import.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
 
                         
@@ -154,7 +152,7 @@
                 @if ($users->count() > 0)
                     @foreach ($users as $key => $user)
                         <tr>
-                            <th scope="row">{{ $counter++ }}</th>
+                            <td scope="row">{{ $counter++ }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>

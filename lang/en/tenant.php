@@ -7,7 +7,7 @@ return [
     'btn-reset' => 'Reset',
     'btn_permanently_deleted' => 'Permanently deleted',
     'btn-manage-permission' => 'Manage permissions',
-    'btn-deleted' => 'Deleted',
+    'btn-delete' => 'Delete',
     'btn_restored' => 'Restore',
     'btn_role_permission' => 'Update Permissions and Role',
     'btn-edit' => 'Update',
@@ -23,10 +23,10 @@ return [
     'description' => 'Create new tenant of the system',
 
 
-    'btn-export-csv' => 'Export Users csv',
-    'btn-export-xlsx' => 'Export Users xlsx',
-    'btn-import-cvs' => 'Import Users csv',
-    'btn-export-pdf' => 'Export Users in PDF',
+    'btn-export-csv' => 'Export csv',
+    'btn-export-xlsx' => 'Export xlsx',
+    'btn-import-cvs' => 'Import csv',
+    'btn-export-pdf' => 'Export in PDF',
 
 
     'user_title' => 'Manage :user permissions',
@@ -53,6 +53,7 @@ return [
         'profile_photo' => 'Profile Photo',
         'status' => 'Status',
         'plan' => 'Plan',
+        'update-plan' => 'Update Plan',
         'upload_description'=>'Drag and drop a file to upload',
         'file'=>'Drag and drop a file to upload Excel',
         'file_upload_description'=>'Drag and drop a file to upload xlsx , csv',
@@ -78,9 +79,9 @@ return [
         'error_domain_already' => 'Sub-domain is already exist',
         'error_email_unique' => 'Email is already used, try another',
 
+    ],
 
+    'listing' => 'Tenants List',
 
-
-    ]
 
 ];

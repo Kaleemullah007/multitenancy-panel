@@ -7,7 +7,7 @@ return [
     'btn-reset' => 'Reset',
     'btn-edit' => 'Update',
     'edit' => 'Edit',
-    'update_profile' => 'Update Profie',
+    'update_profile' => 'Update Profile',
     'btn-update-profile' => 'Update Profile',
     'home' => 'Home',
     'table' => [

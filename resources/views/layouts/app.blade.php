@@ -19,21 +19,21 @@
 
 
     {{-- ====== non generic auth ========= --}}
-        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.jpg">
+        <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.jpg">
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css">
 
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="/assets/js/jquery-3.6.0.min.js"></script>
 
-    <script src="assets/js/feather.min.js"></script>
+    <script src="/assets/js/feather.min.js"></script>
 
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
 
-    <script src="assets/js/script.js"></script>
+    <script src="/assets/js/script.js"></script>
 
     {{-- ====== non generic auth ========= --}}
 
@@ -76,7 +76,7 @@
         }
 
         .log-in-logo {
-            height: 100px;
+            height: 50px;
             width: 140px;
             border-radius: 5px;
         }
@@ -235,12 +235,18 @@
         $("#checkAll").click(function() {
             $('input:checkbox').not(this).prop('checked', this.checked);
         });
-
-       
-    
-
-
     }, 1000);
+    let viewPassword = document.querySelector("#viewPassword");
+    viewPassword.addEventListener("click", ()=>{
+        let password = document.querySelector("#password");
+    if(password.getAttribute('type') == 'password'){
+        password.setAttribute('type','text');
+    }else{
+        password.setAttribute('type','password');
+    }
+
+    });
+   
 
     // function Copy(id) {
     //     setTimeout(function() {

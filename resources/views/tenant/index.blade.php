@@ -2,14 +2,15 @@
 
 
 @section('content')
-<div class="page-header">
+<div class="page-header my-3 mx-4">
     <div class="page-title">
-        <h4>Product List</h4>
-        <h6>Manage your products</h6>
+        <h3>{{ __('tenant.listing') }}</h3>
     </div>
     <div class="page-btn">
-        <a href="addproduct.html" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img"
-                class="me-1">Add New Product</a>
+        @haspermission('tenant_create')
+        <a href="{{ route('tenants.create') }}" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img"
+                class="me-1">{{ __('tenant.create_user') }}</a>
+            @endhaspermission
     </div>
 </div>
 
@@ -34,9 +35,9 @@
                     @haspermission('tenant_create')
                     <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('tenant.create_user') }}" href="{{ route('tenants.create') }}" ><img src="assets/img/icons/users1.svg" class="icon-adjustment"  alt="img"></a></li>
                 @endhaspermission
-                @haspermission('tenant_view')
+                {{-- @haspermission('tenant_view')
                     <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('tenant.users') }}" href="{{ route('tenants.index') }}" ><img src="assets/img/icons/listing.svg" class="icon-adjustment" alt="img"></a></li>
-                @endhaspermission
+                @endhaspermission --}}
             
             
             
@@ -47,7 +48,7 @@
             
             
                 @haspermission('user_export_excel')
-                    <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('tenant.btn-export-xlsx') }}" href="{{ route('export-users', ['id' => 1, 'format' => 'xlxs']) }}"><img src="assets/img/icons/excel2.svg" class="icon-adjustment" alt="img"></a></li>
+                    <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('tenant.btn-export-xlsx') }}" href="{{ route('export-users', ['id' => 1, 'format' => 'xlsx']) }}"><img src="assets/img/icons/excel2.svg" class="icon-adjustment" alt="img"></a></li>
                 @endhaspermission
                 @haspermission('user_export_pdf')
                 <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('tenant.btn-export-pdf') }}" href="{{ route('tenants.pdf') }}" download ><img src="assets/img/icons/pdf.svg" class="icon-adjustment" alt="img"></a></li>
@@ -120,16 +121,6 @@
             </div>
         </div>
 
-   
-
-
-
-        
-        
-
-
-
-
  
     <div class="table-responsive">
     <table class="table datanew dataTable no-footer">
@@ -163,7 +154,7 @@
             @if ($tenants->count() > 0)
                 @foreach ($tenants as $key => $tenant)
                     <tr>
-                        <th scope="row">{{ $counter++ }}</th>
+                        <td scope="row">{{ $counter++ }}</td>
                         <td><img src="<?php echo asset('/storage/app/public/' . $tenant->file); ?>" class="img-fluid w-50 rounded-pill"
                                 style="height: 50px !important; border-radius: 50%">
                         </td>

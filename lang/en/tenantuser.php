@@ -7,7 +7,7 @@ return [
     'btn-reset' => 'Reset',
     'btn_permanently_deleted' => 'Permanently deleted',
     'btn-manage-permission' => 'Manage permissions',
-    'btn-deleted' => 'Deleted',
+    'btn-delete' => 'Delete',
     'btn_restored' => 'Restore',
 
     'btn_role_permission' => 'Update Permissions and Role',
@@ -17,7 +17,15 @@ return [
     'create_user' => 'Create User',
     'edit_user' => 'Edit User',
     'users' => 'Users',
+    'user_list' => 'Users List',
     'user_title' => 'Manage :user permissions',
+
+    'btn-export-csv' => 'Export csv',
+    'btn-export-xlsx' => 'Export xlsx',
+    'btn-import-cvs' => 'Import csv',
+    'btn-export-pdf' => 'Export in PDF',
+
+
     'table' => [
         '#' => 'Sr. No',
         'name' => 'Name',
@@ -34,6 +42,8 @@ return [
         'password' => 'Password',
         'password_confirm' => 'Confirm Password',
         'permissions' => 'permissions',
+        'select_all' => 'Select All',
+
     ],
     'message' => [
         'save-message' => 'User created successfully',

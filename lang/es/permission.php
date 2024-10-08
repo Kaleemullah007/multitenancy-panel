@@ -5,7 +5,7 @@ return [
     'btn-cancel' => 'Cancelar',
     'btn-reset' => 'Reiniciar',
     'btn_permanently_deleted' => 'Eliminada permanentemente',
-    'btn-deleted' => 'eliminada',
+    'btn-delete' => 'borrar',
     'btn-edit' => 'Actualizar',
     'edit' => 'editar',
     'create' => 'Crear',
@@ -16,6 +16,13 @@ return [
     'permissions' => 'Permisos',
     'users' => 'Usuarias',
     'roles' => 'Roles',
+
+    'btn-export-csv' => 'Exportar csv',
+    'btn-export-xlsx' => 'Exportar xlsx',
+    'btn-import-cvs' => 'Importar csv',
+    'btn-export-pdf' => 'Exportar en PDF',
+
+
     'table' => [
         '#' => 'No Señor',
         'name' => 'Nombre',

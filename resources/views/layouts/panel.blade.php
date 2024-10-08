@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <div id="global-loader">
+    <div id="global-loader" >
         <div class="whirly-loader"> </div>
     </div>
 
@@ -42,3 +42,33 @@
 @include('tenants.includes.script')
 
 @yield('script')
+<script>
+       function copyToClipboard(elementId) {
+
+        // Create a "hidden" input
+        elementId = $("#" + elementId).attr('rel');
+        var aux = document.createElement("input");
+
+        text = $("#" + elementId).attr('rel');
+        // Assign it the value of the specified element
+        aux.setAttribute("value", text.trim());
+
+        // Append it to the body
+        document.body.appendChild(aux);
+
+        // Highlight its content
+        aux.select();
+
+        // Copy the highlighted text
+        document.execCommand("copy");
+
+        // Remove it from the body
+        document.body.removeChild(aux);
+
+        let textarea = document.getElementById("body");
+        textarea.focus();
+        var start = '{';
+        var end = '}';
+        textarea.value += start + document.getElementById(elementId).innerHTML.trim() + end;
+    }
+</script>

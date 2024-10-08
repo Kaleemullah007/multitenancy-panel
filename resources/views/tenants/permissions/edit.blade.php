@@ -1,7 +1,17 @@
 @extends('layouts.panel')
 
 @section('content')
-    <div class="page-header">
+<div class="page-header my-3 mx-4">
+        <div class="page-title">
+            <h3>{{ __('permission.edit_permission') }}</h3>
+        </div>
+        <div class="page-btn">
+            @haspermission('permissions_view')
+                <a href="{{ route('permissions.index') }}" class="btn btn-added">{{ __('permission.permissions') }}</a>
+            @endhaspermission
+        </div>
+    </div>
+    {{-- <div class="page-header">
         <div class="page-title">
             <h4>{{ __('permission.edit_permission') }}</h4>
             <h6>{{ __('permission.edit_permission') }} of the system 
@@ -11,7 +21,7 @@
                 @endhaspermission
                 </h6>
         </div>
-    </div>
+    </div> --}}
     <div class="card">
         <div class="card-body">
             {{-- @haspermission('plan_view')

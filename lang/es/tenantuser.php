@@ -7,7 +7,7 @@ return [
     'btn-reset' => 'Reiniciar',
     'btn_permanently_deleted' => 'Eliminada permanentemente',
     'btn-manage-permission' => 'Administrar permisos',
-    'btn-deleted' => 'Eliminada',
+    'btn-delete' => 'borrar',
     'btn_restored' => 'Restaurar',
     'btn_role_permission' => 'Actualizar permisos y roles',
     'btn-edit' => 'Actualizar',
@@ -16,7 +16,16 @@ return [
     'create_user' => 'Crear usuario',
     'edit_user' => 'editar usuario',
     'users' => 'Usuarias',
+    'user_list' => 'Lista de usuarios',
+
     'user_title' => 'Administrar :user permisos',
+
+    'btn-export-csv' => 'Exportar csv',
+    'btn-export-xlsx' => 'Exportar xlsx',
+    'btn-import-cvs' => 'Importar csv',
+    'btn-export-pdf' => 'Exportar en PDF',
+
+
     'table' => [
         '#' => 'No Señor',
         'name' => 'Nombre',
@@ -32,6 +41,7 @@ return [
         'password' => 'Contraseña',
         'password_confirm' => 'Confirmar Contraseña',
         'permissions' => 'permisos',
+        'select_all' => 'Seleccionar todo',
     ],
     'message' => [
         'save-message' => 'Usuario creada con éxito',

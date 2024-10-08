@@ -34,7 +34,6 @@ use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 */
 
 
-
 Route::prefix('api')->middleware([
     'api',
     InitializeTenancyByDomain::class,
@@ -59,6 +58,8 @@ Route::middleware([
 
     Route::get('/', function () {
         // dd(tenant()->toArray());
+
+        // dd(tenant());
         return to_route('login');
         return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
     });

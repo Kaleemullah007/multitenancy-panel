@@ -1,14 +1,14 @@
 @extends('layouts.panel')
 @section('content')
-    <div class="page-header">
+    <div class="page-header my-3 mx-4">
         <div class="page-title">
-            <h4>{{ __('tenantuser.user_title', ['user' => ucfirst($user->name)]) }}</h4>
-            {{-- @haspermission('view_users') --}}
-            {{-- <h6>{{ __('tenantuser.create_plan') }} <a href="{{ route('users.index') }}"
-                    class="btn btn-primary">{{ __('tenantuser.users') }}</a></h6> --}}
-            {{-- @endhaspermission --}}
-
+            <h3>{{ __('tenantuser.user_title', ['user' => ucfirst($user->name)]) }}</h3>
         </div>
+        {{-- <div class="page-btn">
+            @haspermission('user_view')
+                <a href="{{ route('plans.index') }}" class="btn btn-added">{{ __('tenantuser.user_list') }}</a>
+            @endhaspermission
+        </div> --}}
     </div>
     <div class="card">
         <div class="card-body">
@@ -49,12 +49,12 @@
                 </div>
                 <div class="d-flex">
                     <div class="col-sm-4">
-                        <label for="name" class=" text-md-center fw-bold fs-4">{{ __('Permissions') }}</label>
+                        <label for="name" class=" text-md-center fw-bold fs-4">{{ __('tenantuser.form.permissions') }}</label>
 
                     </div>
                     <div class="col-sm-4">
                         <input type="checkbox" name="checkedAll" id="checkAll" />
-                        <label for="checkAll" class="fw-bold">Select All</label>
+                        <label for="checkAll" class="fw-bold">{{ __('tenantuser.form.select_all') }}</label>
                     </div>
                 </div>
                 <div class="row">

@@ -7,6 +7,13 @@ return [
     'replies' => 'Respuestas',
     'reply' => 'Responder',
 
+
+    'btn-export-csv' => 'Exportar csv',
+    'btn-export-xlsx' => 'Exportar xlsx',
+    'btn-import-cvs' => 'Importar csv',
+    'btn-export-pdf' => 'Exportar en PDF',
+
+
     'table' => [
         '#' => 'No Señor',
         'name' => 'Nombre',

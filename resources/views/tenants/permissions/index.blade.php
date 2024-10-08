@@ -1,18 +1,17 @@
 @extends('layouts.panel')
 
 @section('content')
-    <div class="page-header">
-        <div class="page-title">
-            <h4>{{ __('permission.permissions') }}</h4>
-            <h6>Manage your Users</h6>
-        </div>
-        <div class="page-btn">
-            @haspermission('permissions_create')
-                <a href="{{ route('permissions.create') }}" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img"
-                    class="me-1">{{ __('permission.create') }}</a>
-            @endhaspermission
-        </div>
+<div class="page-header my-3 mx-4">
+    <div class="page-title">
+        <h3>{{ __('permission.permissions') }}</h3>
     </div>
+    <div class="page-btn">
+        @haspermission('permissions_create')
+        <a href="{{ route('permissions.create') }}" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img"
+                class="me-1">{{ __('permission.create_permission') }}</a>
+            @endhaspermission
+    </div>
+</div>
 
     <div class="card">
         <div class="card-body">
@@ -32,9 +31,9 @@
                 <div class="wordset">
                     <ul>
 
-                        {{-- @haspermission('permission_create')
-                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('user.create_user') }}" href="{{ route('users.create') }}" ><img src="assets/img/icons/users1.svg" class="icon-adjustment"  alt="img"></a></li>
-                    @endhaspermission --}}
+                        {{-- @haspermission('permissions_create')
+                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('permission.create_permission') }}" href="{{ route('permissions.create') }}" ><img src="assets/img/icons/users1.svg" class="icon-adjustment"  alt="img"></a></li>
+                    @endhaspermission
                     @haspermission('permission_view')
                         <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('permission.permissions') }}" href="{{ route('permissions.index') }}" ><img src="assets/img/icons/listing.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
@@ -42,20 +41,20 @@
                 
                 
                 
-                    @haspermission('permission_export_csv')
-                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('permission.btn-export-csv') }}" href="{{ route('export-permissions', ['id' => 1, 'format' => 'csv']) }}"><img src="assets/img/icons/csv.svg" class="icon-adjustment" alt="img"></a></li>
+                    @haspermission('permissions_export_csv')
+                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('permission.btn-export-csv') }}" href="{{ route('export-permission', ['id' => 1, 'format' => 'csv']) }}"><img src="assets/img/icons/csv.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
+                 
                 
-                
-                    @haspermission('permission_export_excel')
-                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('permission.btn-export-xlsx') }}" href="{{ route('export-permissions', ['id' => 1, 'format' => 'xlxs']) }}"><img src="assets/img/icons/excel2.svg" class="icon-adjustment" alt="img"></a></li>
+                    @haspermission('permissions_export_excel')
+                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('permission.btn-export-xlsx') }}" href="{{ route('export-permission', ['id' => 1, 'format' => 'xlxs']) }}"><img src="assets/img/icons/excel2.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
-                    @haspermission('permission_export_pdf')
+                    @haspermission('permissions_export_pdf')
                     <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('permission.btn-export-pdf') }}" href="{{ route('tenants.pdf') }}" download ><img src="assets/img/icons/pdf.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
-                    @haspermission('permission_import_csv')
+                    @haspermission('permissions_import_csv')
                         <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('permission.btn-import-cvs') }}" href="{{ route('file-import') }}" ><img src="assets/img/icons/import.svg" class="icon-adjustment" alt="img"></a></li>
-                    @endhaspermission
+                    @endhaspermission --}}
 
                         
                     </ul>
@@ -150,13 +149,13 @@
                 @if ($permissions->count() > 0)
                 @foreach ($permissions as $key => $permission)
                     <tr>
-                        <th scope="row">{{ $counter++ }}</th>
+                        <td scope="row">{{ $counter++ }}</td>
                         <td>{{ $permission->name }}</td>
 
                         <td>
                             @haspermission('permissions_edit')
                                 <a
-                                    href="{{ route('permissions.edit', $permission->id) }}?page={{ $permissions->currentPage() }}">
+                                    href="{{ route('permissions.edit', $permission->id) }}?page={{ $permissions->currentPage() }}" title="{{ __('permission.edit') }}" data-bs-toggle="tooltip" data-bs-placement="top">
                                     <img src="assets/img/icons/edit.svg"  class="icon-adjustment" alt="img">
                                 </a>
                             @endhaspermission
@@ -176,7 +175,7 @@
         
         <div class="container">
             
-            {{ $permissions->onEachSide(5)->links() }}
+            {{-- {{ $permissions->onEachSide(5)->links() }} --}}
         </div>
         </div>
     </div>

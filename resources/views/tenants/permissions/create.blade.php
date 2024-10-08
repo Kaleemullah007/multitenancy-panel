@@ -1,15 +1,16 @@
 @extends('layouts.panel')
 @section('content')
-    <div class="page-header">
+<div class="page-header my-3 mx-4">
         <div class="page-title">
-            <h4>{{ __('permission.create_permission') }}</h4>
-            {{-- @haspermission('view_permissions') --}}
-                <h6>{{ __('permission.permissions') }} <a href="{{ route('permissions.index') }}"
-                    class="btn btn-primary">{{ __('permission.permissions') }}</a></h6>
-            {{-- @endhaspermission --}}
-
+            <h3>{{ __('permission.create_permission') }}</h3>
+        </div>
+        <div class="page-btn">
+            @haspermission('permissions_view')
+                <a href="{{ route('permissions.index') }}" class="btn btn-added">{{ __('permission.permissions') }}</a>
+            @endhaspermission
         </div>
     </div>
+    
     <div class="card">
         <div class="card-body">
 
@@ -29,8 +30,8 @@
                         </div>
                     </div>
 
-                    <div class="row mb-0">
-                        <div class="col-md-6 offset-md-4">
+                    <div class="row mb-0 text-center">
+                        <div class="">
                             <button type="submit" class="btn btn-primary">
                                 {{ __('permission.btn-save') }}
                             </button>

@@ -1,13 +1,13 @@
 @extends('layouts.panel')
 @section('content')
-    <div class="page-header">
+    <div class="page-header my-3 mx-4">
         <div class="page-title">
-            <h4>{{ __('tenantuser.create_user') }}</h4>
-            {{-- @haspermission('view_users') --}}
-                <h6>{{ __('tenantuser.create_plan') }} <a href="{{ route('users.index') }}"
-                    class="btn btn-primary">{{ __('tenantuser.users') }}</a></h6>
-            {{-- @endhaspermission --}}
-
+            <h3>{{ __('tenantuser.create_user') }}</h3>
+        </div>
+        <div class="page-btn">
+            @haspermission('user_view')
+                <a href="{{ route('plans.index') }}" class="btn btn-added">{{ __('tenantuser.user_list') }}</a>
+            @endhaspermission
         </div>
     </div>
     <div class="card">
@@ -45,31 +45,31 @@
                     <div class="col-lg-6 col-sm-6 col-12">
                         <div class="form-group">
                             <label for="validity_month" class="">{{ __('tenantuser.form.roles') }}</label>
-                                    <select id="roles" type="text"
-                                        class="form-control @error('roles') is-invalid @enderror" name="roles[]" multiple
-                                        required autocomplete="roles" autofocus>
-                                        @foreach ($roles as $role)
-                                            <option value="{{ $role->name }}"
-                                                {{ (is_array(old('roles')) and in_array($role->name, old('roles'))) ? ' selected' : '' }}>
-                                                {{ $role->name }}</option>
-                                        @endforeach
+                            <select id="roles" type="text" class="form-control @error('roles') is-invalid @enderror"
+                                name="roles[]" multiple required autocomplete="roles" autofocus>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->name }}"
+                                        {{ (is_array(old('roles')) and in_array($role->name, old('roles'))) ? ' selected' : '' }}>
+                                        {{ $role->name }}</option>
+                                @endforeach
 
-                                    </select>
+                            </select>
 
-                                    @error('roles')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                            @error('roles')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     {{--  password --}}
                     <div class="col-lg-6 col-sm-6 col-12">
                         <div class="form-group">
-                                                        
+
                             <label for="password" class="">{{ __('tenantuser.form.password') }}</label>
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-                                name="password" required autocomplete="password" autofocus>
+                            <input id="password" type="password"
+                                class="form-control @error('password') is-invalid @enderror" name="password" required
+                                autocomplete="password" autofocus>
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -77,12 +77,14 @@
                             @enderror
                         </div>
                     </div>
-                    {{--  confirm password --}}          
+                    {{--  confirm password --}}
                     <div class="col-lg-6 col-sm-6 col-12">
                         <div class="form-group">
-                                                        
-                            <label for="password_confirmation" class="">{{ __('tenantuser.form.password_confirm') }}</label>
-                            <input id="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
+
+                            <label for="password_confirmation"
+                                class="">{{ __('tenantuser.form.password_confirm') }}</label>
+                            <input id="password_confirmation" type="password"
+                                class="form-control @error('password_confirmation') is-invalid @enderror"
                                 name="password_confirmation" required autocomplete="password_confirmation" autofocus>
                             @error('password_confirmation')
                                 <span class="invalid-feedback" role="alert">
@@ -92,8 +94,8 @@
                         </div>
                     </div>
 
-                    <div class="row mb-0">
-                        <div class="col-md-6 offset-md-4">
+                    <div class="row mb-0 text-center">
+                        <div class="">
                             <button type="submit" class="btn btn-primary">
                                 {{ __('tenantuser.btn-save') }}
                             </button>
@@ -105,4 +107,3 @@
         </div>
     </div>
 @endsection
-

@@ -1,15 +1,14 @@
 @extends('layouts.panel')
 
 @section('content')
-    <div class="page-header">
+    <div class="page-header my-3 mx-4">
         <div class="page-title">
-            <h4>{{ __('role.edit_role') }}</h4>
-            <h6>{{ __('role.edit_role') }} of the system
-                @haspermission('roles_view')
-                    <a href="{{ route('roles.index') }}"
-                        class="btn btn-primary">{{ __('role.roles') }}</a>
-                @endhaspermission
-            </h6>
+            <h3>{{ __('role.edit_role') }}</h3>
+        </div>
+        <div class="page-btn">
+            @haspermission('roles_view')
+                <a href="{{ route('roles.index') }}" class="btn btn-added">{{ __('role.roles') }}</a>
+            @endhaspermission
         </div>
     </div>
     <div class="card">

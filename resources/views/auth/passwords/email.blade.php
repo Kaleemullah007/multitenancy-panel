@@ -32,7 +32,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                    <img src="assets/img/icons/mail.svg" alt="img">
+                                    <img src="/assets/img/icons/mail.svg" alt="img">
                                 </div>
                             </div>
 
@@ -44,10 +44,13 @@
                         </div>
                     </div>
                     <div class="login-img">
-                        <img src="../assets/img/login.jpg" alt="img">
+                        <img src="/assets/img/login.jpg" alt="img">
                     </div>
                 </div>
             </div>
         </form>
+        
     </div>
 @endsection
+
+

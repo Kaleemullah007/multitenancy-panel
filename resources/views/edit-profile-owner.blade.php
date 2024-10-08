@@ -1,14 +1,14 @@
 @extends('layouts.panel')
 @section('content')
-    <div class="page-header">
-        <div class="page-title d-flex ">
-            <h4>{{ __('user.update_profile') }}</h4>
-            {{-- @haspermission('view_roles') --}}
-            {{-- <h6>{{ __('user.home') }}  --}}
-            <a href="{{ route('dashboard') }}" class="btn btn-primary">{{ __('user.home') }}</a>
-            {{-- </h6> --}}
-            {{-- @endhaspermission --}}
 
+    <div class="page-header my-3 mx-4">
+        <div class="page-title">
+            <h3>{{ __('user.update_profile') }}</h3>
+        </div>
+        <div class="page-btn">
+            {{-- @haspermission('dashboard_view') --}}
+                <a href="{{ route('dashboard') }}" class="btn btn-added">{{ __('user.home') }}</a>
+            {{-- @endhaspermission --}}
         </div>
     </div>
     <div class="card">
@@ -23,7 +23,7 @@
                         <div class="form-group">
                             <label for="name" class="">{{ __('user.form.name') }}</label>
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                value="{{ old('name', $profile->name) }}" name="name"placeholder="Full Name" required
+                                value="{{ old('name', $profile->name) }}" name="name" placeholder="{{ __('user.form.name') }}"
                                 autocomplete="name" autofocus>
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -36,8 +36,8 @@
                         <div class="form-group">
                             <label for="email" class="">{{ __('user.form.email') }}</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                value="{{ old('email', $profile->email) }}" name="email" placeholder="Email Address"
-                                required autocomplete="email" autofocus>
+                                value="{{ old('email', $profile->email) }}" name="email" placeholder="{{ __('user.form.email') }}"
+                             autocomplete="email" autofocus>
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -50,7 +50,7 @@
                             <label for="password" class="">{{ __('user.form.password') }}</label>
                             <input id="password" type="password"
                                 class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}"
-                                placeholder="Password" name="password" required autofocus>
+                                placeholder="{{ __('user.form.password') }}" name="password" autofocus>
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -64,8 +64,8 @@
                                 class="">{{ __('user.form.password_confirm') }}</label>
                             <input id="password_confirmation" type="password"
                                 class="form-control @error('password_confirmation') is-invalid @enderror"
-                                value="{{ old('password_confirmation') }}" placeholder="Confirm Password"
-                                name="password_confirmation" required autofocus>
+                                value="{{ old('password_confirmation') }}" placeholder="{{ __('user.form.password_confirm') }}"
+                                name="password_confirmation" autofocus>
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -92,8 +92,8 @@
 
 
 
-                    <div class="row mb-0">
-                        <div class="col-md-6 offset-md-4">
+                    <div class="row mb-0 text-center">
+                        <div class="">
                             <button type="submit" class="btn btn-primary">
                                 {{ __('tenant.btn-update-profile') }}
                             </button>

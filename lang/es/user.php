@@ -7,8 +7,8 @@ return [
     'btn-reset' => 'Reiniciar',
     'btn-edit' => 'Actualizar',
     'edit' => 'Editar',
-    'update_profile' => 'Actualización del perfil',
-    'btn-update-profile' => 'Actualización del perfil',
+    'update_profile' => 'Actualizar perfil',
+    'btn-update-profile' => 'Actualizar perfil',
     'home' => 'Hogar',
     'table' => [
         '#' => 'No Señor',

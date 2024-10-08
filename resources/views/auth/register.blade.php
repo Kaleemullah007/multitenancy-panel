@@ -21,7 +21,7 @@
                                 <div class="form-addons">
                                     <input type="name" id="name" name="name"
                                         class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
-                                        required autocomplete="name" autofocus placeholder="Name">
+                                        required autocomplete="name" autofocus placeholder="{{ __('auth.title_name') }}">
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -36,7 +36,7 @@
                                     <input type="email" id="email" name="email"
                                         class="form-control @error('email') is-invalid @enderror"
                                         value="{{ old('email') }}" required autocomplete="email" autofocus
-                                        placeholder="Abc123@example.com" aria-label="email-address">
+                                        placeholder="{{ __('auth.title_email') }}" aria-label="email-address">
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -50,7 +50,7 @@
                                 <div class="pass-group">
                                     <input type="password" id="password" name="password"
                                         class="form-control @error('password') is-invalid @enderror" required
-                                        autocomplete="current-password" placeholder="Enter your password">
+                                        autocomplete="current-password" placeholder="{{ __('auth.title_password') }}">
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -64,7 +64,7 @@
                                     class="form-label fs-6">{{ __('auth.confirm_password') }}</label>
                                 <div class="pass-group">
                                     <input type="password" id="password-confirm" name="password_confirmation"
-                                        class="form-control" required autocomplete="new-password" placeholder="********">
+                                        class="form-control" required autocomplete="new-password" placeholder="{{ __('auth.confirm_password') }}">
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

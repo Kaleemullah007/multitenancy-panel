@@ -1,16 +1,18 @@
 @extends('layouts.panel')
 
 @section('content')
-<div class="page-header">
+<div class="page-header my-3 mx-4">
     <div class="page-title">
-        <h4>Contact List</h4>
-        <h6>{{ __('contact.contact_heading') }}</h6>
+        <h3>{{ __('contact.contact_heading') }}</h3>
     </div>
     {{-- <div class="page-btn">
-            <a href="addproduct.html" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img" class="me-1">Add New Product</a>
-        </div> --}}
+        @haspermission('plan_create')
+        <a href="{{ route('plans.create') }}" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img"
+                class="me-1">{{ __('plan.create_plan') }}</a>
+            @endhaspermission
+    </div> --}}
 </div>
-
+<input type="hidden" id="norecord" value="<?= __('general.table.norerord') ?>">
 <div class="card">
     <div class="card-body">
         <div class="table-top">
@@ -28,17 +30,7 @@
             <div class="wordset">
                 <ul>
 
-                    @haspermission('contact_create')
-                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('contact.create_user') }}" href="{{ route('contacts.create') }}" ><img src="assets/img/icons/users1.svg" class="icon-adjustment"  alt="img"></a></li>
-                    @endhaspermission
-                    @haspermission('contact_view')
-                    <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('contact.users') }}" href="{{ route('contacts.index') }}"><img src="assets/img/icons/listing.svg" class="icon-adjustment" alt="img"></a></li>
-                    @endhaspermission
-
-
-
-
-                    @haspermission('user_export_csv')
+                    {{-- @haspermission('user_export_csv')
                     <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('contact.btn-export-csv') }}" href="{{ route('export-users', ['id' => 1, 'format' => 'csv']) }}"><img src="assets/img/icons/csv.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
 
@@ -46,12 +38,12 @@
                     @haspermission('user_export_excel')
                     <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('contact.btn-export-xlsx') }}" href="{{ route('export-users', ['id' => 1, 'format' => 'xlxs']) }}"><img src="assets/img/icons/excel2.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
-                    {{-- @haspermission('user_export_pdf')
+                    @haspermission('user_export_pdf')
                     <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('contact.btn-export-pdf') }}" href="{{ route('contacts.pdf') }}" download><img src="assets/img/icons/pdf.svg" class="icon-adjustment" alt="img"></a></li>
-                    @endhaspermission --}}
+                    @endhaspermission
                     @haspermission('user_import_csv')
                     <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('contact.btn-import-cvs') }}" href="{{ route('file-import') }}"><img src="assets/img/icons/import.svg" class="icon-adjustment" alt="img"></a></li>
-                    @endhaspermission
+                    @endhaspermission --}}
 
 
                 </ul>
