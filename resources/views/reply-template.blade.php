@@ -3,7 +3,7 @@
 
     {{ $reply->message }}
 
-@component('mail::button', ['url' => 'https://rkfoodtrading.com'])
+@component('mail::button', ['url' => env('APP_URL')])
         Feel Free to Contact
 @endcomponent
     Thanks, </br>

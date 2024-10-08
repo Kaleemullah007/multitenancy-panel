@@ -1,5 +1,5 @@
 <div class="card-body">
-    <table class="table table-hover">
+    <table class="table table-hover border border-1">
         <thead>
             <tr>
                 <th scope="col">#</th>
