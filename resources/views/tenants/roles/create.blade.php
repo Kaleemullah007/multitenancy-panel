@@ -1,13 +1,13 @@
 @extends('layouts.panel')
 @section('content')
-    <div class="page-header">
+<div class="page-header my-3 mx-4">
         <div class="page-title">
-            <h4>{{ __('role.create_role') }}</h4>
-            @haspermission('view_roles')
-                <h6>{{ __('role.roles') }} <a href="{{ route('roles.index') }}"
-                        class="btn btn-primary">{{ __('role.roles') }}</a></h6>
+            <h3>{{ __('role.create_role') }}</h3>
+        </div>
+        <div class="page-btn">
+            @haspermission('roles_view')
+                <a href="{{ route('roles.index') }}" class="btn btn-added">{{ __('role.roles') }}</a>
             @endhaspermission
-
         </div>
     </div>
     <div class="card">
@@ -30,8 +30,8 @@
                         </div>
                     </div>
 
-                    <div class="row mb-0">
-                        <div class="col-md-6 offset-md-4">
+                    <div class="row mb-0 text-center">
+                        <div class="">
                             <button type="submit" class="btn btn-primary">
                                 {{ __('role.btn-save') }}
                             </button>

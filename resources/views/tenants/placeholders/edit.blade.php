@@ -1,15 +1,14 @@
 @extends('layouts.panel')
 
 @section('content')
-    <div class="page-header">
+    <div class="page-header my-3 mx-4">
         <div class="page-title">
-            <h4>{{ __('placeholder.edit_placeholder') }}</h4>
-            <h6>{{ __('placeholder.edit_placeholder') }} of the system 
-                @haspermission('placeholders_view')
-                    <a href="{{ route('placeholders.index') }}"
-                    class="btn btn-primary">{{ __('placeholder.placeholders') }}</a>
-                @endhaspermission
-                </h6>
+            <h3>{{ __('placeholder.edit_placeholder') }}</h3>
+        </div>
+        <div class="page-btn">
+            @haspermission('placeholders_view')
+                <a href="{{ route('placeholders.index') }}" class="btn btn-added">{{ __('placeholder.placeholders') }}</a>
+            @endhaspermission
         </div>
     </div>
     <div class="card">

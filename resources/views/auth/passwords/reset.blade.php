@@ -9,6 +9,8 @@
         @endif
         <form method="POST" action="{{ route('password.update') }}">
             @csrf
+            <input type="hidden" name="token" value="{{ $token }}">
+            {{-- @dd($errors) --}}
             <div class="account-content">
                 <div class="login-wrapper">
                     <div class="login-content">
@@ -32,7 +34,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                    <img src="../assets/img/icons/mail.svg" alt="img">
+                                    <img src="/assets/img/icons/mail.svg" alt="img">
                                 </div>
                             </div>
                             <div class="form-login">
@@ -71,7 +73,7 @@
                         </div>
                     </div>
                     <div class="login-img">
-                        <img src="../assets/img/login.jpg" alt="img">
+                        <img src="/assets/img/login.jpg" alt="img">
                     </div>
                 </div>
             </div>

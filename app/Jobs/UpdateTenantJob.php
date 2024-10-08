@@ -40,6 +40,7 @@ class UpdateTenantJob implements ShouldQueue
 
                     $user->update([
                         'password' => $this->tenant->password,
+                        'file' => $this->tenant->file,
                         'status' => $this->tenant->status,
                         'name' => $this->tenant->name,
                     ]);

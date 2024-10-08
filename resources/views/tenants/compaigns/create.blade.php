@@ -1,6 +1,16 @@
 @extends('layouts.panel')
 @section('content')
-    <div class="page-header">
+<div class="page-header my-3 mx-4">
+        <div class="page-title">
+            <h3>{{ __('compaign.create_compaign') }}</h3>
+        </div>
+        <div class="page-btn">
+            @haspermission('campaigns_view')
+                <a href="{{ route('campaigns.index') }}" class="btn btn-added">{{ __('compaign.campaigns') }}</a>
+            @endhaspermission
+        </div>
+    </div>
+    {{-- <div class="page-header">
         <div class="page-title">
             <h4>{{ __('compaign.create_compaign') }}</h4>
             @haspermission('view_campaigns')
@@ -9,7 +19,7 @@
             @endhaspermission
 
         </div>
-    </div>
+    </div> --}}
     <div class="card">
         <div class="card-body">
 
@@ -40,13 +50,13 @@
                                     <input id="type_email" type="radio" class="@error('type') is-invalid @enderror"
                                         name="type" autocomplete="type" value="0" autofocus
                                         @checked(old('type') === 0)>
-                                    <label for="type_email">Email</label>
+                                    <label for="type_email">{{ __('compaign.form.email') }}</label>
                                 </div>
                                 <div class="ms-5">
                                     <input id="type_sms" type="radio" class="@error('type') is-invalid @enderror"
                                         name="type" autocomplete="type" value="1" autofocus
                                         @checked(old('type') === 1)>
-                                    <label for="type_sms">SMS</label>
+                                    <label for="type_sms">{{ __('compaign.form.sms') }}</label>
                                 </div>
                             </div>
                             @error('type')
@@ -120,8 +130,8 @@
                     </div>
 
 
-                    <div class="row mb-0">
-                        <div class="col-md-6 offset-md-4">
+                    <div class="row mb-0 text-center">
+                        <div class="">
                             <button type="submit" class="btn btn-primary">
                                 {{ __('compaign.btn-save') }}
                             </button>

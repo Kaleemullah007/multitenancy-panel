@@ -1,22 +1,18 @@
 @extends('layouts.panel')
 
 @section('content')
-    <div class="page-header">
+    <div class="page-header my-3 mx-4">
         <div class="page-title">
-            <h4>{{ __('plan.edit_plan') }}</h4>
-            <h6>{{ __('plan.edit_plan') }} of the system 
-                @haspermission('plan_view')
-                    <a href="{{ route('plans.index') }}"
-                    class="btn btn-primary">{{ __('plan.plans') }}</a>
-                @endhaspermission
-                </h6>
+            <h3>{{ __('plan.edit_plan') }}</h3>
+        </div>
+        <div class="page-btn">
+            @haspermission('plan_view')
+                <a href="{{ route('plans.index') }}" class="btn btn-added">{{ __('plan.plans') }}</a>
+            @endhaspermission
         </div>
     </div>
     <div class="card">
         <div class="card-body">
-            {{-- @haspermission('plan_view')
-                <a href="{{ route('plans.index') }}" class="btn btn-lg bg-primary">Plans</a>
-            @endhaspermission --}}
             @if (session()->has('message'))
                 <div class="alert text-center alert-{{ session('error') }}">
                     {{ session('message') }}
@@ -33,7 +29,7 @@
                         <div class="form-group">
                             <label for="name" class="">{{ __('plan.form.name') }}</label>
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                value="{{ old('name',$plan->name) }}" name="name"  required autocomplete="name" autofocus>
+                                value="{{ old('name', $plan->name) }}" name="name" required autocomplete="name" autofocus>
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -46,7 +42,7 @@
                         <div class="form-group">
                             <label for="price" class="">{{ __('plan.form.price') }}</label>
                             <input id="price" type="text" class="form-control @error('price') is-invalid @enderror"
-                                value="{{ old('price') }}" name="price" required autocomplete="price" autofocus>
+                                value="{{ old('price', $plan->price) }}" name="price" required autocomplete="price" autofocus>
                             @error('price')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -60,7 +56,7 @@
                             <label for="validity_month" class="">{{ __('plan.form.validity_month') }}</label>
                             <input id="validity_month" type="text"
                                 class="form-control @error('validity_month') is-invalid @enderror" name="validity_month"
-                                value="{{ old('validity_month') }}" required autocomplete="validity_month" autofocus>
+                                value="{{ old('validity_month', $plan->validity_month) }}" required autocomplete="validity_month" autofocus>
                             @error('validity_month')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -89,7 +85,7 @@
                             <label for="description" class="">{{ __('plan.form.description') }}</label>
 
                             <textarea id="description" type="text" class="form-control @error('description') is-invalid @enderror"
-                                name="description" required autocomplete="description" autofocus>{{ old('description') }}</textarea>
+                                name="description" required autocomplete="description" autofocus>{{ old('description', $plan->description) }}</textarea>
                             @error('description')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -110,4 +106,3 @@
         </div>
     </div>
 @endsection
-

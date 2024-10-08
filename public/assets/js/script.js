@@ -74,6 +74,10 @@ $(document).ready(function() {
         });
     }
     if ($('.datanew').length > 0) {
+
+    //    let norecord = document.getElementById('norecord').value ? '' : '';
+
+        // alert(norecord);
         $('.datanew').DataTable({
             "bFilter": true,
             "sDom": 'fBtlpi',
@@ -109,12 +113,13 @@ $(document).ready(function() {
             "bFilter": false
         });
     }
-    setTimeout(function() {
+    
+    // setTimeout(function() {
         $('#global-loader');
-        setTimeout(function() {
-            $("#global-loader").fadeOut("slow");
-        }, 100);
-    }, 500);
+        // setTimeout(function() {
+            $("#global-loader").fadeOut('fast   ');
+        // }, 100);
+    // }, 100);
 
 
 

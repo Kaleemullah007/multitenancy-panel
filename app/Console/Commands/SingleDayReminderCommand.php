@@ -2,9 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\StatusNotification;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class SingleDayReminderCommand extends Command
 {
@@ -13,7 +15,7 @@ class SingleDayReminderCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'user:remider-1';
+    protected $signature = 'user:reminder-1';
 
     /**
      * The console command description.
@@ -31,9 +33,12 @@ class SingleDayReminderCommand extends Command
             ->groupBy('id', 'email', 'name', DB::raw("DATEDIFF(`end_date`, `start_date`)"))
             ->havingRaw('date_difference = 1')
             ->get();
-
+        // dd($users);
         foreach ($users as $user) {
-            info('Your package is going to expire after 1 days' . $user->name);
+
+            $day = 1;
+            Mail::to($user->email)->send(new StatusNotification($user, $day));
+            // info('Your package is going to expire after 1 days ' . $user->name);
         }
     }
 }

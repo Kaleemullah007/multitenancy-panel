@@ -1,15 +1,14 @@
 @extends('layouts.panel')
 
 @section('content')
-    <div class="page-header">
+    <div class="page-header my-3 mx-4">
         <div class="page-title">
-            <h4>{{ __('emailtemplate.edit_emailtemplate') }}</h4>
-            <h6>{{ __('emailtemplate.edit_emailtemplate') }} of the system
-                @haspermission('emailtemplates_view')
-                    <a href="{{ route('emailtemplates.index') }}"
-                        class="btn btn-primary">{{ __('emailtemplate.emailtemplates') }}</a>
-                @endhaspermission
-            </h6>
+            <h3>{{ __('emailtemplate.edit_emailtemplate') }}</h3>
+        </div>
+        <div class="page-btn">
+            @haspermission('emailtemplates_view')
+                <a href="{{ route('emailtemplates.index') }}" class="btn btn-added">{{ __('emailtemplate.emailtemplates') }}</a>
+            @endhaspermission
         </div>
     </div>
     <div class="card">

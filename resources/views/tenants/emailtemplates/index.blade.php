@@ -1,18 +1,18 @@
 @extends('layouts.panel')
 
 @section('content')
-    <div class="page-header">
-        <div class="page-title">
-            <h4>{{ __('emailtemplate.emailtemplates') }}</h4>
-            <h6>{{ __('emailtemplate.emailtemplates') }}</h6>
-        </div>
-        <div class="page-btn">
-            @haspermission('emailtemplates_create')
-                <a href="{{ route('emailtemplates.create') }}" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img"
-                    class="me-1">{{ __('emailtemplate.create') }}</a>
-            @endhaspermission
-        </div>
+<div class="page-header my-3 mx-4">
+    <div class="page-title">
+        <h3>{{ __('emailtemplate.emailtemplates') }}</h3>
     </div>
+    <div class="page-btn">
+        @haspermission('emailtemplates_create')
+        <a href="{{ route('emailtemplates.create') }}" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img"
+                class="me-1">{{ __('emailtemplate.create_emailtemplate') }}</a>
+            @endhaspermission
+    </div>
+</div>
+    
 
     <div class="card">
         <div class="card-body">
@@ -32,30 +32,29 @@
                 <div class="wordset">
                     <ul>
 
-                    {{-- @haspermission('emailtemplate_create')
+                    {{-- @haspermission('emailtemplates_create')
                         <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('emailtemplate.create_emailtemplate') }}" href="{{ route('emailtemplates.create') }}" ><img src="assets/img/icons/users1.svg" class="icon-adjustment"  alt="img"></a></li>
                     @endhaspermission --}}
-                    @haspermission('emailtemplate_view')
+                    {{-- @haspermission('emailtemplates_view')
                         <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('emailtemplate.emailtemplates') }}" href="{{ route('emailtemplates.index') }}" ><img src="assets/img/icons/listing.svg" class="icon-adjustment" alt="img"></a></li>
+                    @endhaspermission --}}
+                
+                
+                
+                    {{-- @haspermission('emailtemplates_export_csv')
+                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('emailtemplate.btn-export-csv') }}" href="{{ route('emailtemplates.index', ['id' => 1, 'format' => 'csv']) }}"><img src="assets/img/icons/csv.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
                 
                 
-                
-                
-                    @haspermission('emailtemplate_export_csv')
-                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('emailtemplate.btn-export-csv') }}" href="{{ route('export-emailtemplates', ['id' => 1, 'format' => 'csv']) }}"><img src="assets/img/icons/csv.svg" class="icon-adjustment" alt="img"></a></li>
+                    @haspermission('emailtemplates_export_excel')
+                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('emailtemplate.btn-export-xlsx') }}" href="{{ route('emailtemplates.index', ['id' => 1, 'format' => 'xlxs']) }}"><img src="assets/img/icons/excel2.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
-                
-                
-                    @haspermission('emailtemplate_export_excel')
-                        <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('emailtemplate.btn-export-xlsx') }}" href="{{ route('export-emailtemplates', ['id' => 1, 'format' => 'xlxs']) }}"><img src="assets/img/icons/excel2.svg" class="icon-adjustment" alt="img"></a></li>
-                    @endhaspermission
-                    @haspermission('emailtemplate_export_pdf')
+                    @haspermission('emailtemplates_export_pdf')
                     <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('emailtemplate.btn-export-pdf') }}" href="{{ route('tenants.pdf') }}" download ><img src="assets/img/icons/pdf.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
-                    @haspermission('emailtemplate_import_csv')
+                    @haspermission('emailtemplates_import_csv')
                         <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('emailtemplate.btn-import-cvs') }}" href="{{ route('file-import') }}" ><img src="assets/img/icons/import.svg" class="icon-adjustment" alt="img"></a></li>
-                    @endhaspermission
+                    @endhaspermission --}}
 
                         
                     </ul>
@@ -153,7 +152,7 @@
                 @if ($emailtemplates->count() > 0)
                     @foreach ($emailtemplates as $key => $emailtemplate)
                         <tr>
-                            <th scope="row">{{ $counter++ }}</th>
+                            <td scope="row">{{ $counter++ }}</td>
                             <td>{{ $emailtemplate->subject }}</td>
                             <td>{{ $emailtemplate->title }}</td>
                             <td>{{ $emailtemplate->body }}</td>
@@ -163,7 +162,7 @@
                             <td>
                                 @haspermission('emailtemplates_edit')
                                     <a
-                                        href="{{ route('emailtemplates.edit', $emailtemplate->id) }}?page={{ $emailtemplates->currentPage() }}">
+                                        href="{{ route('emailtemplates.edit', $emailtemplate->id) }}?page={{ $emailtemplates->currentPage() }}" title="{{ __('emailtemplate.edit') }}" data-bs-toggle="tooltip" data-bs-placement="top">
                                     <img src="assets/img/icons/edit.svg"  class="icon-adjustment" alt="img">
                                 </a>
                                 @endhaspermission

@@ -5,7 +5,8 @@
         @csrf
         @method('DELETE')
         <input type="hidden" name="page" id="page" value="{{ request('page') }}">
-        <a href="javascript:void(0);"  class="">
+        <a href="javascript:void(0);"  class=""  data-bs-toggle="tooltip" data-bs-placement="top" 
+            title="{{ __('permission.btn-delete') }}">
             <img
             src="assets/img/icons/delete.svg" alt="img" class="icon-adjustment _delete_data" data-id="{{$permission->id}}">
         </a>  

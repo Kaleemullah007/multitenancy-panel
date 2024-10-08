@@ -6,7 +6,7 @@ return [
     'btn-cancel' => 'Cancelar',
     'btn-reset' => 'Reiniciar',
     'btn_permanently_deleted' => 'Eliminada permanentemente',
-    'btn-deleted' => 'Eliminada',
+    'btn-delete' => 'borrar',
     'btn_restored' => 'Restaurar',
     'btn-edit' => 'Actualizar',
     'edit' => 'Editar',
@@ -15,6 +15,13 @@ return [
     'create_plan' => 'Crear plan',
     'edit_plan' => 'Editar plano',
     'plans' => 'Planes',
+
+    'btn-export-csv' => 'Exportar csv',
+    'btn-export-xlsx' => 'Exportar xlsx',
+    'btn-import-cvs' => 'Importar csv',
+    'btn-export-pdf' => 'Exportar en PDF',
+
+
     'table' => [
         '#' => 'No Señor',
         'name' => 'Nombre',

@@ -26,7 +26,7 @@
                                     <input type="email" id="email" name="email"
                                         class="form-control @error('email') is-invalid @enderror"
                                         value="{{ old('email') }}" required autocomplete="email" autofocus
-                                        placeholder="Abc123@example.com" aria-label="email-address">
+                                        placeholder="{{ __('auth.title_email') }}" aria-label="email-address">
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -40,13 +40,13 @@
                                 <div class="pass-group">
                                     <input type="password" id="password" name="password"
                                         class="form-control @error('password') is-invalid @enderror" required
-                                        autocomplete="current-password" placeholder="Enter your password">
+                                        autocomplete="current-password" placeholder="{{ __('auth.title_password') }}">
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                    <span class="fas toggle-password fa-eye-slash"></span>
+                                    <span class="fas toggle-password fa-eye-slash" id="viewPassword"></span>
                                 </div>
                             </div>
                             <div class="form-login">

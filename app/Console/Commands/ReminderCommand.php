@@ -2,9 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\StatusNotification;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class ReminderCommand extends Command
 {
@@ -33,7 +35,9 @@ class ReminderCommand extends Command
             ->get();
 
         foreach ($users as $user) {
-            info('Your package is going to expire after 30 days' . $user->name);
+            $day = 30;
+            Mail::to($user->email)->send(new StatusNotification($user, $day));
+            // info('Your package is going to expire after 30 days ' . $user->name);
         }
     }
 }

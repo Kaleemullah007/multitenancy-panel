@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
 //     // return view('welcome');
+// <img src=" echo Storage::url('app/public/' . auth()->user()->tenant->file);/>
+
 //     return redirect()->to(app()->getLocale());
 // });
 

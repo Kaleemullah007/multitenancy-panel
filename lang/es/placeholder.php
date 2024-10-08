@@ -6,14 +6,21 @@ return [
     'btn-cancel' => 'Cancelar',
     'btn-reset' => 'Reiniciar',
     'btn_permanently_deleted' => 'Eliminada permanentemente',
-    'btn-deleted' => 'Eliminada',
+    'btn-delete' => 'borrar',
     'btn_restored' => 'Restaurar',
-    'btn-edit' => 'Update',
+    'btn-edit' => 'Actualizar',
     'edit' => 'Editar',
     'create' => 'Crear',
     'create_placeholder' => 'Crear lugar',
     'edit_placeholder' => 'Editar marcador de posición',
     'placeholders' => 'Marcadores de posición',
+
+    'btn-export-csv' => 'Exportar csv',
+    'btn-export-xlsx' => 'Exportar xlsx',
+    'btn-import-cvs' => 'Importar csv',
+    'btn-export-pdf' => 'Exportar en PDF',
+
+
     'table' => [
         '#' => 'No Señor',
         'name' => 'Nombre',

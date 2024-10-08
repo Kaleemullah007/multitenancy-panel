@@ -6,7 +6,7 @@ return [
     'btn-cancel' => 'Cancel',
     'btn-reset' => 'Reset',
     'btn_permanently_deleted' => 'permanently deleted',
-    'btn-deleted' => 'Deleted',
+    'btn-delete' => 'Delete',
     'btn_restored' => 'Restore',
     'btn-edit' => 'Update',
     'edit' => 'Edit',
@@ -14,6 +14,13 @@ return [
     'create_role' => 'Create Role',
     'edit_role' => 'Edit Role',
     'roles' => 'Roles',
+
+    'btn-export-csv' => 'Export csv',
+    'btn-export-xlsx' => 'Export xlsx',
+    'btn-import-cvs' => 'Import csv',
+    'btn-export-pdf' => 'Export in PDF',
+
+    
     'table' => [
         '#' => 'Sr. No',
         'name' => 'Name',

@@ -1,15 +1,14 @@
 @extends('layouts.panel')
 
 @section('content')
-    <div class="page-header">
+    <div class="page-header my-3 mx-4">
         <div class="page-title">
-            <h4>{{ __('tenantuser.edit_user') }}</h4>
-            <h6>{{ __('tenantuser.edit_user') }} of the system 
-                @haspermission('users_view')
-                    <a href="{{ route('users.index') }}"
-                    class="btn btn-primary">{{ __('tenantuser.users') }}</a>
-                @endhaspermission
-                </h6>
+            <h3>{{ __('tenantuser.edit_user') }}</h3>
+        </div>
+        <div class="page-btn">
+            @haspermission('user_view')
+                <a href="{{ route('users.index') }}" class="btn btn-added">{{ __('tenantuser.user_list') }}</a>
+            @endhaspermission
         </div>
     </div>
     <div class="card">

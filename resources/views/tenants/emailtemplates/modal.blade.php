@@ -13,7 +13,7 @@
                               <span id="copy_button_{{ $placeholder->id }}" rel="{{ $placeholder->name }}">
                                   {{ $placeholder->name }}</span> <i class="bi bi-copy"
                                   onclick="copyToClipboard(this.id)" id="copy_copy_button_{{ $placeholder->id }}"
-                                  rel="copy_button_{{ $placeholder->id }}"></i>
+                                  rel="copy_button_{{ $placeholder->id }}">Copy</i>
                           </li>
                       @endforeach
                   </ul>

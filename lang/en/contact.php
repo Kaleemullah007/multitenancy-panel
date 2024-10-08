@@ -7,6 +7,17 @@ return [
     'replies' => 'Replies',
     'reply' => 'Reply',
 
+    'contact_us' => 'Contact Us',
+    'dashboard' => 'Dashboard',
+
+
+
+    'btn-export-csv' => 'Export csv',
+    'btn-export-xlsx' => 'Export xlsx',
+    'btn-import-cvs' => 'Import csv',
+    'btn-export-pdf' => 'Export in PDF',
+
+
     'table' => [
         '#' => 'Sr. No',
         'name' => 'Name',

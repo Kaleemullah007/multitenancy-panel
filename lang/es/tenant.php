@@ -7,13 +7,12 @@ return [
     'btn-reset' => 'Reiniciar',
     'btn_permanently_deleted' => 'Eliminada permanentemente',
     'btn-manage-permission' => 'Administrar permisos',
-    'btn-deleted' => 'Eliminada',
+    'btn-delete' => 'Borrar',
     'btn_restored' => 'Restaurar',
     'btn_role_permission' => 'Actualizar permisos y roles',
     'btn-edit' => 'Actualizar',
     'edit' => 'Editar',
     'create' => 'Crear',
-    'create_user' => 'Crear usuario',
     'edit_user' => 'editar usuario',
     'users' => 'Usuarias',
     'tenants' => 'Inquilinas',
@@ -23,10 +22,10 @@ return [
     'create_user' => 'Agregar inquilina',
     'description' => 'Crear nueva inquilina del sistema',
 
-    'btn-export-csv' => 'Exportar usuarios csv',
-    'btn-export-xlsx' => 'Exportar usuarias xlsx',
-    'btn-import-cvs' => 'Importar usuarios csv',
-    'btn-export-pdf' => 'Exportar usuarias en PDF',
+    'btn-export-csv' => 'Exportar csv',
+    'btn-export-xlsx' => 'Exportar xlsx',
+    'btn-import-cvs' => 'Importar csv',
+    'btn-export-pdf' => 'Exportar en PDF',
 
 
 
@@ -52,13 +51,16 @@ return [
         'profile_photo' => 'Foto de perfil',
         'status' => 'Estado',
         'plan' => 'Plan',
+        'update-plan' => 'Plan de actualización',
         'upload_description'=>'Arrastra y suelta un archivo para cargar',
-         'file'=>'Drag and drop a file to upload Excel',
-         'file_upload_description'=>'Drag and drop a file to upload xlsx , csv',
-         'import_heading'=>'Import XLSX file',
-         'import_desc'=>'Upload files of tenants xlsx or csv file',
-         'import_save'=>'Import',
-         'export_btn'=>'Export',
+         'file'=> 'Arrastra y suelta un archivo para cargar Excel',
+         'file_upload_description'=> 'Arrastre y suelte un archivo para cargar xlsx, csv',
+         'import_heading'=> 'Importar archivo XLSX',
+         'import_desc'=> 'Cargar archivos de inquilinos en formato xlsx o csv',
+         'import_save'=> 'Importar',
+         'export_btn'=> 'Exportar',
+        'import_save_btn' => 'Importar inquilinos',
+
     ],
     'message' => [
         'save-message' => 'Usuario creada con éxito',
@@ -77,6 +79,8 @@ return [
         'error_domain_already' => 'El subdominio ya existe',
         'error_email_unique' => 'El correo electrónico ya está en uso, prueba con otro.',
 
-    ]
+    ],
+
+    'listing' => 'Lista de inquilinos',
 
 ];

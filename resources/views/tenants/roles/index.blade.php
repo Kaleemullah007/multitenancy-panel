@@ -1,18 +1,17 @@
 @extends('layouts.panel')
 
 @section('content')
-    <div class="page-header">
-        <div class="page-title">
-            <h4>{{ __('role.roles') }}</h4>
-            <h6>{{ __('role.roles') }}</h6>
-        </div>
-        <div class="page-btn">
-            @haspermission('roles_create')
-                <a href="{{ route('roles.create') }}" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img"
-                    class="me-1">{{ __('role.create') }}</a>
-            @endhaspermission
-        </div>
+<div class="page-header my-3 mx-4">
+    <div class="page-title">
+        <h3>{{ __('role.roles') }}</h3>
     </div>
+    <div class="page-btn">
+        @haspermission('roles_create')
+        <a href="{{ route('roles.create') }}" class="btn btn-added"><img src="assets/img/icons/plus.svg" alt="img"
+                class="me-1">{{ __('role.create_role') }}</a>
+            @endhaspermission
+    </div>
+</div>
 
     <div class="card">
         <div class="card-body">
@@ -32,30 +31,30 @@
                 <div class="wordset">
                     <ul>
 
-                    {{-- @haspermission('role_create')
+                    {{-- @haspermission('roles_create')
                         <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('role.create_role') }}" href="{{ route('roles.create') }}" ><img src="assets/img/icons/users1.svg" class="icon-adjustment"  alt="img"></a></li>
-                    @endhaspermission --}}
-                    @haspermission('role_view')
+                    @endhaspermission
+                    @haspermission('roles_view')
                         <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('role.roles') }}" href="{{ route('roles.index') }}" ><img src="assets/img/icons/listing.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
                 
                 
                 
                 
-                    @haspermission('role_export_csv')
+                    @haspermission('roles_export_csv')
                         <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('role.btn-export-csv') }}" href="{{ route('export-roles', ['id' => 1, 'format' => 'csv']) }}"><img src="assets/img/icons/csv.svg" class="icon-adjustment" alt="img"></a></li>
-                    @endhaspermission
+                    @endhaspermission 
                 
                 
-                    @haspermission('role_export_excel')
+                    @haspermission('roles_export_excel')
                         <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('role.btn-export-xlsx') }}" href="{{ route('export-roles', ['id' => 1, 'format' => 'xlxs']) }}"><img src="assets/img/icons/excel2.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
-                    @haspermission('role_export_pdf')
+                    @haspermission('roles_export_pdf')
                     <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('role.btn-export-pdf') }}" href="{{ route('role.pdf') }}" download ><img src="assets/img/icons/pdf.svg" class="icon-adjustment" alt="img"></a></li>
                     @endhaspermission
-                    @haspermission('role_import_csv')
+                    @haspermission('roles_import_csv')
                         <li><a data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('role.btn-import-cvs') }}" href="{{ route('file-import') }}" ><img src="assets/img/icons/import.svg" class="icon-adjustment" alt="img"></a></li>
-                    @endhaspermission
+                    @endhaspermission --}}
 
                         
                     </ul>
@@ -149,13 +148,13 @@
                 @if ($roles->count() > 0)
                     @foreach ($roles as $key => $role)
                     <tr>
-                            <th scope="row">{{ $counter++ }}</th>
+                            <td scope="row">{{ $counter++ }}</td>
                             <td>{{ $role->name }}</td>
 
                             <td>
                                 @haspermission('roles_edit')
                                     <a
-                                        href="{{ route('roles.edit', $role->id) }}?page={{ $roles->currentPage() }}">
+                                        href="{{ route('roles.edit', $role->id) }}?page={{ $roles->currentPage() }}" title="{{ __('role.edit') }}" data-bs-toggle="tooltip" data-bs-placement="top">
                                         <img src="assets/img/icons/edit.svg"  class="icon-adjustment" alt="img">
                                     </a>
                                 @endhaspermission

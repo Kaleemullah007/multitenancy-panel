@@ -1,7 +1,17 @@
 @extends('layouts.panel')
 
 @section('content')
-    <div class="page-header">
+    <div class="page-header my-3 mx-4">
+        <div class="page-title">
+            <h3>{{ __('compaign.edit_compaign') }}</h3>
+        </div>
+        <div class="page-btn">
+            @haspermission('campaigns_view')
+                <a href="{{ route('campaigns.index') }}" class="btn btn-added">{{ __('compaign.campaigns') }}</a>
+            @endhaspermission
+        </div>
+    </div>
+    {{-- <div class="page-header">
         <div class="page-title">
             <h4>{{ __('compaign.edit_compaign') }}</h4>
             <h6>{{ __('compaign.edit_compaign') }} of the system
@@ -11,12 +21,9 @@
                 @endhaspermission
             </h6>
         </div>
-    </div>
+    </div> --}}
     <div class="card">
         <div class="card-body">
-            {{-- @haspermission('campaign_view')
-                <a href="{{ route('campaigns.index') }}" class="btn btn-lg bg-primary">campaigns</a>
-            @endhaspermission --}}
             @if (session()->has('message'))
                 <div class="alert text-center alert-{{ session('error') }}">
                     {{ session('message') }}
@@ -53,13 +60,13 @@
                                     <input id="type_email" type="radio" class="@error('type') is-invalid @enderror"
                                         name="type" autocomplete="type" value="0" autofocus
                                         @checked(old('type', $campaign->type->value) == 0)>
-                                    <label for="type_email">Email</label>
+                                    <label for="type_email">{{ __('compaign.form.email') }}</label>
                                 </div>
                                 <div class="ms-5">
                                     <input id="type_sms" type="radio" class="@error('type') is-invalid @enderror"
                                         name="type" autocomplete="type" value="1" autofocus
                                         @checked(old('type', $campaign->type->value) == 1)>
-                                    <label for="type_sms">SMS</label>
+                                    <label for="type_sms">{{ __('compaign.form.sms') }}</label>
                                 </div>
                             </div>
                             @error('type')

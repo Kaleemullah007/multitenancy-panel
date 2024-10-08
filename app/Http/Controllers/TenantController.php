@@ -83,7 +83,10 @@ class TenantController extends Controller
         ];
         if ($request->has('photo')) {
             $path = Storage::disk('public')->putFile('photos', $request->file('photo'));
+
             $tenant_data['file'] = $path;
+            // Storage::copy($path, $path);
+
         }
 
         // Creating tenant and subdomain
@@ -186,6 +189,11 @@ class TenantController extends Controller
 
             $path = Storage::disk('public')->putFile('photos', $request->file('photo'));
             $data['file'] = $path;
+
+            // $tenant = Tenant::where('email', $user->email)->first();
+            $tenantDirectory = "tenant/$tenant->id";
+            Storage::copy($path, $tenantDirectory . $path);
+
         }
 
         $tenant->update($data);
