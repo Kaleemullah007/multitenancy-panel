@@ -44,6 +44,14 @@ return [
             'throw' => false,
             'visibility' => 'public',
         ],
+        'tenantfile' => [
+            'driver' => 'local',
+            'root' => storage_path(''),
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+            'throw' => false,
+            'visibility' => 'public',
+        ],
 
         's3' => [
             'driver' => 's3',

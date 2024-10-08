@@ -155,7 +155,7 @@
                 @foreach ($tenants as $key => $tenant)
                     <tr>
                         <td scope="row">{{ $counter++ }}</td>
-                        <td><img src="<?php echo asset('/storage/app/public/' . $tenant->file); ?>" class="img-fluid w-50 rounded-pill"
+                        <td><img src="<?php echo asset('/storage/app/public/' . $tenant->user->file); ?>" class="img-fluid w-50 rounded-pill"
                                 style="height: 50px !important; border-radius: 50%">
                         </td>
                         <td>{{ $tenant->name }}</td>

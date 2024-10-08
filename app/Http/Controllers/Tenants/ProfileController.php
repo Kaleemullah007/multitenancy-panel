@@ -8,6 +8,7 @@ use App\Models\BankDetail;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -64,10 +65,15 @@ class ProfileController extends Controller
     public function update(UpdateProfileRequest $request, User $profile)
     {
 
-
+        
         $data = $request->only(['email', 'timezone', 'date_format', 'currency', 'name', 'password', 'currency', 'photo']);
         $bank_details = $request->except(['email', 'timezone', 'date_format', 'currency', 'name', 'password', '_token', '_method', 'password_confirmation', 'photo']);
         // dd($data, $bank_details);
+        // $user = user::first();
+   
+
+// Fetch user from main database
+       $profile_pic = '';
         // Update password if provided
         if ($request->has('password')) {
             $data['password'] = bcrypt($data['password']);
@@ -91,16 +97,55 @@ class ProfileController extends Controller
 
             $path = Storage::disk('public')->putFile('photos', $request->file('photo'));
             $data['file'] = $path;
+            $profile_pic  = $data['file'];
+
+
+
+
+            // Copy the file from the public folder to the storage/app/tenant folder  To update Parent Database table
+            if (Storage::disk('public')->exists('photos') && $profile->hasRole('Admin')) {
+                
+                $changepath = '/app/public/' .$path;
+                $fileContents = Storage::disk('public')->get($path);
+
+                // Save the file to the local storage for the tenant
+                Storage::disk('public')->put('app/public/photos', $fileContents);
+                Storage::disk('tenantfile')->put($changepath, $fileContents);
+                
+            }
+
+
         } else {
+            $profile_pic  = $profile->file;
             unset($data['file']);
         }
 
         $profile->update($data);
 
-
+        // $mainuser;
+    
+       
 
         BankDetail::where('status', 1)->update(['status' => 0]);
         BankDetail::create($bank_details);
+        $data['file'] = $profile_pic;
+        
+        unset($data['timezone']);
+        unset($data['photo']);
+        unset($data['currency']);
+       
+        if($profile->hasRole('Admin')){
+
+        $mainuser = DB::connection('mysql')->table('users')->where('email',$profile->email)->update($data);
+
+        unset($data['file']);
+
+        $tenant = DB::connection('mysql')->table('tenants')->where('email',$profile->email)->update($data);
+
+
+        }
+        
+
         // Optionally, you can return a response indicating success
         return to_route('profile.edit', [$profile->id])->with(['message' => 'Profile updated successfully']);
     }

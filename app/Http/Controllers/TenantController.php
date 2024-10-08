@@ -85,12 +85,31 @@ class TenantController extends Controller
             $path = Storage::disk('public')->putFile('photos', $request->file('photo'));
 
             $tenant_data['file'] = $path;
+            $user->update(['file' => $path]);
             // Storage::copy($path, $path);
 
         }
 
         // Creating tenant and subdomain
         $tenant = Tenant::create($tenant_data);
+
+        // dd($tenant_data,$tenant);
+        if ($request->has('photo')) {
+
+        $sourcePath = $path; // Path to the file in the public folder
+        $tenantDirectory = "tenant{$tenant->id}"; // Tenant directory name in storage
+        
+        // Copy the file from the public folder to the storage/app/tenant folder
+        if (Storage::disk('public')->exists($sourcePath)) {
+            $file_path = $tenantDirectory . '/app/public/' . $path;
+
+            $fileContents = Storage::disk('public')->get($sourcePath);
+
+            // Save the file to the local storage for the tenant
+            Storage::disk('tenantfile')->put($file_path, $fileContents);
+        }
+    }
+
         $tenant->domains()->create([
             'domain' => $data['domain_name'] . '.' . config('app.domain')
         ]);
@@ -158,7 +177,7 @@ class TenantController extends Controller
      */
     public function edit(Tenant $tenant)
     {
-        
+
         $tenant->load('domains');
         $plans = Plan::ActivePlans()->get();
         return view('tenant.edit', compact('tenant', 'plans'));
@@ -169,6 +188,15 @@ class TenantController extends Controller
      */
     public function update(UpdateTenantRequest $request, Tenant $tenant)
     {
+        $file_path = storage_path();
+
+        $tenantDirectory = "tenant{$tenant->id}";
+        $basePath = storage_path('app');
+        $userPath = $basePath . '/' . $tenantDirectory;
+        $realPath = realpath($userPath);
+
+        // echo $realPath;
+        // die();
 
         $data = $request->validated();
         // dd($data);
@@ -176,7 +204,7 @@ class TenantController extends Controller
         if (is_null($request->password)) {
             unset($data['password']);
         }
-
+        // dd(global_asset('storage'));
         // Update Profile and Delete image from the directory
         if ($request->has('photo')) {
             $user = $tenant;
@@ -190,10 +218,21 @@ class TenantController extends Controller
             $path = Storage::disk('public')->putFile('photos', $request->file('photo'));
             $data['file'] = $path;
 
-            // $tenant = Tenant::where('email', $user->email)->first();
-            $tenantDirectory = "tenant/$tenant->id";
-            Storage::copy($path, $tenantDirectory . $path);
+            $tenant->file = $path;
+            $tenant->save();
 
+            $sourcePath = $path; // Path to the file in the public folder
+            $tenantDirectory = "tenant{$tenant->id}"; // Tenant directory name in storage
+
+            // Copy the file from the public folder to the storage/app/tenant folder
+            if (Storage::disk('public')->exists($sourcePath)) {
+                $file_path = $tenantDirectory . '/app/public/' . $path;
+
+                $fileContents = Storage::disk('public')->get($sourcePath);
+
+                // Save the file to the local storage for the tenant
+                Storage::disk('tenantfile')->put($file_path, $fileContents);
+            }
         }
 
         $tenant->update($data);
@@ -207,6 +246,7 @@ class TenantController extends Controller
             'plan_name' => $data['plan_name'],
             'plan_id' => $data['plan_id'],
             'plan_price' => $data['plan_price'],
+            'file' => $path
         ]);
 
         $update_plan = request('update_plan');

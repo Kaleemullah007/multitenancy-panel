@@ -53,7 +53,7 @@ class ProfileController extends Controller
     public function edit(User $profile)
     {
 
-        // dd('sdfs');
+        
         return view('edit-profile-owner', compact('profile'));
     }
 
@@ -67,6 +67,7 @@ class ProfileController extends Controller
     {
 
 
+       
         $data = $request->only(['email', 'name', 'password', 'photo']);
 
         if ($request->has('password')) {
