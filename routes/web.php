@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 //     return redirect()->to(app()->getLocale());
 // });
 
-Route::get('localization/{locale}', [LocalizationController::class, 'index'])->name('localization');
+Route::get('localization/{locale}',  [LocalizationController::class, 'index'])->name('localization');
 
 Route::get('/dashboard', function () {
     // return view('home');

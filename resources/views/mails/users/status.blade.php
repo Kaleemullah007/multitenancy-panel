@@ -2,7 +2,7 @@
 # Introduction
 
 Hi {{$user->name}}
-You are account has been expired  {{ $day !=0 ?'after '.$day:'' }}
+Your account   {{ $day !=0 ?'will be expired after '.$day:'has been expired' }}
 
 
 Thanks,<br>

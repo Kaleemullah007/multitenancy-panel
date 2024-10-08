@@ -9,6 +9,7 @@ return [
 
     'contact_us' => 'Contact Us',
     'dashboard' => 'Dashboard',
+    'enter_captache' => 'Enter Captache Please',
 
 
 

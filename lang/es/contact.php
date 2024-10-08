@@ -14,6 +14,11 @@ return [
     'btn-export-pdf' => 'Exportar en PDF',
 
 
+    'contact_us' => 'Contacta con nosotros',
+    'dashboard' => 'Panel',
+    'enter_captache' => 'Ingrese Captache por favor',
+
+
     'table' => [
         '#' => 'No Señor',
         'name' => 'Nombre',
