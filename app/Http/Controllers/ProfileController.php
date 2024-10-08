@@ -67,6 +67,7 @@ class ProfileController extends Controller
     {
 
 
+       
         $data = $request->only(['email', 'name', 'password', 'photo']);
 
         if ($request->has('password')) {

@@ -65,7 +65,7 @@ class ProfileController extends Controller
     public function update(UpdateProfileRequest $request, User $profile)
     {
 
-
+        
         $data = $request->only(['email', 'timezone', 'date_format', 'currency', 'name', 'password', 'currency', 'photo']);
         $bank_details = $request->except(['email', 'timezone', 'date_format', 'currency', 'name', 'password', '_token', '_method', 'password_confirmation', 'photo']);
         // dd($data, $bank_details);
@@ -102,17 +102,17 @@ class ProfileController extends Controller
 
 
 
-// Copy the file from the public folder to the storage/app/tenant folder
-if (Storage::disk('public')->exists('photos')) {
-    
-    $changepath = '/app/public/' .$path;
-    $fileContents = Storage::disk('public')->get($path);
+            // Copy the file from the public folder to the storage/app/tenant folder  To update Parent Database table
+            if (Storage::disk('public')->exists('photos') && $profile->hasRole('Admin')) {
+                
+                $changepath = '/app/public/' .$path;
+                $fileContents = Storage::disk('public')->get($path);
 
-    // Save the file to the local storage for the tenant
-    Storage::disk('public')->put('app/public/photos', $fileContents);
-    Storage::disk('tenantfile')->put($changepath, $fileContents);
-    
-}
+                // Save the file to the local storage for the tenant
+                Storage::disk('public')->put('app/public/photos', $fileContents);
+                Storage::disk('tenantfile')->put($changepath, $fileContents);
+                
+            }
 
 
         } else {
@@ -134,12 +134,17 @@ if (Storage::disk('public')->exists('photos')) {
         unset($data['photo']);
         unset($data['currency']);
        
+        if($profile->hasRole('Admin')){
+
         $mainuser = DB::connection('mysql')->table('users')->where('email',$profile->email)->update($data);
 
         unset($data['file']);
 
         $tenant = DB::connection('mysql')->table('tenants')->where('email',$profile->email)->update($data);
 
+
+        }
+        
 
         // Optionally, you can return a response indicating success
         return to_route('profile.edit', [$profile->id])->with(['message' => 'Profile updated successfully']);
